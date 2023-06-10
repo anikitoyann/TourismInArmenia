@@ -8,7 +8,6 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "tour_package")
 public class TourPackage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +22,7 @@ public class TourPackage {
     @ManyToOne
     private Region region;
     @ManyToOne
-    private Car cars;
+    private Car car;
     @ManyToOne
     private Hotel hotel;
 

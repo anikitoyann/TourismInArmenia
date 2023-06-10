@@ -12,7 +12,7 @@ public class Hotel {
     private String description;
     private String picName;
     @ManyToOne
-    private Region regions;
+    private Region region;
 
 
 }

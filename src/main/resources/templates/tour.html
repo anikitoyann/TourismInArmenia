@@ -21,13 +21,14 @@
         <th>Duration</th>
         <th>Image</th>
         <th>Start Date</th>
-        <th th:if="${currentUser.UserType == 'ADMIN'}">Action</th>
+        <!--   th:if="${currentUser.UserType == 'ADMIN'}"-->>
+        <th >Action</th>
     </tr>
     <tr th:each="tour : ${tours}">
         <td th:text="${tour.id}"></td>
         <td th:text="${tour.name}"></td>
         <td th:text="${tour.region.name}"></td>
-        <td th:text="${tour.cars.name}"></td>
+        <td th:text="${tour.car.name}"></td>
         <td th:text="${tour.hotel.name}"></td>
         <td th:text="${tour.price}"></td>
         <td th:text="${tour.groupSize}"></td>
