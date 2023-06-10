@@ -26,7 +26,7 @@
     <tr th:each="tour : ${tours}">
         <td th:text="${tour.id}"></td>
         <td th:text="${tour.name}"></td>
-        <td th:text="${tour.regions.name}"></td>
+        <td th:text="${tour.region.name}"></td>
         <td th:text="${tour.cars.name}"></td>
         <td th:text="${tour.hotel.name}"></td>
         <td th:text="${tour.price}"></td>

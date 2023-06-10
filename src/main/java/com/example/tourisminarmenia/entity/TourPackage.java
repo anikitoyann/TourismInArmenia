@@ -21,7 +21,7 @@ public class TourPackage {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
     @ManyToOne
-    private Region regions;
+    private Region region;
     @ManyToOne
     private Car cars;
     @ManyToOne

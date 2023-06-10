@@ -21,8 +21,8 @@ public class TourPackagesController {
     private final RegionsRepository regionsRepository;
     private final CarsRepository carsRepository;
     private final HotelRepository hotelRepository;
-    @Value("${imagesUploadPath}")
-    private String imagesUploadPath;
+    @Value("${upload.image.path}")
+    private String imageUploadPath;
 
     @GetMapping
     public String contactUsPage(ModelMap modelMap) {
@@ -45,7 +45,7 @@ public class TourPackagesController {
     public String tourPackagesAdd(@ModelAttribute TourPackage tourPackages, @RequestParam("image") MultipartFile multipartFile) throws IOException {
         if (multipartFile != null && !multipartFile.isEmpty()) {
             String fileName = System.nanoTime() + "_" + multipartFile.getOriginalFilename();
-            File file = new File(imagesUploadPath + fileName);
+            File file = new File(imageUploadPath + fileName);
             multipartFile.transferTo(file);
             tourPackages.setPicName(fileName);
         }
