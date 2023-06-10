@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Hotel</title>
+</head>
+<body>
+<a href="/hotel">back</a><br>
+<form action="/hotel/add" method="post" enctype="multipart/form-data">
+    <input type="text" name="name"><br>
+    <textarea name="description"></textarea>
+    <select name="regions.id">
+        <option th:each="region : ${regions}"
+                th:text="${region.name}" th:value="${region.id}"></option>
+    </select><br>
+    <input type="file" name="image">
+    <input type="submit" value="create"><br>
+</form>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotels</title>
+</head>
+<body>
+<div th:include="fragment/header::headerFragment">
+</div>
+<h2>Select the hotel and call the hotel directly Get the booking confirmation directly from the hotel.</h2>
+<table border="1px">
+    <!--<div th:if="${currentUser.UserType == 'ADMIN'}">
+
+    </div>-->
+    <a href="/hotel/add">Create Hotel</a>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>region</th>
+        <th>descrption</th>
+        <th th:if="${currentUser.UserType == 'ADMIN'}">action</th>
+    </tr>
+    <tr th:each="hotel : ${hotels}">
+        <td th:text="${hotel.id}"></td>
+        <td th:text="${hotel.name}"></td>
+        <td th:text="${hotel.regions.name}"></td>
+        <td><a th:href="@{'/hotel/' + ${hotel.id}}"> <span th:text="${hotel.name}"></span></a></td>
+        <td th:if="${currentUser.UserType == 'ADMIN'}"><a th:href="@{/hotel/remove(id=${hotel.id})}">Remove</a></td>
+    </tr>
+    <a href="/">Back</a>
+</table>
+</body>
+</html>
