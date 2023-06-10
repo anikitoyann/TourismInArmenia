@@ -11,7 +11,7 @@
 <p th:text="${hotel.description}"></p>
 <br>
 <div>more <a href="https://www.google.com/travel/search?q=gyumri%20hyuranocner&g2lb=2502548%2C2503771%2C2503781%2C4258168%2C4270442%2C4284970%2C4291517%2C4306835%2C4429192%2C4515404%2C4597339%2C4757164%2C4778035%2C4814050%2C4850738%2C4864715%2C4874190%2C4886480%2C4893075%2C4920132%2C4924070%2C4965990%2C4977922%2C4985711%2C4990494%2C72248281%2C72253158%2C72256471%2C72271034%2C72271797%2C72272555&hl=ru-AM&gl=am&ssta=1&ts=CAESCAoCCAMKAggDGhwSGhIUCgcI5w8QBhgYEgcI5w8QBhgZGAEyAhAAKgcKBToDQU1E&qs=CAEyFENnc0lzSV9ua0t1UC0tTDlBUkFCOApCCwl-CSpOFH8eERgBQgsJsMcZsnrsxf0YAUILCR9MHOmQZN95GAE&ap=aAG6AQhvdmVydmlldw&ictx=1&sa=X&ved=0CAAQ5JsGahcKEwjwyce25pX_AhUAAAAAHQAAAAAQDQ"> More</a> </div>
-<span th:if="${hotel.regions != null}" th:text="${hotel.regions.name}"></span>
+<span th:if="${hotel.region != null}" th:text="${hotel.region.name}"></span>
 <div>
  
 </div>

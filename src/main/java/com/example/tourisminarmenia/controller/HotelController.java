@@ -4,6 +4,7 @@ import com.example.tourisminarmenia.entity.Hotel;
 import com.example.tourisminarmenia.entity.Region;
 import com.example.tourisminarmenia.respository.HotelRepository;
 import com.example.tourisminarmenia.respository.RegionsRepository;
+import com.example.tourisminarmenia.security.CurrentUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -65,5 +66,34 @@ public class HotelController {
         hotelRepository.deleteById(id);
         return "redirect:/hotel";
     }
+    @GetMapping("/search")
+    public String searchByRegion(@RequestParam(value = "regionId", required = false) Integer regionId, ModelMap modelMap) {
+        List<Hotel> hotels;
+        String message;
 
+        if (regionId != null) {
+            Region region = regionsRepository.findById(regionId).orElse(null);
+
+            if (region != null) {
+                hotels = hotelRepository.findByRegion(region);
+
+                if (hotels.isEmpty()) {
+                    message = "No hotels found in the selected region.";
+                } else {
+                    message = "Hotels in the selected region:";
+                }
+            } else {
+                hotels = hotelRepository.findAll();
+                message = "Invalid region selected. Showing all hotels instead.";
+            }
+        } else {
+            hotels = hotelRepository.findAll();
+            message = "Showing all hotels:";
+        }
+        modelMap.addAttribute("hotels", hotels);
+        modelMap.addAttribute("regions", regionsRepository.findAll());
+        modelMap.addAttribute("message", message);
+
+        return "hotel";
+    }
 }

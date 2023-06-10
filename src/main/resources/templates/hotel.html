@@ -8,6 +8,15 @@
 <div th:include="fragment/header::headerFragment">
 </div>
 <h2>Select the hotel and call the hotel directly Get the booking confirmation directly from the hotel.</h2>
+
+<form action="/hotel/search" method="get">
+    <select name="regionId">
+        <option value="">All Regions</option>
+        <option th:each="region : ${regions}"
+                th:text="${region.name}" th:value="${region.id}"></option>
+    </select>
+    <input type="submit" value="Search">
+</form>
 <table border="1px">
     <!--<div th:if="${currentUser.UserType == 'ADMIN'}">
 
@@ -16,18 +25,19 @@
     <tr>
         <th>id</th>
         <th>name</th>
+        <th>image</th>
         <th>region</th>
-        <th>descrption</th>
         <th th:if="${currentUser.UserType == 'ADMIN'}">action</th>
     </tr>
     <tr th:each="hotel : ${hotels}">
         <td th:text="${hotel.id}"></td>
         <td th:text="${hotel.name}"></td>
-        <td th:text="${hotel.regions.name}"></td>
-        <td><a th:href="@{'/hotel/' + ${hotel.id}}"> <span th:text="${hotel.name}"></span></a></td>
+       <td><a th:href="@{'/hotel/' + ${hotel.id}}"> <img th:if="${hotel.getPicName()!= null}" th:src="@{/getImage(imageName=${hotel.getPicName()})}" width="400"/></a></td>
+        <td th:text="${hotel.region.name}"></td>
         <td th:if="${currentUser.UserType == 'ADMIN'}"><a th:href="@{/hotel/remove(id=${hotel.id})}">Remove</a></td>
     </tr>
     <a href="/">Back</a>
 </table>
+<p th:if="${message != null}" th:text="${message}"></p>
 </body>
 </html>

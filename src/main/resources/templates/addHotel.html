@@ -10,7 +10,7 @@
 <form action="/hotel/add" method="post" enctype="multipart/form-data">
     <input type="text" name="name"><br>
     <textarea name="description"></textarea>
-    <select name="regions.id">
+    <select name="region.id">
         <option th:each="region : ${regions}"
                 th:text="${region.name}" th:value="${region.id}"></option>
     </select><br>
