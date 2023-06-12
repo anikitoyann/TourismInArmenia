@@ -22,7 +22,7 @@ public class Book {
     @ManyToOne
     private TourPackage tourPackage;
     @ManyToOne
-    private Hotel hotel;
+    private Item item;
 
     @ManyToOne
     private User user;

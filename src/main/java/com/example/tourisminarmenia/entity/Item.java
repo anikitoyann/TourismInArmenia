@@ -4,7 +4,8 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Hotel {
+@Table(name = "item")
+public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -13,6 +14,8 @@ public class Hotel {
     private String picName;
     @ManyToOne
     private Region region;
+    @Enumerated(value = EnumType.STRING)
+    private Type type;
 
 
 }

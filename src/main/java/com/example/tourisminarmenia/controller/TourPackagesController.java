@@ -1,5 +1,4 @@
 package com.example.tourisminarmenia.controller;
-
 import com.example.tourisminarmenia.entity.*;
 import com.example.tourisminarmenia.respository.*;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +18,7 @@ public class TourPackagesController {
     private final TourPackagesRepository tourPackagesRepository;
     private final RegionsRepository regionsRepository;
     private final CarsRepository carsRepository;
-    private final HotelRepository hotelRepository;
+    private final ItemRepository itemRepository;
     @Value("${upload.image.path}")
     private String imageUploadPath;
 
@@ -33,10 +32,10 @@ public class TourPackagesController {
     public String itemsAddPage(ModelMap modelMap) {
         List<Region> regions = regionsRepository.findAll();
         List<Car>cars=carsRepository.findAll();
-        List<Hotel>hotels=hotelRepository.findAll();
+        List<Item> items = itemRepository.findAll();
         modelMap.addAttribute("regions", regions);
         modelMap.addAttribute("cars",cars);
-        modelMap.addAttribute("hotels",hotels);
+        modelMap.addAttribute("items", items);
         return "addTours";
     }
 

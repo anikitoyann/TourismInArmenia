@@ -12,9 +12,9 @@
         <option th:each="car : ${cars}"
                 th:text="${car.name}" th:value="${car.id}"></option>
     </select><br>
-    <select name="hotel.id" required>
-        <option th:each="hotel : ${hotels}"
-                th:text="${hotel.name}" th:value="${hotel.id}"></option>
+    <select name="item.id" required>
+        <option th:each="item : ${items}"
+                th:text="${item.name}" th:value="${item.id}"></option>
     </select><br>
     <input type="number" name="price" required><br>
     <input type="number" name="groupSize" required><br>

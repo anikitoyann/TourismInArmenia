@@ -6,10 +6,14 @@
     <title>Add Hotel</title>
 </head>
 <body>
-<a href="/hotel">back</a><br>
-<form action="/hotel/add" method="post" enctype="multipart/form-data">
+<a href="/item">back</a><br>
+<form action="/item/add" method="post" enctype="multipart/form-data">
     <input type="text" name="name"><br>
     <textarea name="description"></textarea>
+    <select name="type">
+        <option value="">Select Type</option>
+        <option th:each="type : ${types}" th:value="${type}" th:text="${type}"></option>
+    </select>
     <select name="region.id">
         <option th:each="region : ${regions}"
                 th:text="${region.name}" th:value="${region.id}"></option>

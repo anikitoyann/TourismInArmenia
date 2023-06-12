@@ -15,7 +15,7 @@
         <th>Name</th>
         <th>Region</th>
         <th>Cars</th>
-        <th>Hotels</th>
+        <th>type</th>
         <th>Price</th>
         <th>Group Size</th>
         <th>Duration</th>
@@ -29,7 +29,7 @@
         <td th:text="${tour.name}"></td>
         <td th:text="${tour.region.name}"></td>
         <td th:text="${tour.car.name}"></td>
-        <td th:text="${tour.hotel.name}"></td>
+        <td th:text="${tour.item.type.name()}"></td>
         <td th:text="${tour.price}"></td>
         <td th:text="${tour.groupSize}"></td>
         <td th:text="${tour.duration}"></td>

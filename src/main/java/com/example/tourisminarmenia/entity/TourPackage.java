@@ -24,6 +24,6 @@ public class TourPackage {
     @ManyToOne
     private Car car;
     @ManyToOne
-    private Hotel hotel;
+    private Item item;
 
 }
