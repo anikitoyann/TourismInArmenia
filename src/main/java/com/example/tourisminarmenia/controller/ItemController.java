@@ -25,7 +25,7 @@ import java.util.stream.IntStream;
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/item")
-public class HotelController {
+public class ItemController {
     private final ItemRepository itemRepository;
     private final RegionsRepository regionsRepository;
     @Value("${upload.image.path}")
