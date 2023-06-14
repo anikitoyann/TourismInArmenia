@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/tour")
 public class TourPackagesController {
     private final TourPackagesRepository tourPackagesRepository;
-    private final RegionsRepository regionsRepository;
+    private final RegionRepository regionsRepository;
     private final CarsRepository carsRepository;
     private final ItemRepository itemRepository;
     @Value("${upload.image.path}")

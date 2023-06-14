@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>single Regions</title>
+
+</head>
+<body>
+<a href="/regions">Back</a><br>
+<a href="/item/add">Create Sightseeing</a><br>
+<a th:href="${'/regions/'+region.id+'?type=HOTEL'}"><button>SEE hotels</button></a><br>
+<a th:href="${'/regions/'+region.id+'?type=SIGHTSEEING'}"><button>SEE Sightseeing</button></a>
+
+<h1 th:text="${region.name}"></h1>
+<div th:each="item : ${items}">
+    <span th:text="${item.name}"></span>
+    <span th:text="${item.type}"></span>
+    <span th:text="${item.getDescription()}"></span>
+    <img th:if="${item.getPicName() != null}" th:src="@{/getImage(imageName=${item.getPicName()})}" width="400"/>
+</div>
+</body>
+</html>
