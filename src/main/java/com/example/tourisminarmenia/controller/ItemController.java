@@ -3,7 +3,9 @@ import com.example.tourisminarmenia.entity.Item;
 import com.example.tourisminarmenia.entity.Region;
 import com.example.tourisminarmenia.entity.Type;
 import com.example.tourisminarmenia.respository.ItemRepository;
-import com.example.tourisminarmenia.respository.RegionsRepository;
+import com.example.tourisminarmenia.respository.RegionRepository;
+import com.example.tourisminarmenia.service.ItemService;
+import com.example.tourisminarmenia.service.RegionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -14,7 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import java.io.File;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -27,20 +29,20 @@ import java.util.stream.IntStream;
 @RequestMapping("/item")
 public class ItemController {
     private final ItemRepository itemRepository;
-    private final RegionsRepository regionsRepository;
-    @Value("${upload.image.path}")
-    private String imageUploadPath;
+    private final RegionRepository regionsRepository;
+    private final ItemService itemService;
+    private final RegionService regionService;
 
     @GetMapping
-    public String hotelReservetionpage(@RequestParam("page") Optional<Integer> page,
+    public String hotelReservationPage(
+            @RequestParam("page") Optional<Integer> page,
                                        @RequestParam("size") Optional<Integer> size,ModelMap modelMap) {
-        modelMap.addAttribute("hotels", itemRepository.findAll());
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(5);
         Sort sort = Sort.by(Sort.Order.desc("id"));
         Pageable pageable = PageRequest.of(currentPage - 1, pageSize, sort);
 
-        Page<Item> result = itemRepository.findAll(pageable);
+        Page<Item> result = itemRepository.findAllByType(Type.HOTEL,pageable);
         int totalPages = result.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
@@ -54,27 +56,21 @@ public class ItemController {
     }
     @GetMapping("/add")
     public String itemsAddPage(ModelMap modelMap) {
-        List<Region> regions=regionsRepository.findAll();
-        modelMap.addAttribute("regions",regions);
+        modelMap.addAttribute("regions", regionService.findAll());
         List<Type> types = Arrays.asList(Type.values());
         modelMap.addAttribute("types", types);
-        return "addHotel";
+        return "addItem";
     }
     @PostMapping("/add")
     public String hotelsAdd(@ModelAttribute Item item, @RequestParam("image") MultipartFile multipartFile) throws IOException {
-        if (multipartFile != null && !multipartFile.isEmpty()) {
-            String fileName = System.nanoTime() + "_" + multipartFile.getOriginalFilename();
-            File file = new File(imageUploadPath + fileName);
-            multipartFile.transferTo(file);
-            item.setPicName(fileName);
-        }
-
-        itemRepository.save(item);
+        itemService.addItem(multipartFile, item);
         return "redirect:/item";
+        // return "redirect:/regions/" + item.getRegion().getId();
     }
+
     @GetMapping("/{id}")
     public String singleHotelPage(@PathVariable("id") int id, ModelMap modelMap) {
-        Optional<Item> byId = itemRepository.findById(id);
+        Optional<Item> byId = itemService.findById(id);
         if (byId.isPresent()) {
             Item item = byId.get();
             modelMap.addAttribute("item", item);

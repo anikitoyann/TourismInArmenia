@@ -11,13 +11,11 @@
     <th>id</th>
     <th>name</th>
     <th>RegionalCenter</th>
-    <th  th:if="${currentUser.UserType == 'ADMIN'}">action</th>
   </tr>
   <tr th:each="region : ${regions}">
     <td th:text="${region.id}"></td>
-    <td th:text="${region.name}"></td>
+    <td><a th:href="@{'/regions/' + ${region.id}}"> <span th:text="${region.name}"></span></a></td>
     <td th:text="${region.regionalCenter}"></td>
-    <td th:if="${currentUser.UserType == 'ADMIN'}"><a th:href="@{/regions/remove(id=${region.id})}">Remove</a></td>
   </tr>
 </table>
 <a href="/">Back</a>

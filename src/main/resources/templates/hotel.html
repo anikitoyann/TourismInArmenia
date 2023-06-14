@@ -31,11 +31,12 @@
     <!--<div th:if="${currentUser.UserType == 'ADMIN'}">
 
     </div>-->
-    <a href="/item/add">Create Hotel</a>
+    <a href="/item/add">Create item</a><br>
     <tr>
         <th>id</th>
         <th>name</th>
         <th>image</th>
+        <th>type</th>
         <th>region</th>
         <th th:if="${currentUser.UserType == 'ADMIN'}">action</th>
     </tr>
@@ -43,6 +44,7 @@
         <td th:text="${item.id}"></td>
         <td th:text="${item.name}"></td>
        <td><a th:href="@{'/item/' + ${item.id}}"> <img th:if="${item.getPicName()!= null}" th:src="@{/getImage(imageName=${item.getPicName()})}" width="400"/></a></td>
+        <td th:text="${item.type}"></td>
         <td th:text="${item.region.name}"></td>
         <td th:if="${currentUser.UserType == 'ADMIN'}"><a th:href="@{/hotel/remove(id=${item.id})}">Remove</a></td>
     </tr>
