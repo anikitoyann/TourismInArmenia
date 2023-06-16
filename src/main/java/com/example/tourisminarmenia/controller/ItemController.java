@@ -1,13 +1,12 @@
 package com.example.tourisminarmenia.controller;
+
 import com.example.tourisminarmenia.entity.Item;
 import com.example.tourisminarmenia.entity.Region;
 import com.example.tourisminarmenia.entity.Type;
-import com.example.tourisminarmenia.respository.ItemRepository;
 import com.example.tourisminarmenia.respository.RegionRepository;
 import com.example.tourisminarmenia.service.ItemService;
 import com.example.tourisminarmenia.service.RegionService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -28,7 +27,7 @@ import java.util.stream.IntStream;
 @Controller
 @RequestMapping("/item")
 public class ItemController {
-    private final ItemRepository itemRepository;
+
     private final RegionRepository regionsRepository;
     private final ItemService itemService;
     private final RegionService regionService;
@@ -42,7 +41,7 @@ public class ItemController {
         Sort sort = Sort.by(Sort.Order.desc("id"));
         Pageable pageable = PageRequest.of(currentPage - 1, pageSize, sort);
 
-        Page<Item> result = itemRepository.findAllByType(Type.HOTEL,pageable);
+        Page<Item> result = itemService.findAllByType(Type.HOTEL,pageable);
         int totalPages = result.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
@@ -51,7 +50,7 @@ public class ItemController {
             modelMap.addAttribute("pageNumbers", pageNumbers);
         }
         modelMap.addAttribute("items", result);
-        return "hotel";
+        return "item";
 
     }
     @GetMapping("/add")
@@ -82,7 +81,7 @@ public class ItemController {
     }
     @GetMapping("/remove")
     public String removeHotels(@RequestParam("id") int id) {
-        itemRepository.deleteById(id);
+        itemService.deleteById(id);
         return "redirect:/item";
     }
     @GetMapping("/search")
@@ -94,7 +93,7 @@ public class ItemController {
             Region region = regionsRepository.findById(regionId).orElse(null);
 
             if (region != null) {
-                items = itemRepository.findByRegion(region);
+                items = itemService.findByRegion(region);
 
                 if (items.isEmpty()) {
                     message = "No hotels found in the selected region.";
@@ -102,17 +101,17 @@ public class ItemController {
                     message = "Hotels in the selected region:";
                 }
             } else {
-                items = itemRepository.findAll();
+                items = itemService.findAll();
                 message = "Invalid region selected. Showing all hotels instead.";
             }
         } else {
-            items = itemRepository.findAll();
+            items = itemService.findAll();
             message = "Showing all hotels:";
         }
         modelMap.addAttribute("items", items);
         modelMap.addAttribute("regions", regionsRepository.findAll());
         modelMap.addAttribute("message", message);
 
-        return "hotel";
+        return "item";
     }
 }

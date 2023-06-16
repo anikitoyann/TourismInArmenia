@@ -24,21 +24,24 @@ public class SpringSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.GET, "/").permitAll()
+                .requestMatchers(HttpMethod.GET, "/","/regions/**","/item/**","/tour/**").permitAll()
+                .requestMatchers("/css/**").permitAll()
+                .requestMatchers("/images").permitAll()
                 .requestMatchers("/user/register").permitAll()
                 .requestMatchers("/contactUs").permitAll()
-                .requestMatchers("/regions").permitAll()
-                .requestMatchers("/hotel/**").permitAll()
+              //  .requestMatchers("/item/**").hasAnyAuthority("ADMIN", "USER")
+            //    .requestMatchers("/user/admin").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/customLogin")
-                .defaultSuccessUrl("/customSuccessLogin")
-                .loginProcessingUrl("/login")
-                .permitAll()
+                   .loginPage("/customLogin")
+                   .defaultSuccessUrl("/customSuccessLogin")
+                   .loginProcessingUrl("/login")
+                   .permitAll()
                 .and()
-                .logout().permitAll()
-                .logoutSuccessUrl("/");
+                .logout()
+                   .permitAll()
+                   .logoutSuccessUrl("/");
 
         return httpSecurity.build();
     }
