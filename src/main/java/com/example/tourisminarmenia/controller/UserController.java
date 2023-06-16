@@ -1,8 +1,7 @@
 package com.example.tourisminarmenia.controller;
-
 import com.example.tourisminarmenia.entity.User;
 import com.example.tourisminarmenia.entity.UserType;
-import com.example.tourisminarmenia.respository.UserRepository;
+import com.example.tourisminarmenia.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -19,7 +18,7 @@ import java.util.Optional;
 public class UserController {
 
     private final PasswordEncoder passwordEncoder;
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @GetMapping("/register")
     public String registerPage() {
@@ -28,13 +27,13 @@ public class UserController {
 
     @PostMapping("/register")
     public String register(@ModelAttribute User user) {
-        Optional<User> userFromDB = userRepository.findByEmail(user.getEmail());
+        Optional<User> userFromDB = userService.findByEmail(user.getEmail());
         if (userFromDB.isEmpty()) {
             String password = user.getPassword();
             String encodedPassword = passwordEncoder.encode(password);
             user.setPassword(encodedPassword);
             user.setUserType(UserType.USER);
-            userRepository.save(user);
+            userService.save(user);
         }
         return "redirect:/";
     }
