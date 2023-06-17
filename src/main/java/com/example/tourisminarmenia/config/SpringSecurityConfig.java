@@ -1,5 +1,4 @@
 package com.example.tourisminarmenia.config;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,10 +24,16 @@ public class SpringSecurityConfig {
         httpSecurity.csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.GET, "/","/regions/**","/item/**","/tour/**").permitAll()
-                .requestMatchers("/css/**").permitAll()
+                .requestMatchers("/assets/css/**").permitAll()
+                .requestMatchers("/assets/img/**").permitAll()
+                .requestMatchers("/assets/js/**").permitAll()
+                .requestMatchers("/assets/plugins/**").permitAll()
+                .requestMatchers("/assets/options/**").permitAll()
                 .requestMatchers("/images").permitAll()
                 .requestMatchers("/user/register").permitAll()
                 .requestMatchers("/contactUs").permitAll()
+                .requestMatchers("/TermsPrivacy").permitAll()
+                .requestMatchers("/aboutUs").permitAll()
               //  .requestMatchers("/item/**").hasAnyAuthority("ADMIN", "USER")
             //    .requestMatchers("/user/admin").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
