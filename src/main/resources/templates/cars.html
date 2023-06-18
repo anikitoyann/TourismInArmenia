@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Cars</title>
+</head>
+<body>
+<h1>Cars</h1>
+<table border="1px">
+  <tr>
+    <th>id</th>
+    <th>name</th>
+    <th>Seats</th>
+    <th>picName</th>
+  </tr>
+  <tr th:each="car : ${cars}">
+    <td th:text="${car.id}"></td>
+    <td th:text="${car.name}"></td>
+    <td th:text="${car.seats}"></td>
+   <td><img th:if="${car.getPicName()!= null}" th:src="@{/getImage(imageName=${car.getPicName()})}" width="400"/>
+   </td>
+
+  </tr>
+</table>
+<a href="/">Back</a>
+</body>
+</html>
