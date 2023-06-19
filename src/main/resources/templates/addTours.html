@@ -7,21 +7,21 @@
 <body>
 <a href="/tour">Back</a><br>
 <form action="/tour/add" method="post" enctype="multipart/form-data">
-    <input type="text" name="name" required><br>
-    <select name="car.id" required>
+   Name: <input type="text" name="name" required><br>
+   Car:  <select name="car.id" required>
         <option th:each="car : ${cars}"
                 th:text="${car.name}" th:value="${car.id}"></option>
     </select><br>
-    <select name="item.id" required>
+    Item: <select name="item.id" required>
         <option th:each="item : ${items}"
                 th:text="${item.name}" th:value="${item.id}"></option>
     </select><br>
-    <input type="number" name="price" required><br>
-    <input type="number" name="groupSize" required><br>
-    <textarea name="duration" required></textarea><br>
-    <input type="file" name="image" required><br>
-    <input type="datetime-local" name="startDate" required><br>
-    <select name="region.id" required>
+   Price: <input type="number" name="price" required><br>
+   Group size: <input type="number" name="groupSize" required><br>
+  Duration  <textarea name="duration" required></textarea><br>
+  Image:  <input type="file" name="image" required><br>
+  Start date:  <input type="datetime-local" name="startDate" required><br>
+  Region:  <select name="region.id" required>
         <option th:each="region : ${regions}"
                 th:text="${region.name}" th:value="${region.id}"></option>
     </select><br>
