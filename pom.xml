@@ -11,25 +11,28 @@
     <groupId>com.example</groupId>
     <artifactId>TourismInArmenia</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>healthcare_managment</name>
-    <description>healthcare_managment</description>
+    <name>TourismInArmenia</name>
+    <description>TourismInArmenia</description>
     <properties>
         <java.version>17</java.version>
     </properties>
+
+    <packaging>pom</packaging>
+    <modules>
+        <module>tourArmenia-common</module>
+        <module>tourArmenia-web</module>
+        <module>tourArmenia-rest</module>
+    </modules>
+
+
     <dependencies>
+
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.11.0</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
@@ -37,6 +40,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
         <dependency>
