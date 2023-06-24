@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotels</title>
+       <th:block>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <title>Hotel Fullwidth Grid View - Star Travel</title>
+
+        <!-- Plugins css Style -->
+        <link href="/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/assets/plugins/animate/animate.css" rel="stylesheet">
+        <link href="/assets/plugins/menuzord/css/menuzord.css" rel="stylesheet">
+        <link href="/assets/plugins/menuzord/css/menuzord-animations.css" rel="stylesheet">
+
+
+        <link href='/assets/plugins/fancybox/jquery.fancybox.min.css' rel='stylesheet'>
+
+        <link href='/assets/plugins/selectric/selectric.css' rel='stylesheet'>
+        <link href='../../css?family=Montserrat:400,500,600,700' rel='stylesheet'>
+
+        <!-- CUSTOM CSS -->
+        <link href="/assets/css/star.css" id="option_style" rel="stylesheet">
+
+
+        <!-- FAVICON -->
+        <link rel="shortcut icon" type="image/png" href="/assets/img/favicon.png">
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+       </th:block>
+</head>
+<body>
+<div th:include="fragment/header::headerFragment">
+</div>
+
+
+    <!-- ====================================
+    ———	PAGE TITLE
+    ===================================== -->
+    <section class="page-title">
+        <div class="page-title-img bg-img bg-overlay-darken" style="background-image: url(assets/img/pages/page-title-bg12.jpg);">
+            <div class="container">
+                <div class="row align-items-center justify-content-center" style="height: 200px;">
+                    <div class="col-lg-6">
+                        <div class="page-title-content">
+                            <div class="">
+                                <h2 class="text-uppercase text-white font-weight-bold">Armenia Hotels</h2>
+                            </div>
+                            <p class="text-white mb-0"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ====================================
+    ———	PACKAGES SECTION
+    <form action="/item/search" method="get">
+    <select name="regionId">
+        <option value="">All Regions</option>
+        <option th:each="region : ${regions}"
+                th:text="${region.name}" th:value="${region.id}"></option>
+    </select>
+    <input type="submit" value="Search">
+</form>
+    ===================================== -->
+    <section class="bg-smoke py-10">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="mb-md-6">
+                        <div class="row align-items-center">
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group mb-5 mb-md-0 bg-white">
+                                    <div class="select-default select-category-2">
+                                        <select class="select-option">
+                                            <option>SearchByRegion</option>
+                                            <option>All Hotels</option>
+                                            <option>By Region</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-8 d-none d-md-block">
+                                <div class="d-flex justify-content-md-end">
+                                    <a href="/item/add" class="icon-md bg-primary rounded shadow ml-3">
+                                        <i class="fa fa-th text-white" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4 mb-5" th:each="item:${items}">
+                            <div class="card card-hover">
+                                <a th:href="@{'item/'+${item.id}}" class="position-relative">
+                                    <img th:if="${item.getPicName()!= null}" th:src="@{/getImage(imageName=${item.getPicName()})}" width="300" height="250Boo"/></a>
+                                </a>
+
+                                <div class="card-body">
+                                    <h5 th:text="${item.getName()}">
+                                        <a href="single-hotel-right-sidebar.html" class="card-title text-uppercase">Park Hotel</a>
+                                    </h5>
+
+                                    <p  th:text="${item.region.getName()}" class="mb-7"></p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <p class="mb-0 text-capitalize">Per night</p>
+                                            <h3  th:text="${item.getDescription()}" class="text-primary">$25</h3>
+                                        </div>
+
+                                        <div>
+                                            <a th:href="@{/item/remove(id=${item.id})}" class="btn btn-xs btn-outline-secondary text-uppercase">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+        <!-- ====================================
+      ———	PAGINATION
+          <div class="pagination">
+        <div th:if="${items.totalPages > 0}"
+             th:each="pageNumber : ${pageNumbers}">
+            <a th:href="@{/item(size=${items.size}, page=${pageNumber})}"
+               th:text="${pageNumber}"
+               th:class="${pageNumber==items.number + 1} ? active"></a>
+        </div>
+    </div>
+      ===================================== -->
+        <section class="pt-5 pt-md-7">
+            <div class="container">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center align-items-center">
+                        <li class="page-item">
+                            <a class="page-link" href="javascript:void(0)" tabindex="-1">
+                                <i class="fa fa-long-arrow-left d-none d-md-inline-block mr-md-1" aria-hidden="true"></i> Previous
+                            </a>
+                        </li>
+
+                        <li class="page-item">
+                            <a class="page-link active" href="javascript:void(0)">1</a>
+                        </li>
+
+                        <li class="page-item">
+                            <a class="page-link" href="javascript:void(0)">2</a>
+                        </li>
+
+                        <li class="page-item">
+                            <a class="page-link" href="javascript:void(0)">3</a>
+                        </li>
+
+                        <li class="page-item">
+                            <a class="page-link" href="javascript:void(0)">...</a>
+                        </li>
+
+                        <li class="page-item">
+                            <a class="page-link" href="javascript:void(0)">9</a>
+                        </li>
+
+                        <li class="page-item">
+                            <a class="page-link" href="javascript:void(0)">Next
+                                <i class="fa fa-long-arrow-right d-none d-md-inline-block ml-md-1" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </section>
+
+    </section>
+
+
+
+</div><!-- element wrapper ends -->
+
+<!-- ====================================
+——— FOOTER SECTION
+===================================== -->
+<th:block th:include="fragment/header::footerFragment">
+</th:block>
+
+<!-- ====================================
+——— MODAL SECTION
+===================================== -->
+<!-- Signup Modal -->
+<div class="modal fade" id="signup" tabindex="-1" role="dialog" aria-label="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header rounded">
+                <h3 class="modal-title text-uppercase font-weight-bold">Create your account</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="" action="index.html" method="post">
+                    <div class="form-group">
+                        <input type="text" class="form-control bg-smoke" required="" placeholder="Full Name">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" class="form-control bg-smoke" required="" placeholder="Email">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" class="form-control bg-smoke" required="" placeholder="Password">
+                    </div>
+
+                    <div class="form-group form-check mb-0">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck4">
+                        <label class="form-check-label text-gray-color mb-3" for="exampleCheck4">
+                            I agree to the terms of use and privacy.
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block text-uppercase">Login</button>
+
+                    <div class="text-uppercase text-center py-3">Or</div>
+
+                    <button type="submit" class="btn btn-facebook btn-block text-uppercase">Login with facebook</button>
+                </form>
+            </div>
+
+            <div class="modal-footer justify-content-center">
+                <p class="mb-1">Don’t have an Account? <a href="javascript:void(0)">Sign up</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Login Modal -->
+<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-label="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header rounded">
+                <h3 class="modal-title text-uppercase font-weight-bold">Log in to your account</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="" action="index.html" method="post">
+                    <div class="form-group">
+                        <input type="email" class="form-control bg-smoke" required="" placeholder="Email">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" class="form-control bg-smoke" required="" placeholder="Password">
+                    </div>
+
+                    <div class="form-group form-check mb-0">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck5">
+                        <label class="form-check-label text-gray-color mb-3" for="exampleCheck5">
+                            Remember me
+                        </label>
+                        <a class="pull-right" href="javascript:void(0)">Fogot Password?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block text-uppercase">Login</button>
+                    <div class="text-uppercase text-center py-3">Or</div>
+                    <button type="submit" class="btn btn-facebook btn-block text-uppercase">Login with facebook</button>
+                </form>
+            </div>
+
+            <div class="modal-footer justify-content-center">
+                <p class="mb-1">Don’t have an Account? <a href="javascript:void(0)">Sign up</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- INQUIRY IN MODAL -->
+<div class="modal fade" id="inquiry" tabindex="-1" role="dialog" aria-label="inquiryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header rounded">
+                <h3 class="modal-title text-uppercase font-weight-bold">Inquiry about tour</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pb-3">
+                <form class="" action="index.html" method="post">
+                    <div class="form-group">
+                        <input type="text" class="form-control bg-smoke" required="" placeholder="Your Name">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" class="form-control bg-smoke" required="" placeholder="Your Email">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="number" class="form-control bg-smoke" required="" placeholder="Phone Number">
+                    </div>
+
+                    <div class="form-group">
+                        <textarea class="form-control bg-smoke" rows="6" placeholder="Message"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary text-uppercase">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Javascript -->
+<script src="/assets/plugins/jquery/jquery-3.4.1.min.js"></script>
+<script src="/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/plugins/menuzord/js/menuzord.js"></script>
+
+
+
+<script src='assets/plugins/fancybox/jquery.fancybox.min.js'></script>
+
+<script src='assets/plugins/selectric/jquery.selectric.min.js'></script>
+
+
+
+<script src="/assets/plugins/lazyestload/lazyestload.js"></script>
+
+
+
+
+
+
+
+
+<script src="/assets/plugins/smoothscroll/SmoothScroll.js"></script>
+
+<script src="/assets/js/star.js"></script>
+<link href="assets/options/optionswitch.css" rel="stylesheet">
+<script src="/assets/options/optionswitcher.js"></script>
+<!--
+<h2>Select the item and call the item directly Get the booking confirmation directly from the item.</h2>
+
+<form action="/item/search" method="get">
+    <select name="regionId">
+        <option value="">All Regions</option>
+        <option th:each="region : ${regions}"
+                th:text="${region.name}" th:value="${region.id}"></option>
+    </select>
+    <input type="submit" value="Search">
+</form>
+<table border="1px">
+
+    <a href="/item/add">Create item</a><br>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>image</th>
+        <th>region</th>
+        <th>action</th>
+    </tr>
+    <tr th:each="item : ${items}">
+        <td th:text="${item.id}"></td>
+        <td th:text="${item.name}"></td>
+       <td>
+        <img th:if="${item.getPicName()!= null}" th:src="@{/getImage(imageName=${item.getPicName()})}" width="400"/></a></td>
+        <td th:text="${item.region.name}"></td>
+        <td><a th:href="@{/item/remove(id=${item.id})}">Remove</a></td>
+    </tr>
+    <a href="/">Back</a>
+    <div class="pagination">
+        <div th:if="${items.totalPages > 0}"
+             th:each="pageNumber : ${pageNumbers}">
+            <a th:href="@{/item(size=${items.size}, page=${pageNumber})}"
+               th:text="${pageNumber}"
+               th:class="${pageNumber==items.number + 1} ? active"></a>
+        </div>
+    </div>
+</table>
+<p th:if="${message != null}" th:text="${message}"></p> -->
+</body>
+</body>
+</html>
