@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+<head>
+    <title>Register Page</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body style="background-color: snow">
+<div class="main-block">
+    <form action="/user/register" method="post">
+        <hr>
+        <label id="icon" for="name"><i class="fas fa-user"></i></label>
+        <input type="text" name="name" id="name" placeholder="Name" required/>
+
+        <label id="icon" for="surname"><i class="fas fa-user"></i></label>
+        <input type="text" name="surname" id="surname" placeholder="Surname" required/>
+
+        <label id="icon" for="email"><i class="fas fa-envelope"></i></label>
+        <input type="text" name="email" id="email" placeholder="email" required/>
+
+        <label id="icon" for="address"><i class="fas fa-envelope"></i></label>
+        <input type="text" name="address" id="address" placeholder="address" required/>
+
+        <label id="icon" for="phoneNumber"><i class="fas fa-envelope"></i></label>
+        <input type="text" name="phoneNumber" id="phoneNumber" placeholder="phoneNumber" required/>
+
+        <label id="icon" for="password"><i class="fas fa-unlock-alt"></i></label>
+        <input type="password" name="password" id="password" placeholder="Password" required/>
+        <hr>
+        <div class="btn-block">
+            <button type="submit" >Register</button>
+            <a href="/static"> <button type="button">Back</button> </a>
+        </div>
+    </form>
+</div>
+</body>
+</html>
