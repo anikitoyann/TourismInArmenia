@@ -1,52 +1,45 @@
-package com.example.tourisminarmenia.config;
+package com.example.tourarmeniarest.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.tourarmeniarest.filter.JWTAuthenticationTokenFilter;
+import com.example.tourarmeniarest.security.JwtAuthenticationEntryPoint;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-public class SpringSecurityConfig {
+@RequiredArgsConstructor
+public class RestSecurityConfig {
 
-    @Autowired
-    private UserDetailsService userDetailsService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
+    private final PasswordEncoder passwordEncoder;
+    private final UserDetailsService userDetailsService;
+    private final JwtAuthenticationEntryPoint authenticationEntryPoint;
+    private final JWTAuthenticationTokenFilter jwtAuthenticationTokenFilter;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
+                .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.GET, "/","/regions/**","/item/**","/tour/**").permitAll()
-                .requestMatchers("/assets/css/**").permitAll()
-                .requestMatchers("/assets/img/**").permitAll()
-                .requestMatchers("/assets/js/**").permitAll()
-                .requestMatchers("/assets/plugins/**").permitAll()
-                .requestMatchers("/assets/options/**").permitAll()
                 .requestMatchers("/images").permitAll()
-                .requestMatchers("/user/register").permitAll()
+                .requestMatchers(HttpMethod.POST,"/user/register").permitAll()
                 .requestMatchers("/contactUs").permitAll()
-              //  .requestMatchers("/item/**").hasAnyAuthority("ADMIN", "USER")
-            //    .requestMatchers("/user/admin").hasAuthority("ADMIN")
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                   .loginPage("/customLogin")
-                   .defaultSuccessUrl("/customSuccessLogin")
-                   .loginProcessingUrl("/login")
-                   .permitAll()
-                .and()
-                .logout()
-                   .permitAll()
-                   .logoutSuccessUrl("/");
+                .requestMatchers("/TermsPrivacy").permitAll()
+                .requestMatchers("/aboutUs").permitAll()
+                .anyRequest().authenticated();
 
+        httpSecurity.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }
 
@@ -57,4 +50,6 @@ public class SpringSecurityConfig {
         authenticationProvider.setPasswordEncoder(passwordEncoder);
         return authenticationProvider;
     }
+
+
 }

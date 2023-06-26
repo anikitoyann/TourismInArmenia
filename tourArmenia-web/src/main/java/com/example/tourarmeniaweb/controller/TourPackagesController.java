@@ -23,7 +23,7 @@ import java.util.Optional;
 public class TourPackagesController {
     private final TourPackagesRepository tourPackagesRepository;
     private final RegionRepository regionsRepository;
-    private final CarsRepository carsRepository;
+    private final CarRepository carsRepository;
     private final ItemRepository itemRepository;
     private final UserRepository userRepository;
 
