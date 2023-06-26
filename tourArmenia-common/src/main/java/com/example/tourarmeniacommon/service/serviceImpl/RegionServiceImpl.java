@@ -1,8 +1,8 @@
-package com.example.tourarmeniaweb.service.serviceImpl;
+package com.example.tourarmeniacommon.service.serviceImpl;
 
 import com.example.tourarmeniacommon.entity.Region;
 import com.example.tourarmeniacommon.repository.RegionRepository;
-import com.example.tourarmeniaweb.service.RegionService;
+import com.example.tourarmeniacommon.service.RegionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

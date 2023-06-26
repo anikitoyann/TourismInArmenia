@@ -1,4 +1,4 @@
-package com.example.tourarmeniaweb.service;
+package com.example.tourarmeniacommon.service;
 
 import com.example.tourarmeniacommon.entity.Region;
 

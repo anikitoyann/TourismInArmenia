@@ -2,7 +2,7 @@ package com.example.tourarmeniaweb.controller;
 
 import com.example.tourarmeniacommon.entity.User;
 import com.example.tourarmeniacommon.entity.UserType;
-import com.example.tourarmeniaweb.service.UserService;
+import com.example.tourarmeniacommon.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
