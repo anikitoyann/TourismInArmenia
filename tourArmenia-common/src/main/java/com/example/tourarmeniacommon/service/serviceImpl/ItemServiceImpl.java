@@ -1,10 +1,10 @@
-package com.example.tourarmeniaweb.service.serviceImpl;
+package com.example.tourarmeniacommon.service.serviceImpl;
 
 import com.example.tourarmeniacommon.entity.Item;
 import com.example.tourarmeniacommon.entity.Region;
 import com.example.tourarmeniacommon.entity.Type;
 import com.example.tourarmeniacommon.repository.ItemRepository;
-import com.example.tourarmeniaweb.service.ItemService;
+import com.example.tourarmeniacommon.service.ItemService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Value;
