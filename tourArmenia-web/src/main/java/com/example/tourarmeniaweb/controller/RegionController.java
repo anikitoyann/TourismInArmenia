@@ -3,9 +3,9 @@ package com.example.tourarmeniaweb.controller;
 import com.example.tourarmeniacommon.entity.Item;
 import com.example.tourarmeniacommon.entity.Region;
 import com.example.tourarmeniacommon.entity.Type;
-import com.example.tourarmeniacommon.repository.ItemRepository;
-import com.example.tourarmeniacommon.service.RegionService;
-import com.example.tourarmeniacommon.service.UserService;
+import com.example.tourarmeniacommon.service.ItemService;
+import com.example.tourarmeniaweb.service.RegionService;
+import com.example.tourarmeniaweb.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,7 +23,7 @@ import java.util.Optional;
 public class RegionController {
     private final RegionService regionService;
     private final UserService userService;
-    private final ItemRepository itemRepository;
+    private final ItemService itemService;
 
     @GetMapping
     public String regionPage(ModelMap modelMap) {
@@ -42,7 +42,7 @@ public class RegionController {
             if (type == null) {
                 type = "HOTEL";
             }
-            List<Item> items = itemRepository.findAllByRegion_IdAndType(region.getId(), Type.valueOf(type));
+            List<Item> items = itemService.findAllByRegionAndType(region.getId(), Type.valueOf(type));
             modelMap.addAttribute("region", region);
             modelMap.addAttribute("items", items);
             return "singleRegion";
