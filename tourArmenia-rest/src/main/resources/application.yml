@@ -16,6 +16,9 @@ jwt:
   secret: YXNkZmYkIyNzZFNEU0RBQVNERksjQEBkc2ZqZGZrZHNqQEAjZHNmZ2ZnZmdeXiYmWipeJSQkI2RzZHMkIyVzZDQ1MDk5KUkjJCg5V0ZTSUo=
   expiration: 600000
 
-  upload:
-    image:
-      path: C:\\Users\\Admin\\data\\lesons\\Java2022-23\\TourismInArmenia\\images\\
+upload:
+  image:
+    path: C:\\Users\\Admin\\data\\lesons\\Java2022-23\\TourismInArmenia\\images\\
+
+site:
+  url: http://localhost:8081

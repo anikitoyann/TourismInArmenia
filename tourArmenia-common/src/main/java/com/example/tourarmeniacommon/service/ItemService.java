@@ -24,4 +24,10 @@ public interface ItemService {
     List<Item> findAll();
 
     List<Item> findByRegion(Region region);
+
+    List<Item> findAllByRegionAndType(int id, Type type);
+
+    public Item save(Item item);
+
+    boolean existsById(int id);
 }

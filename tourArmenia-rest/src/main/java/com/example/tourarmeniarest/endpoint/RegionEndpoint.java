@@ -1,15 +1,11 @@
 package com.example.tourarmeniarest.endpoint;
 
-import com.example.tourarmeniacommon.entity.Item;
 import com.example.tourarmeniacommon.entity.Region;
 import com.example.tourarmeniacommon.entity.Type;
-import com.example.tourarmeniacommon.repository.ItemRepository;
+import com.example.tourarmeniacommon.service.ItemService;
 import com.example.tourarmeniacommon.service.RegionService;
-import com.example.tourarmeniacommon.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +16,7 @@ import java.util.Optional;
 @RequestMapping("/regions")
 public class RegionEndpoint {
     private final RegionService regionService;
-    private final ItemRepository itemRepository;
+    private final ItemService itemService;
 
     @GetMapping
     public List<Region> regionPage() {
@@ -36,8 +32,7 @@ public class RegionEndpoint {
             if (type == null) {
                 type = "HOTEL";
             }
-            return ResponseEntity.ok(itemRepository.findAllByRegion_IdAndType(region.getId(), Type.valueOf(type)));
-
+            return ResponseEntity.ok(itemService.findAllByRegionAndType(region.getId(), Type.valueOf(type)));
         }
         return ResponseEntity.badRequest().build();
     }

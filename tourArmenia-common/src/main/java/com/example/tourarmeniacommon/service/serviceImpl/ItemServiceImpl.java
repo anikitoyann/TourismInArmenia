@@ -47,6 +47,20 @@ public class ItemServiceImpl implements ItemService {
         return itemRepository.findAllByType(type,pageable);
     }
 
+    public List<Item> findAllByRegionAndType(int regionId, Type type){
+        return itemRepository.findAllByRegion_IdAndType(regionId,type);
+    }
+
+    @Override
+    public Item save(Item item) {
+        return itemRepository.save(item);
+    }
+
+    @Override
+    public boolean existsById(int id) {
+      return itemRepository.existsById(id);
+    }
+
     @Override
     public void deleteById(int id) {
         itemRepository.deleteById(id);
