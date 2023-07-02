@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 public class ItemDto {
     private int id;
     private String name;
+    private String picUrl;
     private String description;
-    private String picName;
     private Type type;
     private RegionDto regionDto;
 }

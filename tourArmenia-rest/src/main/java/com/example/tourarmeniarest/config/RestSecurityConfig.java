@@ -31,12 +31,13 @@ public class RestSecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.GET, "/","/regions/**","/item/**","/tour/**").permitAll()
-                .requestMatchers("/images").permitAll()
-                .requestMatchers(HttpMethod.POST,"/user/register").permitAll()
-                .requestMatchers("/contactUs").permitAll()
-                .requestMatchers("/TermsPrivacy").permitAll()
-                .requestMatchers("/aboutUs").permitAll()
+                .requestMatchers(HttpMethod.GET, "/","/regions/**","/item/**","/tour/**", "/cars").permitAll()
+                .requestMatchers(HttpMethod.POST,"/user/register","/user/auth").permitAll()
+                .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                .requestMatchers("/admin/getImage/**").permitAll()
+               // .requestMatchers("/contactUs").permitAll()
+               // .requestMatchers("/TermsPrivacy").permitAll()
+               // .requestMatchers("/aboutUs").permitAll()
                 .anyRequest().authenticated();
 
         httpSecurity.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);

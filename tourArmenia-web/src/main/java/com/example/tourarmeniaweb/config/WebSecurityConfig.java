@@ -33,6 +33,7 @@ public class WebSecurityConfig {
                 .requestMatchers("/contactUs").permitAll()
                 .requestMatchers("/TermsPrivacy").permitAll()
                 .requestMatchers("/aboutUs").permitAll()
+                .requestMatchers("/admin/**").hasAuthority("ADMIN")
               //  .requestMatchers("/item/**").hasAnyAuthority("ADMIN", "USER")
             //    .requestMatchers("/user/admin").hasAuthority("ADMIN")
                 .anyRequest().authenticated()

@@ -8,11 +8,16 @@ import com.example.tourarmeniacommon.mapper.ItemMapper;
 import com.example.tourarmeniacommon.service.ItemService;
 import com.example.tourarmeniacommon.service.RegionService;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -24,16 +29,10 @@ public class ItemEndpoint {
     private final ItemService itemService;
     private final RegionService regionService;
     private final ItemMapper itemMapper;
-
-    @PostMapping
-    public ResponseEntity<ItemDto> create(@RequestBody CreateItemRequestDto createItemRequestDto) {
-        Optional<Region> byId = regionService.findById(createItemRequestDto.getRegionId());
-        if (byId.isEmpty()) {
-            return ResponseEntity.badRequest().build();
-        }
-        Item save = itemService.save(itemMapper.map(createItemRequestDto));
-        return ResponseEntity.ok(itemMapper.mapToDto(save));
-    }
+    @Value("${upload.image.path}")
+    private String uploadPath;
+    @Value("${site.url}")
+    private String siteUrl;
 
     @GetMapping("/{id}")
     public ResponseEntity<Item> singleItem(@PathVariable("id") int id) {

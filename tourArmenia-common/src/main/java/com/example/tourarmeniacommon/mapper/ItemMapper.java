@@ -5,12 +5,16 @@ import com.example.tourarmeniacommon.dto.ItemDto;
 import com.example.tourarmeniacommon.entity.Item;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.springframework.beans.factory.annotation.Value;
 
 @Mapper(componentModel = "spring", uses = ItemMapper.class)
-public interface ItemMapper {
+public abstract class ItemMapper {
+    @Value("${site.url}")
+    String siteUrl;
     @Mapping(target = "region.id", source = "regionId")
-    Item map(CreateItemRequestDto dto);
+    public abstract Item map(CreateItemRequestDto dto);
 
     @Mapping(target = "regionDto", source = "region")
-    ItemDto mapToDto(Item entity);
+    @Mapping(target = "picUrl", expression = "java(entity.getPicName() != null ? siteUrl + \"/item/getImage?picName=\" + entity.getPicName() : null)")
+    public abstract ItemDto mapToDto(Item entity);
 }
