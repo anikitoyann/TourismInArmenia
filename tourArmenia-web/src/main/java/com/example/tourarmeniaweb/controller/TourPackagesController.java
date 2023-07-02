@@ -1,12 +1,12 @@
 package com.example.tourarmeniaweb.controller;
 
-import com.example.tourarmeniacommon.entity.Car;
-import com.example.tourarmeniacommon.entity.Item;
-import com.example.tourarmeniacommon.entity.Region;
-import com.example.tourarmeniacommon.entity.TourPackage;
+import com.example.tourarmeniacommon.entity.*;
 import com.example.tourarmeniacommon.repository.*;
+import com.example.tourarmeniaweb.security.CurrentUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +26,8 @@ public class TourPackagesController {
     private final RegionRepository regionsRepository;
     private final CarRepository carsRepository;
     private final ItemRepository itemRepository;
-    private final UserRepository userRepository;
+    private final CommentRepository commentRepository;
+
 
     @Value("${upload.image.path}")
     private String imageUploadPath;
@@ -95,22 +97,36 @@ public class TourPackagesController {
     }
 
     @GetMapping("/{id}")
-    public String singleTourPage(@PathVariable("id") int id, ModelMap modelMap) {
+    public String singleTourPage(@PathVariable("id") int id,@AuthenticationPrincipal CurrentUser currentUser,
+                                 ModelMap modelMap){
         Optional<TourPackage> byId = tourPackagesRepository.findById(id);
         if (byId.isPresent()) {
             TourPackage tourPackage = byId.get();
+            User user = currentUser.getUser();
+            List<Comment> comments = commentRepository.findAllByTourId(id);
             modelMap.addAttribute("tour", tourPackage);
+            modelMap.addAttribute("comments", comments);
+            modelMap.addAttribute("user", user);
+
             return "singleTour";
         } else {
             return "redirect:/tour";
         }
 
     }
+    @PostMapping("/comment/add")
+    public String addComment(@ModelAttribute Comment comment, @AuthenticationPrincipal CurrentUser currentUser) {
+        User user = currentUser.getUser();
+        comment.setUser(user);
+        comment.setDate(new Date());
+        commentRepository.save(comment);
 
-    @GetMapping("/remove")
-    public String removeTour(@RequestParam("id") int id) {
-        tourPackagesRepository.deleteById(id);
-        return "redirect:/tour";
+        return "redirect:/tour/" + comment.getTour().getId();
     }
-}
+
+@GetMapping("/remove")
+    public String removeTour(@RequestParam("id") int id){
+    tourPackagesRepository.deleteById(id);
+    return "redirect:/tour";
+    }}
 
