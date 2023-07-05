@@ -31,7 +31,7 @@ public class RestSecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.GET, "/","/regions/**","/item/**","/tour/**", "/cars").permitAll()
+                .requestMatchers(HttpMethod.GET, "/","/regions/**","/item/**","/tours/**", "/cars").permitAll()
                 .requestMatchers(HttpMethod.POST,"/user/register","/user/auth").permitAll()
                 .requestMatchers("/admin/**").hasAuthority("ADMIN")
                 .requestMatchers("/admin/getImage/**").permitAll()

@@ -100,4 +100,23 @@ create table if not exists car
         );
         </sql>
     </changeSet>
+
+        <changeSet id="addTable" author="lsepanyan">
+                <createTable tableName="currency">
+                        <column name="id" type="int(11)" autoIncrement="true">
+                                <constraints primaryKey="true" nullable="false"></constraints>
+                        </column>
+                        <column name="rub" type="double" >
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="usd" type="double">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="last_updated_date" type="timestamp">
+                                <constraints nullable="false"/>
+                        </column>
+                </createTable>
+        </changeSet>
+
+      
 </databaseChangeLog>

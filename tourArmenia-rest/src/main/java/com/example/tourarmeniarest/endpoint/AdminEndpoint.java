@@ -54,7 +54,6 @@ public class AdminEndpoint {
             item.setPicName(picName);
             itemService.save(item);
             ItemDto itemDto = itemMapper.mapToDto(item);
-            //bookDto.setPicUrl(siteUrl + "/books/getImage?picName=" + picName);
             return ResponseEntity.ok(itemDto);
         }
         return ResponseEntity.badRequest().build();

@@ -14,5 +14,4 @@ public class ItemDto {
     private String picUrl;
     private String description;
     private Type type;
-    private RegionDto regionDto;
 }
