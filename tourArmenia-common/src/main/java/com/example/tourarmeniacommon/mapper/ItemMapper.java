@@ -7,7 +7,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Value;
 
-@Mapper(componentModel = "spring", uses = ItemMapper.class)
+import java.util.List;
+
+@Mapper(componentModel = "spring", uses = RegionMapper.class)
 public abstract class ItemMapper {
     @Value("${site.url}")
     String siteUrl;
@@ -17,4 +19,7 @@ public abstract class ItemMapper {
     @Mapping(target = "regionDto", source = "region")
     @Mapping(target = "picUrl", expression = "java(entity.getPicName() != null ? siteUrl + \"/item/getImage?picName=\" + entity.getPicName() : null)")
     public abstract ItemDto mapToDto(Item entity);
+
+    public abstract List<ItemDto> mapListToDtos(List<Item> items);
+
 }

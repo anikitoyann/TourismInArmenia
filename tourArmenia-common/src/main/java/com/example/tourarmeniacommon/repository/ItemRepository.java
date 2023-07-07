@@ -6,10 +6,11 @@ import com.example.tourarmeniacommon.entity.Type;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 import java.util.List;
 
-public interface ItemRepository extends JpaRepository<Item, Integer> {
+public interface ItemRepository extends JpaRepository<Item, Integer>, QuerydslPredicateExecutor<Item> {
 
     List<Item> findByRegion(Region region);
     List<Item> findAllByRegion_IdAndType(int regionId, Type type);

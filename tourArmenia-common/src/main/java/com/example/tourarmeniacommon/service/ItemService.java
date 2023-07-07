@@ -1,6 +1,8 @@
 package com.example.tourarmeniacommon.service;
 
 
+import com.example.tourarmeniacommon.dto.ItemDto;
+import com.example.tourarmeniacommon.dto.ItemSearchDto;
 import com.example.tourarmeniacommon.entity.Item;
 import com.example.tourarmeniacommon.entity.Region;
 import com.example.tourarmeniacommon.entity.Type;
@@ -13,7 +15,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ItemService {
-    public void addItem(MultipartFile multipartFile, Item item) throws IOException;
 
     public Optional<Item> findById(int id);
 
@@ -30,4 +31,7 @@ public interface ItemService {
     public Item save(Item item);
 
     boolean existsById(int id);
+
+    List<ItemDto> search(int page, int size, ItemSearchDto itemSearchDto);
 }
+
