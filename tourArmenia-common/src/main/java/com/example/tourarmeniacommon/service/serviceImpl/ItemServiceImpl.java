@@ -1,10 +1,20 @@
 package com.example.tourarmeniacommon.service.serviceImpl;
 
+import com.example.tourarmeniacommon.dto.ItemDto;
+import com.example.tourarmeniacommon.dto.ItemSearchDto;
 import com.example.tourarmeniacommon.entity.Item;
+import com.example.tourarmeniacommon.entity.QItem;
 import com.example.tourarmeniacommon.entity.Region;
 import com.example.tourarmeniacommon.entity.Type;
+import com.example.tourarmeniacommon.mapper.ItemMapper;
 import com.example.tourarmeniacommon.repository.ItemRepository;
 import com.example.tourarmeniacommon.service.ItemService;
+import com.querydsl.core.types.Order;
+import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.dsl.PathBuilder;
+import com.querydsl.jpa.impl.JPAQuery;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -21,24 +31,12 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService {
-    public final ItemRepository itemRepository;
-    @Value("${upload.image.path}")
-    private String imageUploadPath;
-    private int id;
-
-    public void addItem(MultipartFile multipartFile, Item item) throws IOException {
-        if (multipartFile != null && !multipartFile.isEmpty()) {
-            String fileName = System.nanoTime() + "_" + multipartFile.getOriginalFilename();
-            File file = new File(imageUploadPath + fileName);
-            multipartFile.transferTo(file);
-            item.setPicName(fileName);
-        }
-        itemRepository.save(item);
-    }
-
+    private final ItemRepository itemRepository;
+    private final ItemMapper itemMapper;
+    @PersistenceContext
+    private EntityManager entityManager;
     @Override
     public Optional<Item> findById(int id) {
-        this.id = id;
         return itemRepository.findById(id);
     }
 
@@ -62,10 +60,14 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    public List<ItemDto> search(int page, int size, ItemSearchDto itemSearchDto) {
+        List<Item> fetch = searchItemByFilter(page, size, itemSearchDto);
+        List<ItemDto> itemDtos = itemMapper.mapListToDtos(fetch);
+        return itemDtos;
+    } @Override
     public void deleteById(int id) {
         itemRepository.deleteById(id);
     }
-
     @Override
     public List<Item> findAll() {
         return itemRepository.findAll();
@@ -75,4 +77,32 @@ public class ItemServiceImpl implements ItemService {
     public List<Item> findByRegion(Region region) {
         return itemRepository.findByRegion(region);
     }
+    private List<Item> searchItemByFilter(int page, int size, ItemSearchDto itemSearchDto) {
+       QItem qItem = QItem.item;
+        var query = new JPAQuery<Item>(entityManager);
+        JPAQuery<Item> from = query.from(qItem);
+        if (itemSearchDto.getDescription() != null && !itemSearchDto.getDescription().isEmpty()) {
+            from.where(qItem.description.contains(itemSearchDto.getDescription()));
+        }
+        if (itemSearchDto.getName() != null && itemSearchDto.getName().isEmpty()) {
+            from.where(qItem.name.contains(itemSearchDto.getName()));
+        }
+        if (itemSearchDto.getRegionName() != null && itemSearchDto.getRegionName().isEmpty()) {
+            from.where(qItem.region.name.contains(itemSearchDto.getRegionName()));
+        }
+        if (itemSearchDto.getType() != null) {
+            from.where(qItem.type.eq(itemSearchDto.getType()));
+        }
+        if (page > 0) {
+            from.offset((long) page * size) ;
+        }
+        from.limit(size);
+        PathBuilder<Object> objectPathBuilder = new PathBuilder<Object>(Item.class, itemSearchDto.getSortBy());
+        from.orderBy(new OrderSpecifier("asc".equalsIgnoreCase(itemSearchDto.getSortDirection()) ? Order.ASC
+                : Order.DESC, objectPathBuilder));
+        List<Item> fetch = from.fetch();
+        return fetch;
+    }
+
+
 }
