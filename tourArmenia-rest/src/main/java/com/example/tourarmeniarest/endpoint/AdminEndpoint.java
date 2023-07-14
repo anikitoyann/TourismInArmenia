@@ -2,22 +2,24 @@ package com.example.tourarmeniarest.endpoint;
 
 import com.example.tourarmeniacommon.dto.CreateItemRequestDto;
 import com.example.tourarmeniacommon.dto.ItemDto;
+import com.example.tourarmeniacommon.dto.RegionDto;
+import com.example.tourarmeniacommon.dto.RegionRequestDto;
 import com.example.tourarmeniacommon.entity.Item;
 import com.example.tourarmeniacommon.entity.Region;
+import com.example.tourarmeniacommon.mapper.CarMapper;
 import com.example.tourarmeniacommon.mapper.ItemMapper;
+import com.example.tourarmeniacommon.mapper.RegionMapper;
+import com.example.tourarmeniacommon.service.CarService;
 import com.example.tourarmeniacommon.service.ItemService;
 import com.example.tourarmeniacommon.service.RegionService;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -28,11 +30,14 @@ public class AdminEndpoint {
     private final ItemService itemService;
     private final RegionService regionService;
     private final ItemMapper itemMapper;
+    private final CarMapper carMapper;
+    private final RegionMapper regionMapper;
+    private final CarService carService;
     @Value("${upload.image.path}")
     private String uploadPath;
     @Value("${site.url}")
     private String siteUrl;
-    @PostMapping
+    @PostMapping("/createItem")
     public ResponseEntity<ItemDto> create(@RequestBody CreateItemRequestDto createItemRequestDto) {
         Optional<Region> byId = regionService.findById(createItemRequestDto.getRegionId());
         if (byId.isEmpty()) {
@@ -40,6 +45,12 @@ public class AdminEndpoint {
         }
         Item save = itemService.save(itemMapper.map(createItemRequestDto));
         return ResponseEntity.ok(itemMapper.mapToDto(save));
+    }
+
+    @PostMapping("/createRegion")
+    public ResponseEntity<RegionDto> create(@RequestBody RegionRequestDto regionRequestDto) {
+        Region region = regionService.save(regionMapper.map(regionRequestDto));
+        return ResponseEntity.ok(regionMapper.mapToDto(region));
     }
     @PostMapping("/{id}/image")
     public ResponseEntity<ItemDto> uploadImage(@PathVariable("id") int itemId,
@@ -49,7 +60,6 @@ public class AdminEndpoint {
             String originalFilename = multipartFile.getOriginalFilename();
             String picName = System.currentTimeMillis() + "_" + originalFilename;
             File file = new File(uploadPath + picName);
-            multipartFile.transferTo(file);
             Item item = itemOptional.get();
             item.setPicName(picName);
             itemService.save(item);
@@ -59,17 +69,7 @@ public class AdminEndpoint {
         return ResponseEntity.badRequest().build();
     }
 
-    @GetMapping(value = "/getImage",
-            produces = MediaType.IMAGE_JPEG_VALUE)
-    public @ResponseBody byte[] getImage(@RequestParam("picName") String picName) throws IOException {
-        File file = new File(uploadPath + picName);
-        if (file.exists()) {
-            FileInputStream fileInputStream = new FileInputStream(file);
-            return IOUtils.toByteArray(fileInputStream);
-        }
-        return null;
-    }
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteItemById(@PathVariable("id") int id) {
         if (itemService.existsById(id)) {
             itemService.deleteById(id);

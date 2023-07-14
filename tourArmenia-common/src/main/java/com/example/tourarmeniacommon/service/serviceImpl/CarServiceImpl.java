@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,5 +33,25 @@ public class CarServiceImpl implements CarService {
             car.setPicName(fileName);
         }
         carRepository.save(car);
+    }
+
+    @Override
+    public Optional<Car> findById(int carId) {
+        return carRepository.findById(carId);
+    }
+
+    @Override
+    public Car create(Car car) {
+        return carRepository.save(car);
+    }
+
+    @Override
+    public boolean existsById(int id) {
+        return carRepository.existsById(id);
+    }
+
+    @Override
+    public void deleteById(int id) {
+        carRepository.deleteById(id);
     }
 }

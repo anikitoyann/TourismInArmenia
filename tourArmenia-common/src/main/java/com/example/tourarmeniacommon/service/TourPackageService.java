@@ -17,4 +17,6 @@ public interface TourPackageService {
     Optional<TourPackage> findById(int id);
 
     List<TourPackage> findAll();
+
+    boolean existsById(int id);
 }

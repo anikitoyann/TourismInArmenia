@@ -37,7 +37,6 @@ public class ItemServiceImpl implements ItemService {
     private EntityManager entityManager;
     @Value("${upload.image.path}")
     private String imageUploadPath;
-    private int id;
 
     public void addItem(MultipartFile multipartFile, Item item) throws IOException {
         if (multipartFile != null && !multipartFile.isEmpty()) {

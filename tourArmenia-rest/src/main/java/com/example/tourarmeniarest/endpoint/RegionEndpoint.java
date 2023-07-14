@@ -1,7 +1,13 @@
 package com.example.tourarmeniarest.endpoint;
 
+import com.example.tourarmeniacommon.dto.CarDto;
+import com.example.tourarmeniacommon.dto.CreateCarRequestDto;
+import com.example.tourarmeniacommon.dto.RegionDto;
+import com.example.tourarmeniacommon.dto.RegionRequestDto;
+import com.example.tourarmeniacommon.entity.Car;
 import com.example.tourarmeniacommon.entity.Region;
 import com.example.tourarmeniacommon.entity.Type;
+import com.example.tourarmeniacommon.mapper.RegionMapper;
 import com.example.tourarmeniacommon.service.ItemService;
 import com.example.tourarmeniacommon.service.RegionService;
 import lombok.RequiredArgsConstructor;
@@ -17,10 +23,16 @@ import java.util.Optional;
 public class RegionEndpoint {
     private final RegionService regionService;
     private final ItemService itemService;
+    private final RegionMapper regionMapper;
 
     @GetMapping
-    public List<Region> regionPage() {
-        return regionService.findAll();
+    public ResponseEntity<List<RegionDto>> regionPage() {
+        List<Region> all = regionService.findAll();
+        if (all.size() == 0) {
+            return ResponseEntity.notFound().build();
+        }
+        List<RegionDto> regionDto = regionMapper.mapListToDtos(all);
+        return ResponseEntity.ok(regionDto);
     }
 
     @GetMapping("/{id}")
