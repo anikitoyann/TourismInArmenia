@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ItemService {
+    public void addItem(MultipartFile multipartFile, Item item) throws IOException;
 
     public Optional<Item> findById(int id);
 

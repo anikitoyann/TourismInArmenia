@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegionRequestDto {
+public class CarDto {
+    private int id;
     private String name;
-    private String regionalCenter;
+    private String seats;
+    private String picUrl;
 }

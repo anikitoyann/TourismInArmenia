@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegionDto {
+
     private int id;
     private String name;
+    private String regionalCenter;
+
 }

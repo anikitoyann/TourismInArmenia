@@ -19,7 +19,6 @@ public abstract class ItemMapper {
     @Mapping(target = "regionDto", source = "region")
     @Mapping(target = "picUrl", expression = "java(entity.getPicName() != null ? siteUrl + \"/item/getImage?picName=\" + entity.getPicName() : null)")
     public abstract ItemDto mapToDto(Item entity);
-
     public abstract List<ItemDto> mapListToDtos(List<Item> items);
 
 }

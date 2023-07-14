@@ -31,10 +31,23 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService {
-    private final ItemRepository itemRepository;
+    public final ItemRepository itemRepository;
     private final ItemMapper itemMapper;
     @PersistenceContext
     private EntityManager entityManager;
+    @Value("${upload.image.path}")
+    private String imageUploadPath;
+
+    public void addItem(MultipartFile multipartFile, Item item) throws IOException {
+        if (multipartFile != null && !multipartFile.isEmpty()) {
+            String fileName = System.nanoTime() + "_" + multipartFile.getOriginalFilename();
+            File file = new File(imageUploadPath + fileName);
+            multipartFile.transferTo(file);
+            item.setPicName(fileName);
+        }
+        itemRepository.save(item);
+    }
+
     @Override
     public Optional<Item> findById(int id) {
         return itemRepository.findById(id);

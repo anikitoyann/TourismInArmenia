@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegionRequestDto {
+public class CreateCarRequestDto {
     private String name;
-    private String regionalCenter;
+    private String seats;
 }

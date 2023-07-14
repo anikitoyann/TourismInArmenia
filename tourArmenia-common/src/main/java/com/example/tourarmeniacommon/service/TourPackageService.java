@@ -12,9 +12,11 @@ public interface TourPackageService {
 
    void deleteById(int id);
 
-   TourPackage add(TourPackage tour);
+    TourPackage add(TourPackage tour);
 
-   Optional<TourPackage> findById(int id);
+    Optional<TourPackage> findById(int id);
 
-   List<TourPackage> findAll();
+    List<TourPackage> findAll();
+
+    boolean existsById(int id);
 }

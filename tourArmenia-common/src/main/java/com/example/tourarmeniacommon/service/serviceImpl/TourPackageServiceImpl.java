@@ -50,4 +50,9 @@ public class TourPackageServiceImpl implements TourPackageService {
     public List<TourPackage> findAll() {
         return tourPackagesRepository.findAll();
     }
+
+    @Override
+    public boolean existsById(int id) {
+        return tourPackagesRepository.existsById(id);
+    }
 }
