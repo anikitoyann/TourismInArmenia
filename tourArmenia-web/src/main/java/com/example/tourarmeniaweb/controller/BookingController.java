@@ -8,8 +8,10 @@ import com.example.tourarmeniacommon.repository.BookingRepository;
 import com.example.tourarmeniacommon.repository.CarRepository;
 import com.example.tourarmeniacommon.repository.ItemRepository;
 import com.example.tourarmeniacommon.repository.TourPackagesRepository;
+import com.example.tourarmeniacommon.service.ItemService;
 import com.example.tourarmeniaweb.security.CurrentUser;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,14 +30,14 @@ import java.util.Optional;
 public class BookingController {
 
     private final TourPackagesRepository tourPackagesRepository;
-    private final ItemRepository itemRepository;
+    private final ItemService itemService;
     private final CarRepository carRepository;
 
 
-    @GetMapping
+    @GetMapping("/createCustomTour")
     public String showBookingForm(ModelMap modelMap) {
         List<Car> cars = carRepository.findAll();
-        List<Item> items = itemRepository.findAll();
+        List<Item> items = itemService.findAll();
         List<TourPackage> tours = tourPackagesRepository.findAll();
         modelMap.addAttribute("tours", tours);
         modelMap.addAttribute("cars", cars);
@@ -44,32 +46,36 @@ public class BookingController {
         return "booking";
     }
 
-    @PostMapping
-    public String booking(@RequestParam("tourId") Integer tourId,
-                          @RequestParam("groupSize") int groupSize,
-                          @RequestParam("startDate") Date startDate,
-                          @RequestParam("item") Item item,
-                          @RequestParam("notes") String notes,
-                          @AuthenticationPrincipal CurrentUser currentUser
-                         ) {
-
-        Optional<TourPackage> tour = tourPackagesRepository.findById(tourId);
+    @PostMapping("/createCustomTour")
+    public String createBooking(@RequestParam("groupSize") int groupSize,
+                                @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+                                @RequestParam("item.id") Integer itemId,
+                                @RequestParam("notes") String notes,
+                                @AuthenticationPrincipal CurrentUser currentUser
+    ) {
+        Item item = itemService.findById(itemId).get();
         Book book = new Book();
-        if (tourId == null) {
-            book.setGuestCount(groupSize);
-            book.setItem(item);
-            book.setStartDate(startDate);
-            book.setNotes(notes);
-            book.setUser(currentUser.getUser());
-        } else {
-            book.setTourPackage(tour.get());
-            book.setGuestCount(tour.get().getGroupSize());
-            book.setStartDate(tour.get().getStartDate());
-            book.setItem(tour.get().getItem());
-            book.setCar(tour.get().getCar());
-            book.setUser(currentUser.getUser());
-        }
-        return "tour";
+        book.setGuestCount(groupSize);
+        book.setItem(item);
+        book.setStartDate(startDate);
+        book.setNotes(notes);
+        book.setUser(currentUser.getUser());
+        return "/tour";
     }
 
+
+    @PostMapping
+    public String bookTour(@AuthenticationPrincipal CurrentUser currentUser,
+                           @RequestParam("tourId") Integer tourId) {
+        Optional<TourPackage> tour = tourPackagesRepository.findById(tourId);
+        Book book = new Book();
+        book.setTourPackage(tour.get());
+        book.setGuestCount(tour.get().getGroupSize());
+        book.setStartDate(tour.get().getStartDate());
+        book.setItem(tour.get().getItem());
+        book.setCar(tour.get().getCar());
+        book.setUser(currentUser.getUser());
+        return "redirect:/tour";
+    }
 }
+
