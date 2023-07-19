@@ -6,10 +6,8 @@ import com.example.tourarmeniacommon.dto.RegionDto;
 import com.example.tourarmeniacommon.dto.RegionRequestDto;
 import com.example.tourarmeniacommon.entity.Item;
 import com.example.tourarmeniacommon.entity.Region;
-import com.example.tourarmeniacommon.mapper.CarMapper;
 import com.example.tourarmeniacommon.mapper.ItemMapper;
 import com.example.tourarmeniacommon.mapper.RegionMapper;
-import com.example.tourarmeniacommon.service.CarService;
 import com.example.tourarmeniacommon.service.ItemService;
 import com.example.tourarmeniacommon.service.RegionService;
 import lombok.RequiredArgsConstructor;
@@ -30,13 +28,12 @@ public class AdminEndpoint {
     private final ItemService itemService;
     private final RegionService regionService;
     private final ItemMapper itemMapper;
-    private final CarMapper carMapper;
     private final RegionMapper regionMapper;
-    private final CarService carService;
     @Value("${upload.image.path}")
     private String uploadPath;
     @Value("${site.url}")
     private String siteUrl;
+
     @PostMapping("/createItem")
     public ResponseEntity<ItemDto> create(@RequestBody CreateItemRequestDto createItemRequestDto) {
         Optional<Region> byId = regionService.findById(createItemRequestDto.getRegionId());
@@ -44,14 +41,18 @@ public class AdminEndpoint {
             return ResponseEntity.badRequest().build();
         }
         Item save = itemService.save(itemMapper.map(createItemRequestDto));
+        save.setRegion(byId.get());
         return ResponseEntity.ok(itemMapper.mapToDto(save));
     }
 
+
     @PostMapping("/createRegion")
+
     public ResponseEntity<RegionDto> create(@RequestBody RegionRequestDto regionRequestDto) {
         Region region = regionService.save(regionMapper.map(regionRequestDto));
         return ResponseEntity.ok(regionMapper.mapToDto(region));
     }
+
     @PostMapping("/{id}/image")
     public ResponseEntity<ItemDto> uploadImage(@PathVariable("id") int itemId,
                                                @RequestParam("image") MultipartFile multipartFile) throws IOException {
