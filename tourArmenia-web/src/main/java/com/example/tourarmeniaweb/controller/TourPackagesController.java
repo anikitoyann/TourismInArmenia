@@ -5,7 +5,6 @@ import com.example.tourarmeniacommon.repository.*;
 import com.example.tourarmeniaweb.security.CurrentUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -41,7 +40,7 @@ public class TourPackagesController {
     }
 
     @GetMapping("/add")
-    public String itemsAddPage(ModelMap modelMap) {
+    public String toursAddPage(ModelMap modelMap) {
         List<Region> regions = regionsRepository.findAll();
         List<Car> cars = carsRepository.findAll();
         List<Item> items = itemRepository.findAll();

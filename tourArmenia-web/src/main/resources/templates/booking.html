@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking</title>
+</head>
+<body>
+<form action="/booking" method="post">
+    Venue: <select name="item.id" required>
+    <option th:each="item:${items}"
+            th:text="${item.name}"
+            th:value="${item.id}"></option>
+</select>
+    Car: <select name="car.id" required>
+    <option th:each="car:${cars}"
+            th:text="${car.name}"
+            th:value="${car.id}"></option>
+
+</select>
+    Guest count: <input type="text" name="guestCount" required>
+    Start date: <input type="datetime-local" name="startDate" required>
+    Notes: <input type="text" name="notes">
+
+    <input type="submit" value="book my ">
+
+
+</form>
+
+</body>
+</html>
