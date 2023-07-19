@@ -32,8 +32,7 @@ public class TourEndpoint {
     private final CurrencyService currencyService;
     @Value("${upload.image.path}")
     private String uploadPath;
-    @Value("${site.url}")
-    private String siteUrl;
+
     @PostMapping("/createTour")
     public ResponseEntity<TourDto> create(@RequestBody CreateTourRequestDto createTourRequestDto) {
         Optional<Region> regionId = regionService.findById(createTourRequestDto.getRegionId());

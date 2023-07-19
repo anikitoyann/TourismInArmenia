@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +35,7 @@ public class CarEndpoint {
 
     @PostMapping("/{id}/image")
     public ResponseEntity<CarDto> uploadImage(@PathVariable("id") int carId,
-                                               @RequestParam("image") MultipartFile multipartFile) throws IOException {
+                                               @RequestParam("image") MultipartFile multipartFile) {
         Optional<Car> carOptional = carService.findById(carId);
         if (!multipartFile.isEmpty() && carOptional.isPresent()) {
             String originalFilename = multipartFile.getOriginalFilename();

@@ -35,7 +35,7 @@ public class UserEndpoint {
     public ResponseEntity<UserDto> register(@RequestBody CreateUserRequestDto createUserRequestDto){
         Optional<User> byEmail = userService.findByEmail(createUserRequestDto.getEmail());
         if(byEmail.isPresent()){
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+            return ResponseEntity.badRequest().build();
         }
         User user = userMapper.map(createUserRequestDto);
         user.setPassword(passwordEncoder.encode(createUserRequestDto.getPassword()));

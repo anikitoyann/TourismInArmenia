@@ -11,6 +11,7 @@ import com.example.tourarmeniacommon.mapper.RegionMapper;
 import com.example.tourarmeniacommon.service.ItemService;
 import com.example.tourarmeniacommon.service.RegionService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/regions")
+@Slf4j
 public class RegionEndpoint {
     private final RegionService regionService;
     private final ItemService itemService;
@@ -29,9 +31,11 @@ public class RegionEndpoint {
     public ResponseEntity<List<RegionDto>> regionPage() {
         List<Region> all = regionService.findAll();
         if (all.size() == 0) {
+            log.error("there is no any region in DB");
             return ResponseEntity.notFound().build();
         }
         List<RegionDto> regionDto = regionMapper.mapListToDtos(all);
+        log.error("Regions count ");
         return ResponseEntity.ok(regionDto);
     }
 

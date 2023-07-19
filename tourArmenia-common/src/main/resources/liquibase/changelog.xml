@@ -112,5 +112,12 @@ create table if not exists car
                 </createTable>
         </changeSet>
 
+<!--        <changeSet id="addRegion" author="LianaStepanyan">-->
+<!--                <sql>-->
+<!--                        INSERT into region value(`name`,`regional_center`)-->
+<!--                            ('shirak','Gyumri'),-->
+<!--                </sql>-->
+<!--        </changeSet>-->
+
       
 </databaseChangeLog>

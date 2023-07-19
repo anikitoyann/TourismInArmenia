@@ -21,6 +21,7 @@ public abstract class TourMapper {
     @Mapping(target = "itemDto", source = "item")
     @Mapping(target = "carDto", source = "car")
     @Mapping(target = "regionDto", source = "region")
+    @Mapping(target = "priceAmd", source = "priceAmd")
     @Mapping(target = "picUrl", expression = "java(entity.getPicName() != null ? siteUrl + \"/tours/getImage?picName=\" + entity.getPicName() : null)")
     public abstract TourDto mapToDto(TourPackage entity);
     public abstract List<TourDto> mapListToDtos(List<TourPackage> tours);
