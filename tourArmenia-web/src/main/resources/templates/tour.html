@@ -15,10 +15,10 @@
     <input type="submit" value="Search">
 </form>
 <table border="1px">
-    <!--<div th:if="${currentUser.UserType == 'ADMIN'}">-->
-    <a href="/tour/add"> Create Tour</a>
     <a href="/booking/createCustomTour"> Book Custom Tour</a>
-<!--    </div>-->
+    <div th:if="${currentUser.UserType == 'ADMIN'}">
+    <a href="/tour/add"> Create Tour</a>
+    </div>
     <tr>
         <th>ID</th>
         <th>Name</th>
@@ -30,8 +30,8 @@
         <th>Duration</th>
         <th>Image</th>
         <th>Start Date</th>
-        <!--   th:if="${currentUser.UserType == 'ADMIN'}"-->>
-        <th>Action</th>
+        <!-- th:if="${currentUser.UserType == 'ADMIN'}"  -->>
+        <th th:if="${currentUser.UserType == 'ADMIN'}">Action</th>
     </tr>
     <tr th:each="tour : ${tours}">
         <td th:text="${tour.id}"></td>
@@ -47,9 +47,7 @@
                 <img th:if="${tour.picName != null}" th:src="@{/getImage(imageName=${tour.picName})}" width="400"/> </a>
         </td>
         <td th:text="${tour.startDate}"></td>
-        <!--        <td> <a th:href="@{'/tour/' + ${tour.id}}">More</a>-->
-        <!--        </td>-->
-        <td><a th:href="@{/tour/remove(id=${tour.id})}">Remove</a></td>
+        <td th:if="${currentUser.UserType == 'ADMIN'}"><a th:href="@{/tour/remove(id=${tour.id})}">Remove</a></td>
     </tr>
     <a href="/static">Back</a>
 </table>
