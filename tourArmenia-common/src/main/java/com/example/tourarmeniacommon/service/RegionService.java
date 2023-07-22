@@ -11,4 +11,6 @@ public interface RegionService{
     void deleteById(int id);
 
     Optional<Region> findById(int id);
+
+    Region save(Region region);
 }

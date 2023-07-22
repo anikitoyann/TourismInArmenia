@@ -13,10 +13,12 @@ import org.springframework.security.web.SecurityFilterChain;
 
 
 @Configuration
-@RequiredArgsConstructor
-public class WebSecurityConfig {
-    private final UserDetailsService userDetailsService;
-    private final PasswordEncoder passwordEncoder;
+public class SpringSecurityConfig {
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -33,6 +35,7 @@ public class WebSecurityConfig {
                 .requestMatchers("/contactUs").permitAll()
                 .requestMatchers("/TermsPrivacy").permitAll()
                 .requestMatchers("/aboutUs").permitAll()
+                .requestMatchers("/admin/**").hasAuthority("ADMIN")
               //  .requestMatchers("/item/**").hasAnyAuthority("ADMIN", "USER")
             //    .requestMatchers("/user/admin").hasAuthority("ADMIN")
                 .anyRequest().authenticated()

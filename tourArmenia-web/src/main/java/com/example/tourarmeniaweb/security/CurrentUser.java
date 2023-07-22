@@ -1,8 +1,8 @@
 package com.example.tourarmeniaweb.security;
 
 import com.example.tourarmeniacommon.entity.User;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.authority.AuthorityUtils;
-
 public class CurrentUser extends org.springframework.security.core.userdetails.User{
 private User user;
 
@@ -12,6 +12,7 @@ private User user;
                 AuthorityUtils.createAuthorityList(user.getUserType().name()));
         this.user=user;
     }
+
     public User getUser(){
         return user;
     }

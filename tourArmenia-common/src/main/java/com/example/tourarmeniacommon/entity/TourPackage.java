@@ -13,7 +13,7 @@ public class TourPackage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private int price;
+    private double price;
     private int groupSize;
     private String duration;
     private String picName;

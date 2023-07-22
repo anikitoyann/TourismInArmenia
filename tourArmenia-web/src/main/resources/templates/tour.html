@@ -1,14 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Tours</title>
 </head>
 <body>
 <h1>Daily Tours</h1>
+<form action="/tour/search" method="get">
+    <select name="regionId">
+        <option value="">All Regions</option>
+        <option th:each="region : ${regions}"
+                th:text="${region.name}" th:value="${region.id}"></option>
+    </select>
+    <input type="submit" value="Search">
+</form>
 <table border="1px">
-    <!--<div th:if="${currentUser.UserType == 'ADMIN'}">-->
-        <a href="/tour/add">Create Tour</a>
+    <a href="/booking/createCustomTour"> Book Custom Tour</a>
+    <div th:if="${currentUser.UserType == 'ADMIN'}">
+    <a href="/tour/add"> Create Tour</a>
     </div>
     <tr>
         <th>ID</th>
@@ -35,12 +44,13 @@
         <td th:text="${tour.duration}"></td>
         <td>
             <a th:href="@{'/tour/' +${tour.id}}">
-            <img th:if="${tour.picName != null}" th:src="@{/getImage(imageName=${tour.picName})}" width="400"/> </a>
+                <img th:if="${tour.picName != null}" th:src="@{/getImage(imageName=${tour.picName})}" width="400"/> </a>
         </td>
         <td th:text="${tour.startDate}"></td>
+        <td th:if="${currentUser.UserType == 'ADMIN'}"><a th:href="@{/tour/remove(id=${tour.id})}">Remove</a></td>
 <!--        <td> <a th:href="@{'/tour/' + ${tour.id}}">More</a>-->
 <!--        </td>-->
-        <td><a th:href="@{/tour/remove(id=${tour.id})}">Remove</a> </td>
+        <td><a th:href="@{/admin/removeTour(id=${tour.id})}">Remove</a> </td>
     </tr>
     <a href="/static">Back</a>
 </table>

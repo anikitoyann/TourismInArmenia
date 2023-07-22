@@ -31,12 +31,13 @@ public class RestSecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.GET, "/","/regions/**","/item/**","/tour/**").permitAll()
-                .requestMatchers("/images").permitAll()
-                .requestMatchers(HttpMethod.POST,"/user/register").permitAll()
-                .requestMatchers("/contactUs").permitAll()
-                .requestMatchers("/TermsPrivacy").permitAll()
-                .requestMatchers("/aboutUs").permitAll()
+                .requestMatchers(HttpMethod.GET, "/","/regions/**","/item/**","/tours/**", "/cars", "/getImage").permitAll()
+                .requestMatchers(HttpMethod.POST,"/user/register","/user/auth", "/item/search", "/tours/search").permitAll()
+                .requestMatchers(HttpMethod.POST, "/admin/**","/cars/**", "/tours/createTour").hasAuthority("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/cars/delete/**", "/tours/delete/**", "/admin/delete/**").hasAuthority("ADMIN")
+               // .requestMatchers("/contactUs").permitAll()
+               // .requestMatchers("/TermsPrivacy").permitAll()
+               // .requestMatchers("/aboutUs").permitAll()
                 .anyRequest().authenticated();
 
         httpSecurity.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);

@@ -1,15 +1,18 @@
 package com.example.tourarmeniarest.endpoint;
 
-import com.example.tourarmeniacommon.entity.Item;
+import com.example.tourarmeniacommon.dto.CarDto;
+import com.example.tourarmeniacommon.dto.CreateCarRequestDto;
+import com.example.tourarmeniacommon.dto.RegionDto;
+import com.example.tourarmeniacommon.dto.RegionRequestDto;
+import com.example.tourarmeniacommon.entity.Car;
 import com.example.tourarmeniacommon.entity.Region;
 import com.example.tourarmeniacommon.entity.Type;
-import com.example.tourarmeniacommon.repository.ItemRepository;
+import com.example.tourarmeniacommon.mapper.RegionMapper;
+import com.example.tourarmeniacommon.service.ItemService;
 import com.example.tourarmeniacommon.service.RegionService;
-import com.example.tourarmeniacommon.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,13 +21,22 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/regions")
+@Slf4j
 public class RegionEndpoint {
     private final RegionService regionService;
-    private final ItemRepository itemRepository;
+    private final ItemService itemService;
+    private final RegionMapper regionMapper;
 
     @GetMapping
-    public List<Region> regionPage() {
-        return regionService.findAll();
+    public ResponseEntity<List<RegionDto>> regionPage() {
+        List<Region> all = regionService.findAll();
+        if (all.size() == 0) {
+            log.error("there is no any region in DB");
+            return ResponseEntity.notFound().build();
+        }
+        List<RegionDto> regionDto = regionMapper.mapListToDtos(all);
+        log.error("Regions count ");
+        return ResponseEntity.ok(regionDto);
     }
 
     @GetMapping("/{id}")
@@ -36,8 +48,7 @@ public class RegionEndpoint {
             if (type == null) {
                 type = "HOTEL";
             }
-            return ResponseEntity.ok(itemRepository.findAllByRegion_IdAndType(region.getId(), Type.valueOf(type)));
-
+            return ResponseEntity.ok(itemService.findAllByRegionAndType(region.getId(), Type.valueOf(type)));
         }
         return ResponseEntity.badRequest().build();
     }

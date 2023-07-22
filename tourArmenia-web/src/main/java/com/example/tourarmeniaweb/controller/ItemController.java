@@ -3,7 +3,6 @@ package com.example.tourarmeniaweb.controller;
 import com.example.tourarmeniacommon.entity.Item;
 import com.example.tourarmeniacommon.entity.Region;
 import com.example.tourarmeniacommon.entity.Type;
-import com.example.tourarmeniacommon.repository.RegionRepository;
 import com.example.tourarmeniacommon.service.ItemService;
 import com.example.tourarmeniacommon.service.RegionService;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +27,6 @@ import java.util.stream.IntStream;
 @RequestMapping("/item")
 public class ItemController {
 
-    private final RegionRepository regionsRepository;
     private final ItemService itemService;
     private final RegionService regionService;
 
@@ -90,7 +88,7 @@ public class ItemController {
         String message;
 
         if (regionId != null) {
-            Region region = regionsRepository.findById(regionId).orElse(null);
+            Region region = regionService.findById(regionId).orElse(null);
 
             if (region != null) {
                 items = itemService.findByRegion(region);
@@ -109,7 +107,7 @@ public class ItemController {
             message = "Showing all hotels:";
         }
         modelMap.addAttribute("items", items);
-        modelMap.addAttribute("regions", regionsRepository.findAll());
+        modelMap.addAttribute("regions", regionService.findAll());
         modelMap.addAttribute("message", message);
 
         return "item";
