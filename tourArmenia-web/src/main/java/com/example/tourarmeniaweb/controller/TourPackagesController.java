@@ -5,6 +5,10 @@ import com.example.tourarmeniacommon.entity.Item;
 import com.example.tourarmeniacommon.entity.Region;
 import com.example.tourarmeniacommon.entity.TourPackage;
 import com.example.tourarmeniacommon.repository.*;
+import com.example.tourarmeniacommon.service.CarService;
+import com.example.tourarmeniacommon.service.ItemService;
+import com.example.tourarmeniacommon.service.RegionService;
+import com.example.tourarmeniacommon.service.TourService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -21,26 +25,25 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/tour")
 public class TourPackagesController {
-    private final TourPackagesRepository tourPackagesRepository;
-    private final RegionRepository regionsRepository;
-    private final CarRepository carsRepository;
-    private final ItemRepository itemRepository;
-    private final UserRepository userRepository;
+    private final TourService tourService;
+    private final RegionService regionService;
+    private final CarService carService;
+    private final ItemService itemService;
 
     @Value("${upload.image.path}")
     private String imageUploadPath;
 
     @GetMapping
     public String toursPage(ModelMap modelMap) {
-        modelMap.addAttribute("tours", tourPackagesRepository.findAll());
+        modelMap.addAttribute("tours", tourService.findAll());
         return "tour";
     }
 
     @GetMapping("/add")
     public String itemsAddPage(ModelMap modelMap) {
-        List<Region> regions = regionsRepository.findAll();
-        List<Car> cars = carsRepository.findAll();
-        List<Item> items = itemRepository.findAll();
+        List<Region> regions = regionService.findAll();
+        List<Car> cars = carService.findAll();
+        List<Item> items = itemService.findAll();
         modelMap.addAttribute("regions", regions);
         modelMap.addAttribute("cars", cars);
         modelMap.addAttribute("items", items);
@@ -49,18 +52,12 @@ public class TourPackagesController {
 
     @PostMapping("/add")
     public String tourPackagesAdd(@ModelAttribute TourPackage tourPackages, @RequestParam("image") MultipartFile multipartFile) throws IOException {
-        if (multipartFile != null && !multipartFile.isEmpty()) {
-            String fileName = System.nanoTime() + "_" + multipartFile.getOriginalFilename();
-            File file = new File(imageUploadPath + fileName);
-            multipartFile.transferTo(file);
-            tourPackages.setPicName(fileName);
-        }
-        tourPackagesRepository.save(tourPackages);
+        tourService.addTour(tourPackages,multipartFile);
         return "redirect:/tour";
     }
     @GetMapping("/{id}")
     public String singleTourPage(@PathVariable("id") int id, ModelMap modelMap) {
-        Optional<TourPackage> byId = tourPackagesRepository.findById(id);
+        Optional<TourPackage> byId = tourService.findById(id);
         if (byId.isPresent()) {
             TourPackage tourPackage = byId.get();
             modelMap.addAttribute("tour", tourPackage);
@@ -73,7 +70,7 @@ public class TourPackagesController {
 
 @GetMapping("/remove")
     public String removeTour(@RequestParam("id") int id){
-    tourPackagesRepository.deleteById(id);
+    tourService.deleteById(id);
     return "redirect:/tour";
     }}
 
