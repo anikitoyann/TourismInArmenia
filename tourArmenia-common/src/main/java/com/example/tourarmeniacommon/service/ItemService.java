@@ -1,6 +1,8 @@
 package com.example.tourarmeniacommon.service;
 
 
+import com.example.tourarmeniacommon.dto.ItemDto;
+import com.example.tourarmeniacommon.dto.ItemSearchDto;
 import com.example.tourarmeniacommon.entity.Item;
 import com.example.tourarmeniacommon.entity.Region;
 import com.example.tourarmeniacommon.entity.Type;
@@ -24,4 +26,13 @@ public interface ItemService {
     List<Item> findAll();
 
     List<Item> findByRegion(Region region);
+
+    List<Item> findAllByRegionAndType(int id, Type type);
+
+    public Item save(Item item);
+
+    boolean existsById(int id);
+
+    List<ItemDto> search(int page, int size, ItemSearchDto itemSearchDto);
 }
+

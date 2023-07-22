@@ -28,4 +28,9 @@ public class RegionServiceImpl implements RegionService {
     public Optional<Region> findById(int id) {
         return regionRepository.findById(id);
     }
+
+    @Override
+    public Region save(Region region) {
+        return regionRepository.save(region);
+    }
 }
