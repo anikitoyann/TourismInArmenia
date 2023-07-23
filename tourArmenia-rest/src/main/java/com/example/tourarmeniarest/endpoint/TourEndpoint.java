@@ -1,4 +1,5 @@
 package com.example.tourarmeniarest.endpoint;
+
 import com.example.tourarmeniacommon.dto.CreateTourRequestDto;
 import com.example.tourarmeniacommon.dto.TourDto;
 import com.example.tourarmeniacommon.entity.*;
@@ -6,16 +7,13 @@ import com.example.tourarmeniacommon.mapper.TourMapper;
 import com.example.tourarmeniacommon.service.*;
 import com.example.tourarmeniacommon.util.RoundUtil;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -55,6 +53,17 @@ public class TourEndpoint {
         }
         return ResponseEntity.notFound().build();
     }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<TourPackage> update(@PathVariable("id") int id, @RequestBody TourPackage tourPackage) {
+        Optional<TourPackage> byId = tourPackageService.findById(id);
+        if (byId.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        TourPackage tourPackageDB = byId.get();
+        updateTour(tourPackage, tourPackageDB);
+        return ResponseEntity.ok(tourPackageService.add(tourPackageDB));
+    }
+
     @PostMapping("/{id}/image")
     public ResponseEntity<TourDto> uploadImage(@PathVariable("id") int tourId,
                                                @RequestParam("image") MultipartFile multipartFile) throws IOException {
@@ -87,5 +96,32 @@ public class TourEndpoint {
             }
         }
         return ResponseEntity.ok(tourDtoList);
+    }
+    private static void updateTour(TourPackage tourPackage, TourPackage tourPackageDB) {
+        if (tourPackage.getName() != null && !tourPackage.getName().isEmpty()) {
+            tourPackageDB.setName(tourPackage.getName());
+        }
+        if (tourPackage.getDuration() != null && tourPackage.getDuration().isEmpty()) {
+            tourPackageDB.setDuration(tourPackage.getDuration());
+        }
+        if (tourPackage.getStartDate() != null) {
+            tourPackageDB.setStartDate(tourPackage.getStartDate());
+        }
+        if (tourPackage.getCar() != null) {
+            tourPackageDB.setCar(tourPackage.getCar());
+        }
+        if (tourPackage.getRegion() != null) {
+            tourPackageDB.setRegion(tourPackage.getRegion());
+        }
+        if (tourPackage.getItem() != null) {
+            tourPackageDB.setItem(tourPackage.getItem());
+        }
+        if (tourPackage.getPrice() != 0) {
+            tourPackageDB.setPrice(tourPackage.getPrice());
+        }
+        if (tourPackage.getGroupSize() != 0) {
+            tourPackageDB.setGroupSize(tourPackage.getGroupSize());
+        }
+        tourPackageDB.setPicName(tourPackage.getPicName());
     }
 }

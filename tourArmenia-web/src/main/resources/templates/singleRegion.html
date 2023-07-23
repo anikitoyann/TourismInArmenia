@@ -7,7 +7,6 @@
 </head>
 <body>
 <a href="/regions">Back</a><br>
-<a href="/item/add">Create Sightseeing</a><br>
 <a th:href="${'/regions/'+region.id+'?type=HOTEL'}"><button>SEE hotels</button></a><br>
 <a th:href="${'/regions/'+region.id+'?type=SIGHTSEEING'}"><button>SEE Sightseeing</button></a>
 
@@ -17,6 +16,8 @@
     <span th:text="${item.type}"></span>
     <span th:text="${item.getDescription()}"></span>
     <img th:if="${item.getPicName() != null}" th:src="@{/getImage(imageName=${item.getPicName()})}" width="400"/>
+    <a th:href="@{/admin/updateItem(id=${item.id})}" class="btn btn-xs btn-outline-secondary text-uppercase">Delete</a>
+
 </div>
 </body>
 </html>

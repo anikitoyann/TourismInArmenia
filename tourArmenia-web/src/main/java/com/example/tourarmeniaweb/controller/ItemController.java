@@ -12,11 +12,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -50,19 +50,6 @@ public class ItemController {
         modelMap.addAttribute("items", result);
         return "item";
 
-    }
-    @GetMapping("/add")
-    public String itemsAddPage(ModelMap modelMap) {
-        modelMap.addAttribute("regions", regionService.findAll());
-        List<Type> types = Arrays.asList(Type.values());
-        modelMap.addAttribute("types", types);
-        return "addItem";
-    }
-    @PostMapping("/add")
-    public String hotelsAdd(@ModelAttribute Item item, @RequestParam("image") MultipartFile multipartFile) throws IOException {
-        itemService.addItem(multipartFile, item);
-        return "redirect:/item";
-        // return "redirect:/regions/" + item.getRegion().getId();
     }
 
     @GetMapping("/{id}")
