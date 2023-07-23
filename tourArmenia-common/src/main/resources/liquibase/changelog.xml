@@ -115,7 +115,17 @@ create table if not exists car
 <!--        <changeSet id="addRegion" author="LianaStepanyan">-->
 <!--                <sql>-->
 <!--                        INSERT into region value(`name`,`regional_center`)-->
-<!--                            ('shirak','Gyumri'),-->
+<!--                            ('Shirak','Gyumri'),-->
+<!--                            ('Lori','Vanadzor'),-->
+<!--                            ('Tavush','Ijevan'),-->
+<!--                            ('Aragatsotn','Ashtarak'),-->
+<!--                            ('Kotayq','Hrazdan'),-->
+<!--                            ('Gegharkuniq','Gavar'),-->
+<!--                            ('Armavir','Armavir'),-->
+<!--                            ('Ararat','Artashat'),-->
+<!--                            ('Vayots Dzor','Eghegnadzor'),-->
+<!--                            ('Syuniq','Kapan'),-->
+<!--                            ('Erevan','Erevan')-->
 <!--                </sql>-->
 <!--        </changeSet>-->
 

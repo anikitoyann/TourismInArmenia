@@ -34,5 +34,7 @@ public interface ItemService {
     boolean existsById(int id);
 
     List<ItemDto> search(int page, int size, ItemSearchDto itemSearchDto);
+
+    Item updateItem(Item item, Optional<Item> byId);
 }
 

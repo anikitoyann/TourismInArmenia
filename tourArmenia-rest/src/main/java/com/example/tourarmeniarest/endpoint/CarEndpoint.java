@@ -3,6 +3,7 @@ package com.example.tourarmeniarest.endpoint;
 import com.example.tourarmeniacommon.dto.CarDto;
 import com.example.tourarmeniacommon.dto.CreateCarRequestDto;
 import com.example.tourarmeniacommon.entity.Car;
+import com.example.tourarmeniacommon.entity.Region;
 import com.example.tourarmeniacommon.mapper.CarMapper;
 import com.example.tourarmeniacommon.service.CarService;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +26,6 @@ public class CarEndpoint {
     private final CarMapper carMapper;
     @Value("${upload.image.path}")
     private String uploadPath;
-    @Value("${site.url}")
-    private String siteUrl;
     @PostMapping("/createCar")
     public ResponseEntity<CarDto> create(@RequestBody CreateCarRequestDto createCarRequestDto) {
         Car car = carService.create(carMapper.map(createCarRequestDto));
@@ -66,5 +65,21 @@ public class CarEndpoint {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
+    }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Car> update(@PathVariable("id") int id, @RequestBody Car car) {
+        Optional<Car> byId = carService.findById(id);
+        if (byId.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        Car carDb = byId.get();
+        if (car.getName() != null && !car.getName().isEmpty()) {
+            carDb.setName(car.getName());
+        }
+        if (car.getSeats() != null && !car.getSeats().isEmpty()) {
+            carDb.setSeats(car.getSeats());
+        }
+        carDb.setPicName(car.getPicName());
+        return ResponseEntity.ok(carService.create(carDb));
     }
 }

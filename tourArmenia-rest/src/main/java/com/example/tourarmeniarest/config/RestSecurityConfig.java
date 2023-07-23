@@ -35,9 +35,7 @@ public class RestSecurityConfig {
                 .requestMatchers(HttpMethod.POST,"/user/register","/user/auth", "/item/search", "/tours/search").permitAll()
                 .requestMatchers(HttpMethod.POST, "/admin/**","/cars/**", "/tours/createTour").hasAuthority("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/cars/delete/**", "/tours/delete/**", "/admin/delete/**").hasAuthority("ADMIN")
-               // .requestMatchers("/contactUs").permitAll()
-               // .requestMatchers("/TermsPrivacy").permitAll()
-               // .requestMatchers("/aboutUs").permitAll()
+                .requestMatchers(HttpMethod.PUT, "/admin/**", "/cars/**", "/tours/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated();
 
         httpSecurity.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);

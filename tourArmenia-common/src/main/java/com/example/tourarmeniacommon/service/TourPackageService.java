@@ -19,4 +19,6 @@ public interface TourPackageService {
     List<TourPackage> findAll();
 
     boolean existsById(int id);
+
+    TourPackage updateTour(TourPackage tourPackage,Optional<TourPackage> byId);
 }

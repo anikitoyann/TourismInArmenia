@@ -31,8 +31,6 @@ public class AdminEndpoint {
     private final RegionMapper regionMapper;
     @Value("${upload.image.path}")
     private String uploadPath;
-    @Value("${site.url}")
-    private String siteUrl;
 
     @PostMapping("/createItem")
     public ResponseEntity<ItemDto> create(@RequestBody CreateItemRequestDto createItemRequestDto) {
@@ -68,6 +66,38 @@ public class AdminEndpoint {
             return ResponseEntity.ok(itemDto);
         }
         return ResponseEntity.badRequest().build();
+    }
+
+    @PutMapping("/updateItem/{id}")
+    public ResponseEntity<Item> update(@PathVariable("id") int id, @RequestBody Item item) {
+        Optional<Item> byId = itemService.findById(id);
+        if (byId.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        Item itemFromDB = byId.get();
+        if (item.getName() != null && !item.getName().isEmpty()) {
+            itemFromDB.setName(item.getName());
+        }
+        if (item.getDescription() != null && !item.getDescription().isEmpty()) {
+            itemFromDB.setDescription(item.getDescription());
+        }
+        return ResponseEntity.ok(itemService.save(itemFromDB));
+    }
+
+    @PutMapping("/updateRegion/{id}")
+    public ResponseEntity<Region> updateRegion(@PathVariable("id") int id, @RequestBody Region region) {
+        Optional<Region> byId = regionService.findById(id);
+        if (byId.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        Region regionFromDB = byId.get();
+        if (region.getName() != null && !region.getName().isEmpty()) {
+            regionFromDB.setName(region.getName());
+        }
+        if (region.getRegionalCenter() != null && !region.getRegionalCenter().isEmpty()) {
+            regionFromDB.setRegionalCenter(region.getRegionalCenter());
+        }
+        return ResponseEntity.ok(regionService.save(regionFromDB));
     }
 
     @DeleteMapping("/delete/{id}")
