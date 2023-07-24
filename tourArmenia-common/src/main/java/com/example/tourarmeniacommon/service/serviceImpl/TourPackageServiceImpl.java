@@ -1,5 +1,6 @@
 package com.example.tourarmeniacommon.service.serviceImpl;
 
+import com.example.tourarmeniacommon.entity.Item;
 import com.example.tourarmeniacommon.entity.TourPackage;
 import com.example.tourarmeniacommon.repository.TourPackagesRepository;
 import com.example.tourarmeniacommon.service.TourPackageService;
@@ -54,5 +55,35 @@ public class TourPackageServiceImpl implements TourPackageService {
     @Override
     public boolean existsById(int id) {
         return tourPackagesRepository.existsById(id);
+    }
+
+    @Override
+    public TourPackage updateTour(TourPackage tour, Optional<TourPackage> byId) {
+        TourPackage tourDB = byId.get();
+        if (tour.getName() != null && !tour.getName().isEmpty()) {
+            tourDB.setName(tour.getName());
+        }
+        if (tour.getRegion() != null) {
+            tourDB.setRegion(tour.getRegion());
+        }
+        if (tour.getGroupSize() != 0) {
+            tourDB.setGroupSize(tour.getGroupSize());
+        }
+        if (tour.getCar() != null) {
+            tourDB.setCar(tour.getCar());
+        }
+        if (tour.getItem() != null) {
+            tourDB.setItem(tour.getItem());
+        }
+        if (tour.getPrice() != 0) {
+            tourDB.setPrice(tour.getPrice());
+        }
+        if (tour.getDuration() != null && !tour.getDuration().isEmpty()) {
+            tourDB.setDuration(tour.getDuration());
+        }
+        if (tour.getStartDate() != null) {
+            tourDB.setStartDate(tour.getStartDate());
+        }
+        return tourDB;
     }
 }

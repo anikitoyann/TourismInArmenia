@@ -39,17 +39,6 @@ public class TourPackagesController {
         return "tour";
     }
 
-    @GetMapping("/add")
-    public String toursAddPage(ModelMap modelMap) {
-        List<Region> regions = regionsRepository.findAll();
-        List<Car> cars = carsRepository.findAll();
-        List<Item> items = itemRepository.findAll();
-        modelMap.addAttribute("regions", regions);
-        modelMap.addAttribute("cars", cars);
-        modelMap.addAttribute("items", items);
-        return "addTours";
-    }
-
     @GetMapping("/search")
     public String searchByRegion(@RequestParam(value = "regionId", required = false) Integer regionId, ModelMap modelMap) {
 
@@ -82,18 +71,6 @@ public class TourPackagesController {
     }
 
 
-    @PostMapping("/add")
-    public String tourPackagesAdd(@ModelAttribute TourPackage tourPackages, @RequestParam("image") MultipartFile
-            multipartFile) throws IOException {
-        if (multipartFile != null && !multipartFile.isEmpty()) {
-            String fileName = System.nanoTime() + "_" + multipartFile.getOriginalFilename();
-            File file = new File(imageUploadPath + fileName);
-            multipartFile.transferTo(file);
-            tourPackages.setPicName(fileName);
-        }
-        tourPackagesRepository.save(tourPackages);
-        return "redirect:/tour";
-    }
 
     @GetMapping("/{id}")
     public String singleTourPage(@PathVariable("id") int id,@AuthenticationPrincipal CurrentUser currentUser,

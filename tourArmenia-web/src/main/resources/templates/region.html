@@ -11,11 +11,14 @@
     <th>id</th>
     <th>name</th>
     <th>RegionalCenter</th>
+    <th>Action</th>
   </tr>
   <tr th:each="region : ${regions}">
     <td th:text="${region.id}"></td>
     <td><a th:href="@{'/regions/' + ${region.id}}"> <span th:text="${region.name}"></span></a></td>
     <td th:text="${region.regionalCenter}"></td>
+    <td><a th:href="@{/admin/updateRegion(id=${region.id})}" class="btn btn-xs btn-outline-secondary text-uppercase">Update</a>
+    </td>
   </tr>
 </table>
 <a href="/">Back</a>

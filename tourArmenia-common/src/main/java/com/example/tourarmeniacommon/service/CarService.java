@@ -19,4 +19,6 @@ public interface CarService {
     boolean existsById(int id);
 
     void deleteById(int id);
+
+    Car updateCar(Car car, Optional<Car> byId);
 }
