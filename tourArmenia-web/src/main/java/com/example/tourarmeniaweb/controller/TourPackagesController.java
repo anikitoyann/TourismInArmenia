@@ -23,13 +23,9 @@ import java.util.Optional;
 public class TourPackagesController {
     private final TourPackagesRepository tourPackagesRepository;
     private final RegionRepository regionsRepository;
-    private final CarRepository carsRepository;
-    private final ItemRepository itemRepository;
+
     private final CommentRepository commentRepository;
 
-
-    @Value("${upload.image.path}")
-    private String imageUploadPath;
 
     @GetMapping
     public String toursPage(ModelMap modelMap) {
