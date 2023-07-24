@@ -32,7 +32,7 @@ public class TourServiceImpl implements TourService {
     }
 
     @Override
-    public void addTour(TourPackage tourPackages, MultipartFile multipartFile) throws IOException {
+    public void save(TourPackage tourPackages, MultipartFile multipartFile) throws IOException {
 
         if (multipartFile != null && !multipartFile.isEmpty()) {
             String fileName = System.nanoTime() + "_" + multipartFile.getOriginalFilename();
@@ -52,5 +52,8 @@ public class TourServiceImpl implements TourService {
     public Optional<TourPackage> findById(int id) {
         this.id = id;
         return tourPackagesRepository.findById(id);
+    }
+    public boolean existById(int id){
+        return tourPackagesRepository.existsById(id);
     }
 }

@@ -11,11 +11,11 @@ public interface TourService {
 
     List<TourPackage> findAll();
 
-    void addTour(TourPackage tourPackages, MultipartFile multipartFile) throws IOException;
+    void save(TourPackage tourPackages, MultipartFile multipartFile) throws IOException;
 
     Optional<TourPackage> findById(int id);
 
     void deleteById(int id);
 
-
+    boolean existById(int id);
 }

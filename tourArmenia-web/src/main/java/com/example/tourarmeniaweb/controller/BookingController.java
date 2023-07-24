@@ -8,7 +8,7 @@ import com.example.tourarmeniacommon.repository.BookingRepository;
 import com.example.tourarmeniacommon.repository.CarRepository;
 import com.example.tourarmeniacommon.repository.ItemRepository;
 import com.example.tourarmeniacommon.repository.TourPackagesRepository;
-import com.example.tourarmeniacommon.service.ItemService;
+import com.example.tourarmeniacommon.service.*;
 import com.example.tourarmeniaweb.security.CurrentUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -27,17 +27,18 @@ import java.util.Optional;
 @Controller
 public class BookingController {
 
-    private final TourPackagesRepository tourPackagesRepository;
+    private final TourService tourService;
     private final ItemService itemService;
-    private final CarRepository carRepository;
-    private final BookingRepository bookingRepository;
+    private final CarService carService;
+    private final BookService bookService;
+    private final MailService mailService;
 
-
+    //to show the form for new booking
     @GetMapping("/createCustomTour")
     public String showBookingForm(ModelMap modelMap) {
-        List<Car> cars = carRepository.findAll();
+        List<Car> cars = carService.findAll();
         List<Item> items = itemService.findAll();
-        List<TourPackage> tours = tourPackagesRepository.findAll();
+        List<TourPackage> tours = tourService.findAll();
         modelMap.addAttribute("tours", tours);
         modelMap.addAttribute("cars", cars);
         modelMap.addAttribute("items", items);
@@ -45,6 +46,7 @@ public class BookingController {
         return "booking";
     }
 
+    //If there is no existing matching tour for the user, create a custom tour for them
     @PostMapping("/createCustomTour")
     public String createBooking(@RequestParam("groupSize") int groupSize,
                                 @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
@@ -54,7 +56,7 @@ public class BookingController {
                                 @AuthenticationPrincipal CurrentUser currentUser
     ) {
         Item item = itemService.findById(itemId).get();
-        Car car = carRepository.findById(carId).get();
+        Car car = carService.findById(carId).get();
         Book book = new Book();
         book.setGuestCount(groupSize);
         book.setItem(item);
@@ -62,30 +64,41 @@ public class BookingController {
         book.setStartDate(startDate);
         book.setNotes(notes);
         book.setUser(currentUser.getUser());
-        bookingRepository.save(book);
+        bookService.save(book);
         return "redirect:/tour";
     }
-@PostMapping
-public String bookTour(@AuthenticationPrincipal CurrentUser currentUser,
-                       @RequestParam("tourId") Integer tourId,
-                       RedirectAttributes redirectAttributes) {
 
-    Optional<TourPackage> tour = tourPackagesRepository.findById(tourId);
-    Book book = new Book();
-    book.setTourPackage(tour.get());
-    book.setGuestCount(tour.get().getGroupSize());
-    book.setStartDate(tour.get().getStartDate());
-    book.setItem(tour.get().getItem());
-    book.setCar(tour.get().getCar());
-    book.setUser(currentUser.getUser());
-    bookingRepository.save(book);
-    return "redirect:/tour";
-}
+//to book an existing in db tour
+    @PostMapping
+    public String bookTour(@AuthenticationPrincipal CurrentUser currentUser,
+                           @RequestParam("tourId") Integer tourId,
+                           RedirectAttributes redirectAttributes) {
+
+        Optional<TourPackage> tour = tourService.findById(tourId);
+        Book book = new Book();
+        book.setTourPackage(tour.get());
+        book.setGuestCount(tour.get().getGroupSize());
+        book.setStartDate(tour.get().getStartDate());
+        book.setItem(tour.get().getItem());
+        book.setCar(tour.get().getCar());
+        book.setUser(currentUser.getUser());
+        bookService.save(book);
+        mailService.sendMail(currentUser.getUser().getEmail(),"Booking verification", "hi," + currentUser.getUser().getName()+"! please verify your tour booking");
+        return "redirect:/tour";
+    }
 
     @GetMapping("/booking")
     public String bookTour(@RequestParam("tourId") Integer tourId,
                            @AuthenticationPrincipal CurrentUser currentUser) {
         return "redirect:/tour";
 
-}}
+    }
+
+    @GetMapping("/bookings")
+    public String showBookings(ModelMap modelMap){
+        List<Book> all = bookService.findAll();
+        modelMap.addAttribute("bookings",all);
+        return "bookings";
+    }
+}
 

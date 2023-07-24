@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bookings</title>
+</head>
+<body>
+<h1>Bookings</h1>
+<table border="1px">
+    <tr>
+        <th>id</th>
+        <th>tour</th>
+        <th>car</th>
+        <th>start date</th>
+        <th>end date</th>
+        <th>guest count</th>
+        <th>item</th>
+        <th>notes</th>
+        <th>user id</th>
+    </tr>
+    <tr th:each="book:${bookings}">
+        <td th:text="${book.id}"></td>
+        <td th:text="${book.tourPackage.name}"></td>
+        <td th:text="${book.car.name}"></td>
+        <td th:text="${book.startDate}"></td>
+        <td th:text="${book.endDate}"></td>
+        <td th:text="${book.guestCount}"></td>
+        <td th:text="${book.item.name}"></td>
+        <td th:text="${book.notes}"></td>
+        <td th:text="${book.user.id}"></td>
+    </tr>
+    <a href="/">Back</a>
+</table>
+</body>
+</html>

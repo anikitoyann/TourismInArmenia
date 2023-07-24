@@ -25,3 +25,17 @@ upload:
 
 site:
   url: http://localhost:8081
+
+
+  spring:
+    mail:
+      host: smtp.gmail.com
+      username: tourisminarmeniajava@gmail.com
+      password: AnahitLianAni
+      port: 587
+      properties:
+        mail:
+          smtp:
+            auth: true
+            starttls:
+              enable: true

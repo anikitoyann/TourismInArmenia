@@ -4,7 +4,7 @@ import com.example.tourarmeniacommon.entity.*;
 import com.example.tourarmeniacommon.service.CarService;
 import com.example.tourarmeniacommon.service.ItemService;
 import com.example.tourarmeniacommon.service.RegionService;
-import com.example.tourarmeniacommon.service.TourPackageService;
+import com.example.tourarmeniacommon.service.TourService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,7 +22,7 @@ public class AdminController {
     private final RegionService regionService;
     private final ItemService itemService;
     private  final CarService carService;
-    private final TourPackageService tourPackageService;
+    private final TourService tourService;
     @GetMapping
     public String adminPage(){
      return "admin";
@@ -52,7 +52,7 @@ public class AdminController {
 
     @PostMapping("/addTour")
     public String tourAdd(@ModelAttribute TourPackage tourPackages, @RequestParam("image") MultipartFile multipartFile) throws IOException {
-        tourPackageService.save(multipartFile, tourPackages);
+        tourService.save(tourPackages, multipartFile);
         return "redirect:/admin";
     }
     @GetMapping("/addCar")
@@ -72,7 +72,7 @@ public class AdminController {
     }
     @GetMapping("/removeTour")
     public String removeTour(@RequestParam("id") int id){
-        tourPackageService.deleteById(id);
+        tourService.deleteById(id);
         return "redirect:/tour";
     }
 }
