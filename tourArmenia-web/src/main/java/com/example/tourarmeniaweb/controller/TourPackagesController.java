@@ -1,11 +1,7 @@
 package com.example.tourarmeniaweb.controller;
 
 import com.example.tourarmeniacommon.entity.*;
-import com.example.tourarmeniacommon.repository.*;
-import com.example.tourarmeniacommon.service.CarService;
-import com.example.tourarmeniacommon.service.ItemService;
-import com.example.tourarmeniacommon.service.RegionService;
-import com.example.tourarmeniacommon.service.TourService;
+import com.example.tourarmeniacommon.service.*;
 import com.example.tourarmeniaweb.security.CurrentUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +11,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -29,6 +24,7 @@ public class TourPackagesController {
     private final RegionService regionService;
     private final CarService carService;
     private final ItemService itemService;
+    private final CommentService commentService;
 
     @Value("${upload.image.path}")
     private String imageUploadPath;
@@ -42,7 +38,7 @@ public class TourPackagesController {
     }
 
     @GetMapping("/add")
-    public String itemsAddPage(ModelMap modelMap) {
+    public String toursAddPage(ModelMap modelMap) {
         List<Region> regions = regionService.findAll();
         List<Car> cars = carService.findAll();
         List<Item> items = itemService.findAll();
@@ -50,6 +46,12 @@ public class TourPackagesController {
         modelMap.addAttribute("cars", cars);
         modelMap.addAttribute("items", items);
         return "addTours";
+    }
+
+    @PostMapping("/add")
+    public String tourPackagesAdd(@ModelAttribute TourPackage tourPackages, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+        tourService.save(tourPackages, multipartFile);
+        return "redirect:/tour";
     }
 
     @GetMapping("/search")
@@ -69,12 +71,12 @@ public class TourPackagesController {
                     msg = null;
                 }
             } else {
-                tourPackages=tourService.findAll();
+                tourPackages = tourService.findAll();
                 msg = "invalid region";
             }
         } else {
-            msg=null;
-           tourPackages = tourService.findAll();
+            msg = null;
+            tourPackages = tourService.findAll();
         }
 
         modelMap.addAttribute("tourPackages", tourPackages);
@@ -83,20 +85,14 @@ public class TourPackagesController {
         return "tour";
     }
 
-
-    @PostMapping("/add")
-    public String tourPackagesAdd(@ModelAttribute TourPackage tourPackages, @RequestParam("image") MultipartFile multipartFile) throws IOException {
-        tourService.addTour(tourPackages,multipartFile);
-        return "redirect:/tour";
-    }
     @GetMapping("/{id}")
-    public String singleTourPage(@PathVariable("id") int id,@AuthenticationPrincipal CurrentUser currentUser,
-                                 ModelMap modelMap){
-        Optional<TourPackage> byId = tourPackagesRepository.findById(id);
+    public String singleTourPage(@PathVariable("id") int id, @AuthenticationPrincipal CurrentUser currentUser,
+                                 ModelMap modelMap) {
+        Optional<TourPackage> byId = tourService.findById(id);
         if (byId.isPresent()) {
             TourPackage tourPackage = byId.get();
             User user = currentUser.getUser();
-            List<Comment> comments = commentRepository.findAllByTourId(id);
+            List<Comment> comments = commentService.findAllByTourId(id);
             modelMap.addAttribute("tour", tourPackage);
             modelMap.addAttribute("comments", comments);
             modelMap.addAttribute("user", user);
@@ -107,19 +103,21 @@ public class TourPackagesController {
         }
 
     }
+
     @PostMapping("/comment/add")
     public String addComment(@ModelAttribute Comment comment, @AuthenticationPrincipal CurrentUser currentUser) {
         User user = currentUser.getUser();
         comment.setUser(user);
         comment.setDate(new Date());
-        commentRepository.save(comment);
+        commentService.save(comment);
 
         return "redirect:/tour/" + comment.getTour().getId();
     }
 
-@GetMapping("/remove")
-    public String removeTour(@RequestParam("id") int id){
-    tourService.deleteById(id);
-    return "redirect:/tour";
-    }}
+    @GetMapping("/remove")
+    public String removeTour(@RequestParam("id") int id) {
+        tourService.deleteById(id);
+        return "redirect:/tour";
+    }
+}
 

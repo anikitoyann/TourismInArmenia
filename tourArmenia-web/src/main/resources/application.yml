@@ -30,8 +30,8 @@ site:
   spring:
     mail:
       host: smtp.gmail.com
-      username: tourisminarmeniajava@gmail.com
-      password: AnahitLianAni
+      username: mailsenderforjava@gmail.com
+      password: iltifceckjkwsohf
       port: 587
       properties:
         mail:

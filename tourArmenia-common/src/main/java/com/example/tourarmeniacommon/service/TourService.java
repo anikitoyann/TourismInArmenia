@@ -1,5 +1,6 @@
 package com.example.tourarmeniacommon.service;
 
+import com.example.tourarmeniacommon.entity.Region;
 import com.example.tourarmeniacommon.entity.TourPackage;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,4 +19,6 @@ public interface TourService {
     void deleteById(int id);
 
     boolean existById(int id);
+
+    List<TourPackage> findByRegion(Region region);
 }

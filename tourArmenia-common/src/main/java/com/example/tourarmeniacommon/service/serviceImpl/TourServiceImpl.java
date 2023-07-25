@@ -1,5 +1,6 @@
 package com.example.tourarmeniacommon.service.serviceImpl;
 
+import com.example.tourarmeniacommon.entity.Region;
 import com.example.tourarmeniacommon.entity.TourPackage;
 import com.example.tourarmeniacommon.repository.CarRepository;
 import com.example.tourarmeniacommon.repository.ItemRepository;
@@ -55,5 +56,10 @@ public class TourServiceImpl implements TourService {
     }
     public boolean existById(int id){
         return tourPackagesRepository.existsById(id);
+    }
+
+    @Override
+    public List<TourPackage> findByRegion(Region region) {
+        return tourPackagesRepository.findByRegion(region);
     }
 }

@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Data
 @Entity
@@ -30,5 +31,6 @@ public class Book {
     @ManyToOne
     private Car car;
 
-
+    private boolean enabled;
+    private String token;
 }
