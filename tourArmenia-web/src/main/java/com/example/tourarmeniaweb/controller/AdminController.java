@@ -27,6 +27,17 @@ public class AdminController {
     public String adminPage(){
      return "admin";
      }
+   @GetMapping("/addRegion")
+         public String regionPage(){
+        return "addRegion";
+         }
+
+         @PostMapping("/addRegion")
+         public String addRegionPage(@ModelAttribute Region region) {
+        regionService.save(region);
+        return "redirect:/admin";
+         }
+
     @GetMapping("/addItem")
     public String itemAddPage(ModelMap modelMap) {
         modelMap.addAttribute("regions", regionService.findAll());
@@ -34,6 +45,7 @@ public class AdminController {
         modelMap.addAttribute("types", types);
         return "addItem";
     }
+
     @PostMapping("/addItem")
     public String hotelsAdd(@ModelAttribute Item item, @RequestParam("image") MultipartFile multipartFile) throws IOException {
         itemService.addItem(multipartFile, item);

@@ -5,6 +5,8 @@ import com.example.tourarmeniacommon.repository.TourPackagesRepository;
 import com.example.tourarmeniacommon.service.TourPackageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -54,5 +56,10 @@ public class TourPackageServiceImpl implements TourPackageService {
     @Override
     public boolean existsById(int id) {
         return tourPackagesRepository.existsById(id);
+    }
+
+    @Override
+    public Page<TourPackage> findAllByPageable(Pageable pageable) {
+        return tourPackagesRepository.findAll(pageable);
     }
 }

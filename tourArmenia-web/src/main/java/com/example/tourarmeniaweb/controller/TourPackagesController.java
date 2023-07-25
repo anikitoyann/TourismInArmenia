@@ -1,66 +1,53 @@
 package com.example.tourarmeniaweb.controller;
 
-import com.example.tourarmeniacommon.entity.Car;
-import com.example.tourarmeniacommon.entity.Item;
-import com.example.tourarmeniacommon.entity.Region;
 import com.example.tourarmeniacommon.entity.TourPackage;
-import com.example.tourarmeniacommon.repository.*;
+import com.example.tourarmeniacommon.service.TourPackageService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/tour")
 public class TourPackagesController {
-    private final TourPackagesRepository tourPackagesRepository;
-    private final RegionRepository regionsRepository;
-    private final CarRepository carsRepository;
-    private final ItemRepository itemRepository;
-    private final UserRepository userRepository;
-
-    @Value("${upload.image.path}")
-    private String imageUploadPath;
+    private final TourPackageService tourPackageService;
 
     @GetMapping
-    public String toursPage(ModelMap modelMap) {
-        modelMap.addAttribute("tours", tourPackagesRepository.findAll());
+    public String toursPage(@RequestParam("page") Optional<Integer> page,
+                            @RequestParam("size") Optional<Integer> size, ModelMap modelMap) {
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(5);
+        Sort sort = Sort.by(Sort.Order.desc("id"));
+        Pageable pageable = PageRequest.of(currentPage - 1, pageSize, sort);
+        Page<TourPackage> result = tourPackageService.findAllByPageable(pageable);
+        List<TourPackage> content = result.getContent();
+        int totalPages = result.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            modelMap.addAttribute("pageNumbers", pageNumbers);
+        }
+        modelMap.addAttribute("tours", result);
         return "tour";
     }
 
-    @GetMapping("/add")
-    public String itemsAddPage(ModelMap modelMap) {
-        List<Region> regions = regionsRepository.findAll();
-        List<Car> cars = carsRepository.findAll();
-        List<Item> items = itemRepository.findAll();
-        modelMap.addAttribute("regions", regions);
-        modelMap.addAttribute("cars", cars);
-        modelMap.addAttribute("items", items);
-        return "addTours";
-    }
-
-    @PostMapping("/add")
-    public String tourPackagesAdd(@ModelAttribute TourPackage tourPackages, @RequestParam("image") MultipartFile multipartFile) throws IOException {
-        if (multipartFile != null && !multipartFile.isEmpty()) {
-            String fileName = System.nanoTime() + "_" + multipartFile.getOriginalFilename();
-            File file = new File(imageUploadPath + fileName);
-            multipartFile.transferTo(file);
-            tourPackages.setPicName(fileName);
-        }
-        tourPackagesRepository.save(tourPackages);
-        return "redirect:/tour";
-    }
     @GetMapping("/{id}")
     public String singleTourPage(@PathVariable("id") int id, ModelMap modelMap) {
-        Optional<TourPackage> byId = tourPackagesRepository.findById(id);
+        Optional<TourPackage> byId = tourPackageService.findById(id);
         if (byId.isPresent()) {
             TourPackage tourPackage = byId.get();
             modelMap.addAttribute("tour", tourPackage);
@@ -69,11 +56,6 @@ public class TourPackagesController {
             return "redirect:/tour";
         }
 
-    }
+     }
 
-@GetMapping("/remove")
-    public String removeTour(@RequestParam("id") int id){
-    tourPackagesRepository.deleteById(id);
-    return "redirect:/tour";
-    }}
-
+}

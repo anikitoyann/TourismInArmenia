@@ -27,12 +27,14 @@ public interface ItemService {
 
     List<Item> findByRegion(Region region);
 
-    List<Item> findAllByRegionAndType(int id, Type type);
+    Page<Item> findAllByRegionAndType(Pageable pageable ,int id, Type type);
 
     public Item save(Item item);
 
     boolean existsById(int id);
 
     List<ItemDto> search(int page, int size, ItemSearchDto itemSearchDto);
+
+    Page<Item> findAllByPageable(Pageable pageable);
 }
 

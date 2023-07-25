@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
+<div>
+
 <th:block th:fragment="importFragment">
   <!-- SITE TITTLE -->
   <meta charset="utf-8">
@@ -32,6 +34,11 @@
 </th:block>
 <div th:fragment="headerFragment">
   <body id="body" class="up-scroll" data-spy="scroll" data-target=".element-right-sidebar">
+  <div id="language" style="color: red" >
+    <a href="?lang=hy">հայերեն</a>
+    <a href="?lang=ru">Русский</a>
+    <a href="?lang=en">English</a>
+  </div>
 
   <!-- ====================================
   ——— HEADER
@@ -74,7 +81,7 @@
             </li>
 
             <li class="">
-              <a href="javascript:void(0)">Tours</a>
+              <a href="javascript:void(0)" th:text="#{index.TOURS}"></a>
               <div class="megamenu drop-up">
                 <div class="megamenu-row">
 
@@ -82,7 +89,7 @@
                     <ul class="list-unstyled">
                       <li>Tour Packages List View</li>
                       <li class="">
-                        <a href="/tour">Tour Packages List</a>
+                        <a href="/tour" th:text="#{index.tourList}"></a>
                       </li>
 
                       <li class="">
@@ -98,7 +105,7 @@
             </li>
 
             <li class="">
-              <a href="javascript:void(0)">Hotels</a>
+              <a href="javascript:void(0)" th:text="#{index.HOTELS}"></a>
               <div class="megamenu drop-up">
                 <div class="megamenu-row">
 
@@ -106,14 +113,14 @@
                     <ul class="list-unstyled">
                       <li>Hotels List View</li>
                       <li class="">
-                        <a href="/item">Hotels List</a>
+                        <a href="/item" th:text="#{index.hotelsList}"></a>
                       </li>
                     </ul>
                   </div>
 
 
                   <li class="">
-                    <a href="javascript:void(0)">Rental</a>
+                    <a href="javascript:void(0)" th:text="#{index.RENTAL}"></a>
 
                     <ul class="dropdown drop-up">
                       <li class=" ||
@@ -132,7 +139,7 @@
                   </li>
 
                   <li class="">
-                    <a href="javascript:void(0)">Pages</a>
+                    <a href="javascript:void(0)" th:text="#{index.PAGES}"></a>
                     <ul class="dropdown drop-up">
                       <li class="">
                         <a href="/aboutUs">About Us</a>
@@ -151,7 +158,7 @@
                   </li>
 
                   <li class="">
-                    <a href="javascript:void(0)">Regions</a>
+                    <a href="javascript:void(0)" th:text="#{index.REGIONS}"></a>
 
                     <ul class="dropdown drop-up">
 
@@ -159,7 +166,7 @@
                    ||
                   ">
 
-                        <a href="/regions">List Regions</a>
+                        <a href="/regions" th:text="#{index.regionList}"></a>
 
                       </li>      <li class=" ||
                    ||
@@ -173,7 +180,7 @@
                   </li>
 
                   <li class="">
-                    <a href="javascript:void(0)">Admin</a>
+                    <a href="javascript:void(0)" th:text="#{index.ADMIN}"></a>
                     <ul id="admin" class="dropdown drop-up">
                       <li class="">
                         <a href="/admin">ADMIN</a>

@@ -44,10 +44,16 @@
 </head>
 <body id="body" class="up-scroll" data-spy="scroll" data-target=".element-right-sidebar">
 
+
 <!-- ====================================
 ——— HEADER
 ===================================== -->
 <header class="header" id="pageTop">
+    <div id="language" style="color: red" >
+        <a href="?lang=hy">հայերեն</a>
+        <a href="?lang=ru">Русский</a>
+        <a href="?lang=en">English</a>
+    </div>
 
     <!-- Menu Zord -->
     <nav class="nav-menuzord nav-menuzord-transparent navbar-sticky">
@@ -85,7 +91,7 @@
                     </li>
 
                     <li class="">
-                        <a href="javascript:void(0)">Tours</a>
+                        <a href="javascript:void(0)" th:text="#{index.TOURS}"></a>
                         <div class="megamenu drop-up">
                             <div class="megamenu-row">
 
@@ -93,7 +99,7 @@
                                     <ul class="list-unstyled">
                                         <li>Tour Packages List View</li>
                                         <li class="">
-                                            <a href="/tour">Tour Packages List</a>
+                                            <a href="/tour" th:text="#{index.tourList}"></a>
                                         </li>
 
                                         <li class="">
@@ -109,7 +115,7 @@
                     </li>
 
                     <li class="">
-                        <a href="javascript:void(0)">Hotels</a>
+                        <a href="javascript:void(0)" th:text="#{index.HOTELS}"></a>
                         <div class="megamenu drop-up">
                             <div class="megamenu-row">
 
@@ -117,24 +123,24 @@
                                     <ul class="list-unstyled">
                                         <li>Hotels List View</li>
                                         <li class="">
-                                            <a href="/item">Hotels List</a>
+                                            <a href="/item" th:text="#{index.hotelsList}"></a>
                                         </li>
                                     </ul>
                                 </div>
 
 
                                 <li class="">
-                                    <a href="javascript:void(0)">Rental</a>
+                                    <a href="javascript:void(0)" th:text="#{index.RENTAL}"></a>
 
                                     <ul class="dropdown drop-up">
                                         <li class=" ||
                   ">
 
-                                            <a href="javascript:void(0)">Cars</a>
+                                            <a href="javascript:void(0)" th:text="#{index.cars}"></a>
 
                                             <ul class="dropdown drop-sub-menu-left drop-up">
                                                 <li class="">
-                                                    <a href="/cars">Cars List View</a>
+                                                    <a href="/cars" th:text="#{index.carsList}"></a>
                                                 </li>
 
                                             </ul>
@@ -143,26 +149,26 @@
                                 </li>
 
                                 <li class="">
-                                    <a href="javascript:void(0)">Pages</a>
+                                    <a href="javascript:void(0)" th:text="#{index.PAGES}"></a>
                                     <ul class="dropdown drop-up">
                                         <li class="">
-                                            <a href="/aboutUs">About Us</a>
+                                            <a href="/aboutUs" th:text="#{index.aboutAs}"></a>
                                         </li>
 
                                         <li class="">
-                                            <a href="/contactUs">Contact Us</a>
+                                            <a href="/contactUs" th:text="#{index.contactUs}"></a>
                                         </li>
 
                                         <li class=" ||
                      ||
                     ">
 
-                                        <li><a href="/TermsPrivacy">Terms & Privacy! </a></a></li>
+                                        <li><a href="/TermsPrivacy" th:text="#{index.terms}"> </a></a></li>
                                     </ul>
                                 </li>
 
                                 <li class="">
-                                    <a href="javascript:void(0)">Regions</a>
+                                    <a href="javascript:void(0)" th:text="#{index.REGIONS}"></a>
 
                                     <ul class="dropdown drop-up">
 
@@ -170,7 +176,7 @@
                    ||
                   ">
 
-                                            <a href="/regions">List Regions</a>
+                                            <a href="/regions" th:text="#{index.regionList}"></a>
 
                                         </li>      <li class=" ||
                    ||
@@ -184,7 +190,7 @@
                                 </li>
 
                                 <li class="">
-                                    <a href="javascript:void(0)">Admin</a>
+                                    <a href="javascript:void(0)" th:text="#{index.ADMIN}"></a>
                                     <ul id="admin" class="dropdown drop-up">
                                         <li class="">
                                             <a href="/admin">Admin</a>
@@ -192,13 +198,13 @@
 
 
                                         <li class="">
-                                            <a href="javascript:void(0)" data-toggle="modal" data-target="#signup">Signup</a>
+                                            <a href="javascript:void(0)" data-toggle="modal" data-target="#signup" th:text="#{index.signUp}"></a>
                                         </li>
                                         <li class="">
-                                            <a href="/customLogin" style="color: coral" th:if="${currentUser==null}">Login</a>
+                                            <a href="/customLogin" style="color: coral" th:if="${currentUser==null}" th:text="#{index.login}"></a>
                                         </li>
                                         <li class="">
-                                            <a href="/logout">Log Out</a>
+                                            <a href="/logout" th:text="#{index.logOut}"></a>
                                         </li>
                                     </ul>
                                 </li>
@@ -824,7 +830,7 @@
             </div>
 
             <div class="modal-footer justify-content-center">
-                <p class="mb-1">Don’t have an Account? <a href="/user/register" th:if="${currentUser==null}">Sign up</a></p>
+                <p class="mb-1">Don’t have an Account? <a href="/user/register" th:if="${currentUser==null}" th:text="#{index.signUp}"></a></p>
             </div>
         </div>
     </div>
@@ -832,7 +838,7 @@
 
 
             <div class="modal-footer justify-content-center">
-                <p class="mb-1">Don’t have an Account? <a href="/user/register" th:if="${currentUser==null}">Sign  Up</a></p>
+                <p class="mb-1">Don’t have an Account? <a href="/user/register" th:if="${currentUser==null}" th:text="#{index.signUp}"></a></p>
             </div>
         </div>
     </div>

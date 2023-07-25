@@ -8,13 +8,12 @@
 <h1>Daily Tours</h1>
 <table border="1px">
     <!--<div th:if="${currentUser.UserType == 'ADMIN'}">-->
-        <a href="/tour/add">Create Tour</a>
     </div>
     <tr>
         <th>ID</th>
-        <th>Name</th>
-        <th>Region</th>
-        <th>Cars</th>
+        <th th:text="#{name}">name</th>
+        <th th:text="#{tour.region}">region</th>
+        <th th:text="#{index.cars}">cars</th>
         <th>type</th>
         <th>Price</th>
         <th>Group Size</th>
@@ -24,7 +23,7 @@
         <!--   th:if="${currentUser.UserType == 'ADMIN'}"-->>
         <th >Action</th>
     </tr>
-    <tr th:each="tour : ${tours}">
+    <tr th:each="tour : ${tours.content}">
         <td th:text="${tour.id}"></td>
         <td th:text="${tour.name}"></td>
         <td th:text="${tour.region.name}"></td>
@@ -45,5 +44,13 @@
     <a href="/static">Back</a>
 </table>
 
+<div class="pagination">
+    <div th:if="${tours.totalPages > 0}"
+         th:each="pageNumber : ${pageNumbers}">
+        <a th:href="@{/tour(size=${tours.size}, page=${pageNumber})}"
+           th:text="${pageNumber}"
+           th:class="${pageNumber==tours.number + 1} ? active"></a>
+    </div>
+</div>
 </body>
 </html>
