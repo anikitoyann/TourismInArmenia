@@ -124,5 +124,22 @@ public class ItemServiceImpl implements ItemService {
         return fetch;
     }
 
+    public Item updateItem(Item item, Optional<Item> byId) {
+        Item itemDB = byId.get();
+        if (item.getName() != null && !item.getName().isEmpty()) {
+            itemDB.setName(item.getName());
+        }
+        if (item.getDescription() != null && !item.getDescription().isEmpty()) {
+            itemDB.setDescription(item.getDescription());
+        }
+        if (item.getRegion() != null) {
+            itemDB.setRegion(item.getRegion());
+        }
+        if (item.getType() != null) {
+            itemDB.setType(item.getType());
+        }
+        return itemDB;
+    }
+
 
 }

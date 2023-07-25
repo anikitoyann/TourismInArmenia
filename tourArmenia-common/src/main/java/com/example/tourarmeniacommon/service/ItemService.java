@@ -35,6 +35,8 @@ public interface ItemService {
 
     List<ItemDto> search(int page, int size, ItemSearchDto itemSearchDto);
 
+    Item updateItem(Item item, Optional<Item> byId);
+
     Page<Item> findAllByPageable(Pageable pageable);
 }
 

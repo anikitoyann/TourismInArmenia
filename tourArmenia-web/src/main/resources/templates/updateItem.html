@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update item</title>
+</head>
+<body>
+<a href="/admin">back</a><br>
+<form action="/admin/updateItem" method="post" enctype="multipart/form-data">
+   item id: <input type="text" id="id" name="id"/><br>
+   name: <input type="text" name="name"><br>
+  description:  <textarea name="description"></textarea><br>
+  item type:  <select name="type">
+        <option value="">Select Type</option>
+        <option th:each="type : ${types}" th:value="${type}" th:text="${type}"></option>
+    </select><br>
+  region:  <select name="region.id">
+        <option th:each="region : ${regions}"
+                th:text="${region.name}" th:value="${region.id}"></option>
+    </select><br>
+   image: <input type="file" name="image"><br>
+    <input type="submit" value="Update"><br>
+</form>
+</body>
+</html>

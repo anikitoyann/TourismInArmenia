@@ -15,6 +15,8 @@
     <span th:text="${item.type}"></span>
     <h1><a th:href="@{'/item/' + ${item.id}}"> <span th:text="${item.name}"></span></a></h1>
     <img th:if="${item.getPicName() != null}" th:src="@{/getImage(imageName=${item.getPicName()})}" width="400"/>
+    <a th:href="@{/admin/updateItem(id=${item.id})}" class="btn btn-xs btn-outline-secondary text-uppercase">Delete</a>
+
 </div>
 
 <div class="pagination">

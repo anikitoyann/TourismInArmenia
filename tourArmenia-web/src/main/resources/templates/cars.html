@@ -12,14 +12,16 @@
     <th>name</th>
     <th>Seats</th>
     <th>picName</th>
+    <th>action</th>
   </tr>
   <tr th:each="car : ${cars}">
     <td th:text="${car.id}"></td>
     <td th:text="${car.name}"></td>
     <td th:text="${car.seats}"></td>
    <td><img th:if="${car.getPicName()!= null}" th:src="@{/getImage(imageName=${car.getPicName()})}" width="400"/>
+    <td><a th:href="@{/admin/removeCar(id=${car.id})}">Remove</a><br>
+      <a th:href="@{/admin/updateCar(id=${car.id})}">Update</a>
    </td>
-
   </tr>
 </table>
 <a href="/">Back</a>

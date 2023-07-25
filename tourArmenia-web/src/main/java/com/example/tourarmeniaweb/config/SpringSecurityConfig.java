@@ -13,10 +13,12 @@ import org.springframework.security.web.SecurityFilterChain;
 
 
 @Configuration
-@RequiredArgsConstructor
-public class WebSecurityConfig {
-    private final UserDetailsService userDetailsService;
-    private final PasswordEncoder passwordEncoder;
+public class SpringSecurityConfig {
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {

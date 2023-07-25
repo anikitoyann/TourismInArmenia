@@ -54,4 +54,15 @@ public class CarServiceImpl implements CarService {
     public void deleteById(int id) {
         carRepository.deleteById(id);
     }
+    public Car updateCar(Car car, Optional<Car> byId) {
+        Car carDb = byId.get();
+        if (car.getName() != null && !car.getName().isEmpty()) {
+            carDb.setName(car.getName());
+        }
+        if (car.getSeats() != null && !car.getSeats().isEmpty()) {
+            carDb.setSeats(car.getSeats());
+        }
+        //carDb.setId(car.getId());
+        return carDb;
+    }
 }
