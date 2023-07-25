@@ -1,26 +1,24 @@
 package com.example.tourarmeniaweb.controller;
 
-import com.example.tourarmeniacommon.entity.*;
-import com.example.tourarmeniacommon.repository.*;
-import com.example.tourarmeniaweb.security.CurrentUser;
+import com.example.tourarmeniacommon.entity.Comment;
+import com.example.tourarmeniacommon.entity.Region;
 import com.example.tourarmeniacommon.entity.TourPackage;
+import com.example.tourarmeniacommon.entity.User;
+import com.example.tourarmeniaweb.security.CurrentUser;
+import com.example.tourarmeniacommon.repository.CommentRepository;
+import com.example.tourarmeniacommon.repository.RegionRepository;
+import com.example.tourarmeniacommon.repository.TourPackagesRepository;
 import com.example.tourarmeniacommon.service.TourPackageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -92,7 +90,8 @@ public class TourPackagesController {
 
 
     @GetMapping("/{id}")
-     public String singleTourPage(@PathVariable("id") int id,@AuthenticationPrincipal CurrentUser currentUser,
+     public String singleTourPage(@PathVariable("id") int id,
+                                  @AuthenticationPrincipal CurrentUser currentUser,
                                  ModelMap modelMap){
         Optional<TourPackage> byId = tourPackagesRepository.findById(id);
         if (byId.isPresent()) {
@@ -117,14 +116,6 @@ public class TourPackagesController {
         commentRepository.save(comment);
 
         return "redirect:/tour/" + comment.getTour().getId();
-    }
-
-@GetMapping("/remove")
-    public String removeTour(@RequestParam("id") int id){
-    tourPackagesRepository.deleteById(id);
-    return "redirect:/tour";
-    }}
-
-     }
+}
 
 }
