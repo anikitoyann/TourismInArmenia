@@ -58,8 +58,8 @@ public class ItemServiceImpl implements ItemService {
         return itemRepository.findAllByType(type,pageable);
     }
 
-    public List<Item> findAllByRegionAndType(int regionId, Type type){
-        return itemRepository.findAllByRegion_IdAndType(regionId,type);
+    public Page<Item> findAllByRegionAndType(Pageable pageable, int regionId, Type type){
+        return itemRepository.findAllByRegion_IdAndType(pageable, regionId,type);
     }
 
     @Override
@@ -77,7 +77,14 @@ public class ItemServiceImpl implements ItemService {
         List<Item> fetch = searchItemByFilter(page, size, itemSearchDto);
         List<ItemDto> itemDtos = itemMapper.mapListToDtos(fetch);
         return itemDtos;
-    } @Override
+    }
+
+    @Override
+    public Page<Item> findAllByPageable(Pageable pageable) {
+        return itemRepository.findAll(pageable);
+    }
+
+    @Override
     public void deleteById(int id) {
         itemRepository.deleteById(id);
     }

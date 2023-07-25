@@ -27,7 +27,7 @@ public interface ItemService {
 
     List<Item> findByRegion(Region region);
 
-    List<Item> findAllByRegionAndType(int id, Type type);
+    Page<Item> findAllByRegionAndType(Pageable pageable ,int id, Type type);
 
     public Item save(Item item);
 
@@ -36,5 +36,7 @@ public interface ItemService {
     List<ItemDto> search(int page, int size, ItemSearchDto itemSearchDto);
 
     Item updateItem(Item item, Optional<Item> byId);
+
+    Page<Item> findAllByPageable(Pageable pageable);
 }
 

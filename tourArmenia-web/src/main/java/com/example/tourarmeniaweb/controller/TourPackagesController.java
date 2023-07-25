@@ -1,26 +1,35 @@
 package com.example.tourarmeniaweb.controller;
 
-import com.example.tourarmeniacommon.entity.*;
-import com.example.tourarmeniacommon.repository.*;
+import com.example.tourarmeniacommon.entity.Comment;
+import com.example.tourarmeniacommon.entity.Region;
+import com.example.tourarmeniacommon.entity.TourPackage;
+import com.example.tourarmeniacommon.entity.User;
 import com.example.tourarmeniaweb.security.CurrentUser;
+import com.example.tourarmeniacommon.repository.CommentRepository;
+import com.example.tourarmeniacommon.repository.RegionRepository;
+import com.example.tourarmeniacommon.repository.TourPackagesRepository;
+import com.example.tourarmeniacommon.service.TourPackageService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/tour")
 public class TourPackagesController {
+    private final TourPackageService tourPackageService;
     private final TourPackagesRepository tourPackagesRepository;
     private final RegionRepository regionsRepository;
 
@@ -28,11 +37,23 @@ public class TourPackagesController {
 
 
     @GetMapping
-    public String toursPage(ModelMap modelMap) {
-        modelMap.addAttribute("tours", tourPackagesRepository.findAll());
-        modelMap.addAttribute("regions", regionsRepository.findAll());
-
-        return "tour";
+    public String toursPage(@RequestParam("page") Optional<Integer> page,
+                            @RequestParam("size") Optional<Integer> size, ModelMap modelMap) {
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(5);
+        Sort sort = Sort.by(Sort.Order.desc("id"));
+        Pageable pageable = PageRequest.of(currentPage - 1, pageSize, sort);
+        Page<TourPackage> result = tourPackageService.findAllByPageable(pageable);
+        List<TourPackage> content = result.getContent();
+        int totalPages = result.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            modelMap.addAttribute("pageNumbers", pageNumbers);
+        }
+        modelMap.addAttribute("tours", result);
+       return "tour";
     }
 
     @GetMapping("/search")
@@ -69,7 +90,8 @@ public class TourPackagesController {
 
 
     @GetMapping("/{id}")
-    public String singleTourPage(@PathVariable("id") int id,@AuthenticationPrincipal CurrentUser currentUser,
+     public String singleTourPage(@PathVariable("id") int id,
+                                  @AuthenticationPrincipal CurrentUser currentUser,
                                  ModelMap modelMap){
         Optional<TourPackage> byId = tourPackagesRepository.findById(id);
         if (byId.isPresent()) {
@@ -94,11 +116,6 @@ public class TourPackagesController {
         commentRepository.save(comment);
 
         return "redirect:/tour/" + comment.getTour().getId();
-    }
+}
 
-@GetMapping("/remove")
-    public String removeTour(@RequestParam("id") int id){
-    tourPackagesRepository.deleteById(id);
-    return "redirect:/tour";
-    }}
-
+}

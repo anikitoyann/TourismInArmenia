@@ -64,11 +64,7 @@ public class ItemController {
         }
 
     }
-    @GetMapping("/remove")
-    public String removeHotels(@RequestParam("id") int id) {
-        itemService.deleteById(id);
-        return "redirect:/item";
-    }
+
     @GetMapping("/search")
     public String searchByRegion(@RequestParam(value = "regionId", required = false) Integer regionId, ModelMap modelMap) {
         List<Item> items;
