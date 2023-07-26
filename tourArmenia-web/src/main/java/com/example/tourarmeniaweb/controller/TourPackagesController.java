@@ -86,7 +86,8 @@ public class TourPackagesController {
     }
 
     @GetMapping("/{id}")
-    public String singleTourPage(@PathVariable("id") int id, @AuthenticationPrincipal CurrentUser currentUser,
+    public String singleTourPage(@PathVariable("id") int id,
+                                 @AuthenticationPrincipal CurrentUser currentUser,
                                  ModelMap modelMap) {
         Optional<TourPackage> byId = tourService.findById(id);
         if (byId.isPresent()) {

@@ -1,15 +1,16 @@
 package com.example.tourarmeniaweb.controller;
 
-import com.example.tourarmeniacommon.entity.Item;
-import com.example.tourarmeniacommon.entity.Region;
-import com.example.tourarmeniacommon.entity.Type;
+import com.example.tourarmeniacommon.entity.*;
+import com.example.tourarmeniacommon.service.HotelCommentService;
 import com.example.tourarmeniacommon.service.ItemService;
 import com.example.tourarmeniacommon.service.RegionService;
+import com.example.tourarmeniaweb.security.CurrentUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,7 @@ public class ItemController {
 
     private final ItemService itemService;
     private final RegionService regionService;
+    private final HotelCommentService hotelCommentService;
 
     @GetMapping
     public String hotelReservationPage(
@@ -66,11 +68,17 @@ public class ItemController {
     }
 
     @GetMapping("/{id}")
-    public String singleHotelPage(@PathVariable("id") int id, ModelMap modelMap) {
+    public String singleHotelPage(@PathVariable("id") int id,
+                                  @AuthenticationPrincipal CurrentUser currentUser,
+                                  ModelMap modelMap) {
         Optional<Item> byId = itemService.findById(id);
         if (byId.isPresent()) {
             Item item = byId.get();
+            User user = currentUser.getUser();
+            List<HotelComment> comments = hotelCommentService.findAllByItemId(id);
             modelMap.addAttribute("item", item);
+            modelMap.addAttribute("comments",comments);
+            modelMap.addAttribute("user",user);
             return "singlehotel";
         } else {
             return "redirect:/item";
