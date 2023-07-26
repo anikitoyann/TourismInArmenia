@@ -18,6 +18,8 @@ public class ImageEndpoint {
 
     @Value("${upload.image.path}")
     private String uploadPath;
+
+   // Endpoint for retrieving an image by its picName from the system.
     @GetMapping(value = "/getImage",
             produces = MediaType.IMAGE_JPEG_VALUE)
     public @ResponseBody byte[] getImage(@RequestParam("picName") String picName) throws IOException {

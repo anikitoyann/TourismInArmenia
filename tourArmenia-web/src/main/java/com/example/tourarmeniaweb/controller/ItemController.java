@@ -6,6 +6,7 @@ import com.example.tourarmeniacommon.entity.Type;
 import com.example.tourarmeniacommon.service.ItemService;
 import com.example.tourarmeniacommon.service.RegionService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -52,6 +53,7 @@ public class ItemController {
 
     }
 
+
     @GetMapping("/{id}")
     public String singleHotelPage(@PathVariable("id") int id, ModelMap modelMap) {
         Optional<Item> byId = itemService.findById(id);
@@ -69,13 +71,10 @@ public class ItemController {
     public String searchByRegion(@RequestParam(value = "regionId", required = false) Integer regionId, ModelMap modelMap) {
         List<Item> items;
         String message;
-
         if (regionId != null) {
             Region region = regionService.findById(regionId).orElse(null);
-
             if (region != null) {
                 items = itemService.findByRegion(region);
-
                 if (items.isEmpty()) {
                     message = "No hotels found in the selected region.";
                 } else {

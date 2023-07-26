@@ -8,6 +8,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,13 +20,17 @@ import java.io.IOException;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class JWTAuthenticationTokenFilter extends OncePerRequestFilter {
 
     private final JwtTokenUtil tokenUtil;
 
     private final CurrentUserDetailServiceImpl userDetailsService;
 
-
+//Custom implementation of the doFilterInternal method for JWT authentication.
+// This method intercepts incoming HTTP requests and checks for a valid JWT token in the "Authorization" header.
+// If a valid token is found, it verifies the token's authenticity and sets the authenticated user in the SecurityContextHolder.
+// The request is then allowed to proceed to the intended endpoint.
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
 
@@ -38,6 +43,7 @@ public class JWTAuthenticationTokenFilter extends OncePerRequestFilter {
             try {
                 username = tokenUtil.getUsernameFromToken(authToken);
             } catch (Exception e) {
+                log.error("Error while parsing the JWT token: {}", e.getMessage());
                 e.printStackTrace();
             }
         }

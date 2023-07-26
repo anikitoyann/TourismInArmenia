@@ -6,6 +6,7 @@ import com.example.tourarmeniacommon.service.ItemService;
 import com.example.tourarmeniacommon.service.RegionService;
 import com.example.tourarmeniacommon.service.TourPackageService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ import java.util.Optional;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/admin")
+@Slf4j
 public class AdminController {
     private final RegionService regionService;
     private final ItemService itemService;
@@ -111,10 +113,14 @@ public class AdminController {
                             @ModelAttribute Car car,
                             @RequestParam("image") MultipartFile multipartFile) throws IOException {
         Optional<Car> byId = carService.findById(id);
-        Car carDb = carService.updateCar(car, byId);
-        carService.save(multipartFile, carDb);
+        if (!byId.isEmpty()) {
+            Car carDb = carService.updateCar(car, byId);
+            carService.save(multipartFile, carDb);
             return "redirect:/cars";
         }
+        log.warn("Car update failed: Car with ID {} not found.", id);
+        return "redirect:/cars";
+    }
 
     @GetMapping("/updateTour")
     public String updateTourPage(ModelMap modelMap) {
@@ -123,6 +129,7 @@ public class AdminController {
         modelMap.addAttribute("items", itemService.findAll());
         return "updateTour";
     }
+
 
     @PostMapping("/updateTour")
     public String updateTour(@RequestParam("id") int id,
@@ -154,7 +161,7 @@ public class AdminController {
             itemService.addItem(multipartFile, itemDB);
             return "redirect:/item";
         }
-            return "redirect:/item";
+        return "redirect:/item";
         }
 
 }

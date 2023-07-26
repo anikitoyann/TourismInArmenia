@@ -181,7 +181,10 @@
                 </nav>
             </div>
         </section>
-
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
 
@@ -325,19 +328,13 @@
 
 
 
-<script src='assets/plugins/fancybox/jquery.fancybox.min.js'></script>
+<script src='/assets/plugins/fancybox/jquery.fancybox.min.js'></script>
 
-<script src='assets/plugins/selectric/jquery.selectric.min.js'></script>
+<script src='/assets/plugins/selectric/jquery.selectric.min.js'></script>
 
 
 
 <script src="/assets/plugins/lazyestload/lazyestload.js"></script>
-
-
-
-
-
-
 
 
 <script src="/assets/plugins/smoothscroll/SmoothScroll.js"></script>
@@ -345,46 +342,6 @@
 <script src="/assets/js/star.js"></script>
 <link href="assets/options/optionswitch.css" rel="stylesheet">
 <script src="/assets/options/optionswitcher.js"></script>
-<!--
-<h2>Select the item and call the item directly Get the booking confirmation directly from the item.</h2>
-
-<form action="/item/search" method="get">
-    <select name="regionId">
-        <option value="">All Regions</option>
-        <option th:each="region : ${regions}"
-                th:text="${region.name}" th:value="${region.id}"></option>
-    </select>
-    <input type="submit" value="Search">
-</form>
-<table border="1px">
-
-    <a href="/item/add">Create item</a><br>
-    <tr>
-        <th>id</th>
-        <th>name</th>
-        <th>image</th>
-        <th>region</th>
-        <th>action</th>
-    </tr>
-    <tr th:each="item : ${items}">
-        <td th:text="${item.id}"></td>
-        <td th:text="${item.name}"></td>
-       <td>
-        <img th:if="${item.getPicName()!= null}" th:src="@{/getImage(imageName=${item.getPicName()})}" width="400"/></a></td>
-        <td th:text="${item.region.name}"></td>
-        <td><a th:href="@{/item/remove(id=${item.id})}">Remove</a></td>
-    </tr>
-    <a href="/">Back</a>
-    <div class="pagination">
-        <div th:if="${items.totalPages > 0}"
-             th:each="pageNumber : ${pageNumbers}">
-            <a th:href="@{/item(size=${items.size}, page=${pageNumber})}"
-               th:text="${pageNumber}"
-               th:class="${pageNumber==items.number + 1} ? active"></a>
-        </div>
-    </div>
-</table>
-<p th:if="${message != null}" th:text="${message}"></p> -->
 </body>
 </body>
 </html>

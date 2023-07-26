@@ -3,6 +3,7 @@ package com.example.tourarmeniaweb.controller;
 import com.example.tourarmeniacommon.entity.User;
 import com.example.tourarmeniacommon.entity.UserType;
 import com.example.tourarmeniaweb.security.CurrentUser;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -27,7 +28,8 @@ public class MainController {
     }
 
     @GetMapping("/customLogin")
-    public String customLogin() {
+    public
+    String customLogin() {
         return "customLoginPage";
     }
     @GetMapping("/customSuccessLogin")
@@ -35,7 +37,7 @@ public class MainController {
         if (currentUser != null) {
             User user = currentUser.getUser();
             if(user.getUserType() == UserType.ADMIN){
-                return "redirect:/";
+                return "rediret:/";
             }else if(user.getUserType() == UserType.USER){
                 return "redirect:/";
             }

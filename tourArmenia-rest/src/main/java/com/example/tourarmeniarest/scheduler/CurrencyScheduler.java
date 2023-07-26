@@ -23,11 +23,21 @@ public class CurrencyScheduler {
     private final CurrencyRepository currencyRepository;
     private final RestTemplate restTemplate;
 
+    /**
+     * PostConstruct method to initialize the Currency synchronization process when the application starts.
+     * This method is automatically called after the bean is constructed and all dependencies are injected.
+     * It calls the syncCurrency() method to fetch and synchronize the currency rates from an external API.
+     */
     @PostConstruct
     public void init() {
         syncCurrency();
     }
 
+    /**
+     * Scheduled method to periodically synchronize the currency rates from an external API.
+     * It fetches the currency rates (RUB and USD) from the external API and stores them in the database.
+     * The method is scheduled to run every minute using the specified cron expression "0 * * * * *".
+     */
     @Scheduled(cron = "0 * * * * *")
     public void syncCurrency() {
         log.info("Currency Scheduler started at " + new Date());
