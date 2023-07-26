@@ -4,11 +4,11 @@ import com.example.tourarmeniacommon.entity.Comment;
 import com.example.tourarmeniacommon.entity.Region;
 import com.example.tourarmeniacommon.entity.TourPackage;
 import com.example.tourarmeniacommon.entity.User;
-import com.example.tourarmeniaweb.security.CurrentUser;
 import com.example.tourarmeniacommon.repository.CommentRepository;
 import com.example.tourarmeniacommon.repository.RegionRepository;
 import com.example.tourarmeniacommon.repository.TourPackagesRepository;
 import com.example.tourarmeniacommon.service.TourPackageService;
+import com.example.tourarmeniaweb.security.CurrentUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -54,6 +54,11 @@ public class TourPackagesController {
         }
         modelMap.addAttribute("tours", result);
        return "tour";
+    }
+    @GetMapping("/index")
+    public String toursPageIndex(ModelMap modelMap) {
+        modelMap.addAttribute("tours", tourPackageService.findAll());
+       return "index";
     }
 
     @GetMapping("/search")
@@ -114,7 +119,6 @@ public class TourPackagesController {
         comment.setUser(user);
         comment.setDate(new Date());
         commentRepository.save(comment);
-
         return "redirect:/tour/" + comment.getTour().getId();
 }
 

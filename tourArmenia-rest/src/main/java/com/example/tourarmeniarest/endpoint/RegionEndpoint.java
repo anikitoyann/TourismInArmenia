@@ -25,6 +25,8 @@ public class RegionEndpoint {
     private final ItemService itemService;
     private final RegionMapper regionMapper;
 
+
+    // Endpoint for retrieving a page of regions from the system.
     @GetMapping
     public ResponseEntity<List<RegionDto>> regionPage() {
         List<Region> all = regionService.findAll();
@@ -37,6 +39,7 @@ public class RegionEndpoint {
         return ResponseEntity.ok(regionDto);
     }
 
+    //Endpoint for retrieving a single region page by its ID and item type from the system.
     @GetMapping("/{id}")
     public ResponseEntity<?> singleRegionPage(@PageableDefault Pageable pageable,
                                               @PathVariable("id") int id,

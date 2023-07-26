@@ -25,4 +25,5 @@ public interface TourPackageService {
     Page<TourPackage> findAllByPageable(Pageable pageable);
 
     TourPackage updateTour(TourPackage tourPackage,Optional<TourPackage> byId);
+
 }

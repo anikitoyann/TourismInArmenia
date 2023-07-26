@@ -6,16 +6,19 @@ import com.example.tourarmeniacommon.entity.Item;
 import com.example.tourarmeniacommon.entity.TourPackage;
 import com.example.tourarmeniacommon.repository.BookingRepository;
 import com.example.tourarmeniacommon.repository.CarRepository;
-import com.example.tourarmeniacommon.repository.ItemRepository;
 import com.example.tourarmeniacommon.repository.TourPackagesRepository;
 import com.example.tourarmeniacommon.service.ItemService;
 import com.example.tourarmeniaweb.security.CurrentUser;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Date;
@@ -69,7 +72,6 @@ public class BookingController {
 public String bookTour(@AuthenticationPrincipal CurrentUser currentUser,
                        @RequestParam("tourId") Integer tourId,
                        RedirectAttributes redirectAttributes) {
-
     Optional<TourPackage> tour = tourPackagesRepository.findById(tourId);
     Book book = new Book();
     book.setTourPackage(tour.get());

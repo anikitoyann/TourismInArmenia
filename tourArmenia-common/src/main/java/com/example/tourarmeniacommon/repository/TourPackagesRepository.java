@@ -9,4 +9,5 @@ import java.util.List;
 public interface TourPackagesRepository extends JpaRepository<TourPackage, Integer> {
 
     List<TourPackage> findByRegion(Region region);
+
 }
