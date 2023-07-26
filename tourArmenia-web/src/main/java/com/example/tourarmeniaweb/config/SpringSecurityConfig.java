@@ -20,6 +20,8 @@ public class SpringSecurityConfig {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+
+    // Configures the SecurityFilterChain with HttpSecurity settings.
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
@@ -53,6 +55,8 @@ public class SpringSecurityConfig {
         return httpSecurity.build();
     }
 
+
+    // Configures the AuthenticationProvider bean with the UserDetailsService and PasswordEncoder.
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();

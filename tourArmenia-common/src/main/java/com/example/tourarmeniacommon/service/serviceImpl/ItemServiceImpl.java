@@ -1,9 +1,7 @@
 package com.example.tourarmeniacommon.service.serviceImpl;
-
 import com.example.tourarmeniacommon.dto.ItemDto;
 import com.example.tourarmeniacommon.dto.ItemSearchDto;
 import com.example.tourarmeniacommon.entity.Item;
-import com.example.tourarmeniacommon.entity.QItem;
 import com.example.tourarmeniacommon.entity.Region;
 import com.example.tourarmeniacommon.entity.Type;
 import com.example.tourarmeniacommon.mapper.ItemMapper;
@@ -16,7 +14,7 @@ import com.querydsl.jpa.impl.JPAQuery;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,6 +28,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ItemServiceImpl implements ItemService {
     public final ItemRepository itemRepository;
     private final ItemMapper itemMapper;
@@ -69,7 +68,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public boolean existsById(int id) {
-      return itemRepository.existsById(id);
+        return itemRepository.existsById(id);
     }
 
     @Override
@@ -98,7 +97,7 @@ public class ItemServiceImpl implements ItemService {
         return itemRepository.findByRegion(region);
     }
     private List<Item> searchItemByFilter(int page, int size, ItemSearchDto itemSearchDto) {
-       QItem qItem = QItem.item;
+        QItem qItem = QItem.item;
         var query = new JPAQuery<Item>(entityManager);
         JPAQuery<Item> from = query.from(qItem);
         if (itemSearchDto.getDescription() != null && !itemSearchDto.getDescription().isEmpty()) {
@@ -131,13 +130,17 @@ public class ItemServiceImpl implements ItemService {
         }
         if (item.getDescription() != null && !item.getDescription().isEmpty()) {
             itemDB.setDescription(item.getDescription());
+            log.info("Description updated to: {}", item.getDescription());
         }
         if (item.getRegion() != null) {
             itemDB.setRegion(item.getRegion());
+            log.info("Region updated to: {}", item.getRegion());
         }
         if (item.getType() != null) {
             itemDB.setType(item.getType());
+            log.info("Type updated to: {}", item.getType());
         }
+        log.info("Updated item: {}", itemDB);
         return itemDB;
     }
 

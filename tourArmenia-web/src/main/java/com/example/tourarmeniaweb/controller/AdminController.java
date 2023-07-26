@@ -1,11 +1,11 @@
 package com.example.tourarmeniaweb.controller;
-
 import com.example.tourarmeniacommon.entity.*;
 import com.example.tourarmeniacommon.service.CarService;
 import com.example.tourarmeniacommon.service.ItemService;
 import com.example.tourarmeniacommon.service.RegionService;
 import com.example.tourarmeniacommon.service.TourPackageService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/admin")
@@ -27,6 +27,7 @@ public class AdminController {
 
     @GetMapping
     public String adminPage(){
+        log.info("Admin page accessed.");
      return "admin";
      }
    @GetMapping("/addRegion")
@@ -37,6 +38,7 @@ public class AdminController {
          @PostMapping("/addRegion")
          public String addRegionPage(@ModelAttribute Region region) {
         regionService.save(region);
+             log.info("Region added: {}", region);
         return "redirect:/admin";
          }
 
@@ -51,6 +53,7 @@ public class AdminController {
     @PostMapping("/addItem")
     public String hotelsAdd(@ModelAttribute Item item, @RequestParam("image") MultipartFile multipartFile) throws IOException {
         itemService.addItem(multipartFile, item);
+        log.info("Item added: {}", item);
         return "redirect:/admin";
     }
 
@@ -68,9 +71,9 @@ public class AdminController {
     @PostMapping("/addTour")
     public String tourAdd(@ModelAttribute TourPackage tourPackages, @RequestParam("image") MultipartFile multipartFile) throws IOException {
         tourPackageService.save(multipartFile, tourPackages);
+        log.info("Tour Package added: {}", tourPackages);
         return "redirect:/admin";
     }
-
     @GetMapping("/addCar")
     public String carAddPage(ModelMap modelMap) {
         modelMap.addAttribute("cars", carService.findAll());
@@ -80,24 +83,31 @@ public class AdminController {
     @PostMapping("/addCar")
     public String carAdd(@ModelAttribute Car car, @RequestParam("image") MultipartFile multipartFile) throws IOException {
         carService.save(multipartFile, car);
+        log.info("Car added: {}", car);
         return "redirect:/admin";
     }
 
     @GetMapping("/removeHotel")
     public String removeHotels(@RequestParam("id") int id) {
+        log.info("Removing hotel with ID: {}", id);
         itemService.deleteById(id);
+        log.info("Hotel with ID {} has been removed.", id);
         return "redirect:/item";
     }
 
     @GetMapping("/removeTour")
     public String removeTour(@RequestParam("id") int id) {
+        log.info("Removing tour with ID: {}", id);
         tourPackageService.deleteById(id);
+        log.info("Tour with ID {} has been removed.", id);
         return "redirect:/tour";
     }
 
     @GetMapping("/removeCar")
     public String removeCar(@RequestParam("id") int id) {
+        log.info("Removing car with ID: {}", id);
         carService.deleteById(id);
+        log.info("Car with ID {} has been removed.", id);
         return "redirect:/cars";
     }
 
@@ -113,6 +123,7 @@ public class AdminController {
         Optional<Car> byId = carService.findById(id);
         Car carDb = carService.updateCar(car, byId);
         carService.save(multipartFile, carDb);
+        log.info("Car updated :{}",carDb);
             return "redirect:/cars";
         }
 
@@ -129,11 +140,13 @@ public class AdminController {
                             @ModelAttribute TourPackage tourPackage,
                             @RequestParam("image") MultipartFile multipartFile) throws IOException {
         Optional<TourPackage> byId = tourPackageService.findById(id);
-        if (!byId.isEmpty()) {
+        if (byId.isPresent()) {
             TourPackage tourDB = tourPackageService.updateTour(tourPackage, byId);
             tourPackageService.save(multipartFile, tourDB);
+            log.info("TourPackage updated: {}", tourDB);
             return "redirect:/tour";
         }
+        log.warn("TourPackage update failed: TourPackage with ID {} not found.", id);
         return "redirect:/tour";
     }
     @GetMapping("/updateItem")
@@ -149,9 +162,10 @@ public class AdminController {
                              @ModelAttribute Item item,
                              @RequestParam("image") MultipartFile multipartFile) throws IOException {
         Optional<Item> byId = itemService.findById(id);
-        if (!byId.isEmpty()) {
+        if (byId.isPresent()) {
             Item itemDB = itemService.updateItem(item, byId);
             itemService.addItem(multipartFile, itemDB);
+            log.info("Item updated: {}", itemDB);
             return "redirect:/item";
         }
             return "redirect:/item";

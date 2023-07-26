@@ -3,7 +3,6 @@ package com.example.tourarmeniarest.endpoint;
 import com.example.tourarmeniacommon.dto.CarDto;
 import com.example.tourarmeniacommon.dto.CreateCarRequestDto;
 import com.example.tourarmeniacommon.entity.Car;
-import com.example.tourarmeniacommon.entity.Region;
 import com.example.tourarmeniacommon.mapper.CarMapper;
 import com.example.tourarmeniacommon.service.CarService;
 import lombok.RequiredArgsConstructor;
