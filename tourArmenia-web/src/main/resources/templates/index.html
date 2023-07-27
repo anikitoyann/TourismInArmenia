@@ -44,10 +44,16 @@
 </head>
 <body id="body" class="up-scroll" data-spy="scroll" data-target=".element-right-sidebar">
 
+
 <!-- ====================================
 ——— HEADER
 ===================================== -->
 <header class="header" id="pageTop">
+    <div id="language" style="color: red" >
+        <a href="?lang=hy">հայերեն</a>
+        <a href="?lang=ru">Русский</a>
+        <a href="?lang=en">English</a>
+    </div>
 
     <!-- Menu Zord -->
     <nav class="nav-menuzord nav-menuzord-transparent navbar-sticky">
@@ -85,7 +91,7 @@
                     </li>
 
                     <li class="">
-                        <a href="javascript:void(0)">Tours</a>
+                        <a href="javascript:void(0)" th:text="#{index.TOURS}"></a>
                         <div class="megamenu drop-up">
                             <div class="megamenu-row">
 
@@ -93,7 +99,7 @@
                                     <ul class="list-unstyled">
                                         <li>Tour Packages List View</li>
                                         <li class="">
-                                            <a href="/tour">Tour Packages List</a>
+                                            <a href="/tour" th:text="#{index.tourList}"></a>
                                         </li>
 
                                         <li class="">
@@ -109,7 +115,7 @@
                     </li>
 
                     <li class="">
-                        <a href="javascript:void(0)">Hotels</a>
+                        <a href="javascript:void(0)" th:text="#{index.HOTELS}"></a>
                         <div class="megamenu drop-up">
                             <div class="megamenu-row">
 
@@ -117,24 +123,24 @@
                                     <ul class="list-unstyled">
                                         <li>Hotels List View</li>
                                         <li class="">
-                                            <a href="/item">Hotels List</a>
+                                            <a href="/item" th:text="#{index.hotelsList}"></a>
                                         </li>
                                     </ul>
                                 </div>
 
 
                                 <li class="">
-                                    <a href="javascript:void(0)">Rental</a>
+                                    <a href="javascript:void(0)" th:text="#{index.RENTAL}"></a>
 
                                     <ul class="dropdown drop-up">
                                         <li class=" ||
                   ">
 
-                                            <a href="javascript:void(0)">Cars</a>
+                                            <a href="javascript:void(0)" th:text="#{index.cars}"></a>
 
                                             <ul class="dropdown drop-sub-menu-left drop-up">
                                                 <li class="">
-                                                    <a href="/cars">Cars List View</a>
+                                                    <a href="/cars" th:text="#{index.carsList}"></a>
                                                 </li>
 
                                             </ul>
@@ -143,26 +149,26 @@
                                 </li>
 
                                 <li class="">
-                                    <a href="javascript:void(0)">Pages</a>
+                                    <a href="javascript:void(0)" th:text="#{index.PAGES}"></a>
                                     <ul class="dropdown drop-up">
                                         <li class="">
-                                            <a href="/aboutUs">About Us</a>
+                                            <a href="/aboutUs" th:text="#{index.aboutAs}"></a>
                                         </li>
 
                                         <li class="">
-                                            <a href="/contactUs">Contact Us</a>
+                                            <a href="/contactUs" th:text="#{index.contactUs}"></a>
                                         </li>
 
                                         <li class=" ||
                      ||
                     ">
 
-                                        <li><a href="/TermsPrivacy">Terms & Privacy! </a></a></li>
+                                        <li><a href="/TermsPrivacy" th:text="#{index.terms}"> </a></a></li>
                                     </ul>
                                 </li>
 
                                 <li class="">
-                                    <a href="javascript:void(0)">Regions</a>
+                                    <a href="javascript:void(0)" th:text="#{index.REGIONS}"></a>
 
                                     <ul class="dropdown drop-up">
 
@@ -170,13 +176,13 @@
                    ||
                   ">
 
-                                            <a href="/regions">List Regions</a>
+                                            <a href="/regions" th:text="#{index.regionList}"></a>
 
                                         </li>      <li class=" ||
                    ||
                   ">
 
-                                        <a href="https://armenia.travel/about-armenia/history/">Armenian History</a><br>
+                                        <a href="https://armenia.travel/about-armenia/history/" th:text="#{index.history}"></a><br>
 
                                     </li>
 
@@ -184,7 +190,7 @@
                                 </li>
 
                                 <li class="">
-                                    <a href="javascript:void(0)">Admin</a>
+                                    <a href="javascript:void(0)" th:text="#{index.ADMIN}"></a>
                                     <ul id="admin" class="dropdown drop-up">
                                         <li class="">
                                             <a href="/admin">Admin</a>
@@ -192,13 +198,13 @@
 
 
                                         <li class="">
-                                            <a href="javascript:void(0)" data-toggle="modal" data-target="#signup">Signup</a>
+                                            <a href="javascript:void(0)" data-toggle="modal" data-target="#signup" th:text="#{index.signUp}"></a>
                                         </li>
                                         <li class="">
-                                            <a href="/customLogin" style="color: coral" th:if="${currentUser==null}">Login</a>
+                                            <a href="/customLogin" style="color: coral" th:if="${currentUser==null}" th:text="#{index.login}"></a>
                                         </li>
                                         <li class="">
-                                            <a href="/logout">Log Out</a>
+                                            <a href="/logout" th:text="#{index.logOut}"></a>
                                         </li>
                                     </ul>
                                 </li>
@@ -432,14 +438,13 @@
           Our top deals
         </span>
                 </h2>
-                <p class="text-capitalize text-center">Quisque lacus augue, blandit non est a, dictum malesuada odio.</p>
             </div>
 
             <div class="row justify-content-center">
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-4" th:each="tour:${tours}">
                     <div class="card card-hover mb-5 mb-lg-0">
-                        <a href="single-package-left-sidebar.html" class="position-relative">
-                            <img class="card-img-top lazyestload" data-src="/assets/img/home/deal/deal-01.jpg" src="/assets/img/home/deal/deal-01.jpg" alt="Card image cap">
+                        <a th:href="@{'/tour/index' +${tour.id}}" class="position-relative">
+                            <img th:if="${tour.picName != null}" th:src="@{/getImage(imageName=${tour.picName})}" width="400"/>  alt="Card image cap" </a>
 
                             <div class="card-img-overlay card-hover-overlay rounded-top d-flex flex-column">
                                 <div class="badge badge-primary badge-rounded-circle">
@@ -492,312 +497,12 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-6 col-lg-4">
-                    <div class="card card-hover mb-5 mb-lg-0">
-                        <a href="single-package-left-sidebar.html" class="position-relative">
-                            <img class="card-img-top lazyestload" data-src="/assets/img/home/deal/deal-02.jpg" src="/assets/img/home/deal/deal-02.jpg" alt="Card image cap">
-
-                            <div class="card-img-overlay card-hover-overlay rounded-top d-flex flex-column">
-                                <div class="badge badge-primary badge-rounded-circle">
-                <span class="d-block">
-                  Free<br>gift
-                </span>
-                                </div>
-
-                                <ul class="list-unstyled d-flex mt-auto text-warning">
-                                    <li>
-                                        <i class="fa fa-star mr-1" aria-hidden="true"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-star mr-1" aria-hidden="true"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-star mr-1" aria-hidden="true"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-star mr-1" aria-hidden="true"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                    </li>
-                                </ul>
-
-                                <ul class="list-unstyled d-flex text-white font-weight-bold mb-0">
-                                    <li class="border-right border-white pr-2">7 days</li>
-                                    <li class="border-right border-white px-2">15 hrs</li>
-                                    <li class="pl-2">15 min</li>
-                                </ul>
-                            </div>
-                        </a>
-
-                        <div class="card-body">
-                            <h5 class="">
-                                <a href="single-package-left-sidebar.html" class="card-title text-uppercase">Suspendisse Eros Erat</a>
-                            </h5>
-                            <p class="mb-5">Proin convallis magna vel libero accumsan sollicitudin. Quisque dapibus vitae turpis eu magna sagittis.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <p class="mb-0 text-capitalize">Start from</p>
-                                    <h3 class="text-primary">$499</h3>
-                                </div>
-
-                                <div>
-                                    <a href="jascript:void(0)" data-toggle="modal" data-target="#inquiry" class="btn btn-sm btn-outline-secondary text-uppercase">Inquiry</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4">
-                    <div class="card card-hover">
-                        <a href="single-package-left-sidebar.html" class="position-relative">
-                            <img class="card-img-top lazyestload" data-src="/assets/img/home/deal/deal-03.jpg" src="/assets/img/home/deal/deal-03.jpg" alt="Card image cap">
-
-                            <div class="card-img-overlay card-hover-overlay rounded-top d-flex flex-column">
-                                <div class="badge badge-primary badge-rounded-circle">
-                <span class="d-block">
-                  25%<br>off
-                </span>
-                                </div>
-
-                                <ul class="list-unstyled d-flex mt-auto text-warning">
-                                    <li>
-                                        <i class="fa fa-star mr-1" aria-hidden="true"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-star mr-1" aria-hidden="true"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-star mr-1" aria-hidden="true"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-star mr-1" aria-hidden="true"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                    </li>
-                                </ul>
-
-                                <ul class="list-unstyled d-flex text-white font-weight-bold mb-0">
-                                    <li class="border-right border-white pr-2">7 days</li>
-                                    <li class="border-right border-white px-2">15 hrs</li>
-                                    <li class="pl-2">15 min</li>
-                                </ul>
-                            </div>
-                        </a>
-
-                        <div class="card-body">
-                            <h5>
-                                <a href="single-package-left-sidebar.html" class="card-title text-uppercase">Quisque Placerat Nunc</a>
-                            </h5>
-                            <p class="mb-5">Vivamus eu mattis nibh. Quisque eget ipsum at odio fringilla consequat vel id erat. Suspendisse non feugiat mi.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <p class="mb-0 text-capitalize">Start from</p>
-                                    <h3 class="text-primary">$299</h3>
-                                </div>
-
-                                <div>
-                                    <a href="booking-step-1.html" class="btn btn-sm btn-outline-secondary text-uppercase">Book Now</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center mt-7">
-                <a href="packages-grid.html" class="btn btn-sm btn-outline-secondary text-uppercase">View all</a>
-            </div>
-        </div>
-    </section>
+</setion>
 
 
     <!-- ====================================
     ———	COUNTER SECTION
     ===================================== -->
-    <section class="counter-up dzsparallaxer auto-init use-loading counterup-paralax">
-        <div class="divimage dzsparallaxer--target" style="height: 700px;" data-src="/assets/img/home/promotion/promotion-2.jpg">
-        </div>
-
-        <div class="container paralax-container">
-            <div class="row align-items-center text-center" id="counter">
-                <div class="col-6 col-md-3 mb-5 mb-md-0">
-                    <div class="icon icon-lg rounded-circle mx-auto bg-primary mb-3">
-                        <i class="fa fa-map-marker text-white" aria-hidden="true"></i>
-                    </div>
-                    <h1 class="counter-value mb-2" data-count="179">0</h1>
-                    <h6 class="">Destinations</h6>
-                </div>
-
-                <div class="col-6 col-md-3 mb-5 mb-md-0">
-                    <div class="icon icon-lg rounded-circle mx-auto bg-primary mb-3">
-                        <i class="fa fa-gift text-white" aria-hidden="true"></i>
-                    </div>
-                    <h1 class="counter-value mb-2" data-count="48">0</h1>
-                    <h6 class="">Tour pack</h6>
-                </div>
-
-                <div class="col-6 col-md-3">
-                    <div class="icon icon-lg rounded-circle mx-auto bg-primary mb-3">
-                        <i class="fa fa-smile-o text-white" aria-hidden="true"></i>
-                    </div>
-                    <h1 class="counter-value mb-2" data-count="4562">0</h1>
-                    <h6 class="">Happy clients</h6>
-                </div>
-
-                <div class="col-6 col-md-3">
-                    <div class="icon icon-lg rounded-circle mx-auto bg-primary mb-3">
-                        <i class="fa fa-life-ring text-white" aria-hidden="true"></i>
-                    </div>
-                    <h1 class="counter-value mb-2" data-count="24">0</h1>
-                    <h6 class="">Hours support</h6>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ====================================
-    ———	PACKAGES SECTION
-    ===================================== -->
-    <section class="py-10">
-        <div class="container">
-            <div class="text-center section-title">
-                <h2 class="text-uppercase font-weight-bold position-relative">
-        <span class="bg-white">
-          Our Packages
-        </span>
-                </h2>
-                <p class="text-capitalize text-center">Ut facilisis facilisis metus quis semper</p>
-            </div>
-
-            <div id="filters" class="button-group">
-                <button class="button is-checked" data-filter="*">All Places</button>
-                <button class="button" data-filter=".asia">Asia</button>
-                <button class="button" data-filter=".america">America</button>
-                <button class="button" data-filter=".africa">Africa</button>
-            </div>
-
-            <div class="row grid">
-                <div class="col-md-6 col-lg-4 element-item america">
-                    <div class="media media-hoverable justify-content-center mb-2 mb-md-4 mb-lg-6">
-                        <a href="single-package-fullwidth.html" class="media-content">
-                            <img class="media-img lazyestload" data-src="/assets/img/home/packages/packages-1.jpg" src="/assets/img/home/packages/packages-1.jpg" alt="Generic placeholder image">
-                            <div class="media-object">
-                                <h3 class="text-uppercase mb-0">Vestibulum Tour</h3>
-                            </div>
-                            <div class="media-img-overlay">
-                                <div class="overlay-content">
-                                    <h3 class="">from <span class="text-primary">$399</span></h3>
-                                    <p class="text-white mb-0">
-                                        <span class="mr-1"><i class="fa fa-calendar" aria-hidden="true"></i></span> 27 Jan, 2019
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4 element-item africa">
-                    <div class="media media-hoverable justify-content-center mb-2 mb-md-4 mb-lg-6">
-                        <a href="single-package-fullwidth.html" class="media-content">
-                            <img class="media-img lazyestload" data-src="/assets/img/home/packages/packages-2.jpg" src="/assets/img/home/packages/packages-2.jpg" alt="Generic placeholder image">
-                            <div class="media-object">
-                                <h3 class="text-uppercase mb-0">Maecenas Tour</h3>
-                            </div>
-                            <div class="media-img-overlay">
-                                <div class="overlay-content">
-                                    <h3 class="">from <span class="text-primary">$599</span></h3>
-                                    <p class="text-white mb-0">
-                                        <span class="mr-1"><i class="fa fa-calendar" aria-hidden="true"></i></span> 09 Feb, 2019
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4 element-item asia america">
-                    <div class="media media-hoverable justify-content-center mb-2 mb-md-4 mb-lg-6">
-                        <a href="single-package-fullwidth.html" class="media-content">
-                            <img class="media-img lazyestload" data-src="/assets/img/home/packages/packages-3.jpg" src="/assets/img/home/packages/packages-3.jpg" alt="Generic placeholder image">
-                            <div class="media-object">
-                                <h3 class="text-uppercase mb-0">Lobortis Tour</h3>
-                            </div>
-                            <div class="media-img-overlay">
-                                <div class="overlay-content">
-                                    <h3 class="">from <span class="text-primary">$299</span></h3>
-                                    <p class="text-white mb-0">
-                                        <span class="mr-1"><i class="fa fa-calendar" aria-hidden="true"></i></span> 14 Feb, 2019
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4 element-item asia africa">
-                    <div class="media media-hoverable justify-content-center mb-2 mb-md-4 mb-lg-0">
-                        <a href="single-package-fullwidth.html" class="media-content">
-                            <img class="media-img lazyestload" data-src="/assets/img/home/packages/packages-4.jpg" src="/assets/img/home/packages/packages-4.jpg" alt="Generic placeholder image">
-                            <div class="media-object">
-                                <h3 class="text-uppercase mb-0">Leo Lacus Tour</h3>
-                            </div>
-                            <div class="media-img-overlay">
-                                <div class="overlay-content">
-                                    <h3 class="">from <span class="text-primary">$399</span></h3>
-                                    <p class="text-white mb-0">
-                                        <span class="mr-1"><i class="fa fa-calendar" aria-hidden="true"></i></span> 11 Jan, 2019
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4 element-item america">
-                    <div class="media media-hoverable justify-content-center mb-2 mb-md-0">
-                        <a href="single-package-fullwidth.html" class="media-content">
-                            <img class="media-img lazyestload" data-src="/assets/img/home/packages/packages-5.jpg" src="/assets/img/home/packages/packages-5.jpg" alt="Generic placeholder image">
-                            <div class="media-object">
-                                <h3 class="text-uppercase mb-0">Nullam Tour</h3>
-                            </div>
-                            <div class="media-img-overlay">
-                                <div class="overlay-content">
-                                    <h3 class="">from <span class="text-primary">$199</span></h3>
-                                    <p class="text-white mb-0">
-                                        <span class="mr-1"><i class="fa fa-calendar" aria-hidden="true"></i></span> 2 Feb, 2019
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4 element-item asia africa">
-                    <div class="media media-hoverable justify-content-center">
-                        <a href="single-package-fullwidth.html" class="media-content">
-                            <img class="media-img lazyestload" data-src="/assets/img/home/packages/packages-6.jpg" src="/assets/img/home/packages/packages-6.jpg" alt="Generic placeholder image">
-                            <div class="media-object">
-                                <h3 class="text-uppercase mb-0">Hendrerit Tour</h3>
-                            </div>
-                            <div class="media-img-overlay">
-                                <div class="overlay-content">
-                                    <h3 class="">from <span class="text-primary">$799</span></h3>
-                                    <p class="text-white mb-0">
-                                        <span class="mr-1"><i class="fa fa-calendar" aria-hidden="true"></i></span> 26 Feb, 2019
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
 
 
 </div><!-- element wrapper ends -->
@@ -824,7 +529,7 @@
             </div>
 
             <div class="modal-footer justify-content-center">
-                <p class="mb-1">Don’t have an Account? <a href="/user/register" th:if="${currentUser==null}">Sign up</a></p>
+                <p class="mb-1">Don’t have an Account? <a href="/user/register" th:if="${currentUser==null}" th:text="#{index.signUp}"></a></p>
             </div>
         </div>
     </div>
@@ -832,7 +537,7 @@
 
 
             <div class="modal-footer justify-content-center">
-                <p class="mb-1">Don’t have an Account? <a href="/user/register" th:if="${currentUser==null}">Sign  Up</a></p>
+                <p class="mb-1">Don’t have an Account? <a href="/user/register" th:if="${currentUser==null}" th:text="#{index.signUp}"></a></p>
             </div>
         </div>
     </div>

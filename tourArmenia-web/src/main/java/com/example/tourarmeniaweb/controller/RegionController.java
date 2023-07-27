@@ -7,6 +7,9 @@ import com.example.tourarmeniacommon.service.ItemService;
 import com.example.tourarmeniacommon.service.RegionService;
 import com.example.tourarmeniacommon.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -34,6 +36,7 @@ public class RegionController {
 
     @GetMapping("/{id}")
     public String singleRegionPage(@PathVariable("id") int id,
+                                   @PageableDefault Pageable pageable,
                                    @RequestParam(required = false) String type,
                                    ModelMap modelMap) {
         Optional<Region> byId = regionService.findById(id);
@@ -42,12 +45,13 @@ public class RegionController {
             if (type == null) {
                 type = "HOTEL";
             }
-            List<Item> items = itemService.findAllByRegionAndType(region.getId(), Type.valueOf(type));
+            Page<Item> result = itemService.findAllByRegionAndType(pageable, region.getId(), Type.valueOf(type));
             modelMap.addAttribute("region", region);
-            modelMap.addAttribute("items", items);
+            modelMap.addAttribute("items", result);
             return "singleRegion";
         } else {
             return "redirect:/regions";
         }
     }
-}
+    }
+

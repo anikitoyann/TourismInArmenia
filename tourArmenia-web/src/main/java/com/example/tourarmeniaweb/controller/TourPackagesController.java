@@ -4,54 +4,56 @@ import com.example.tourarmeniacommon.entity.*;
 import com.example.tourarmeniacommon.service.*;
 import com.example.tourarmeniaweb.security.CurrentUser;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/tour")
 public class TourPackagesController {
+    private final TourPackageService tourPackageService;
     private final TourService tourService;
     private final RegionService regionService;
     private final CarService carService;
     private final ItemService itemService;
     private final CommentService commentService;
 
-    @Value("${upload.image.path}")
-    private String imageUploadPath;
-
     @GetMapping
-    public String toursPage(ModelMap modelMap) {
-        modelMap.addAttribute("tours", tourService.findAll());
-        modelMap.addAttribute("regions", regionService.findAll());
-
-        return "tour";
+    public String toursPage(@RequestParam("page") Optional<Integer> page,
+                            @RequestParam("size") Optional<Integer> size, ModelMap modelMap) {
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(5);
+        Sort sort = Sort.by(Sort.Order.desc("id"));
+        Pageable pageable = PageRequest.of(currentPage - 1, pageSize, sort);
+        Page<TourPackage> result = tourPackageService.findAllByPageable(pageable);
+        List<TourPackage> content = result.getContent();
+        int totalPages = result.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            modelMap.addAttribute("pageNumbers", pageNumbers);
+        }
+        modelMap.addAttribute("tours", result);
+       return "tour";
     }
-
-    @GetMapping("/add")
-    public String toursAddPage(ModelMap modelMap) {
-        List<Region> regions = regionService.findAll();
-        List<Car> cars = carService.findAll();
-        List<Item> items = itemService.findAll();
-        modelMap.addAttribute("regions", regions);
-        modelMap.addAttribute("cars", cars);
-        modelMap.addAttribute("items", items);
-        return "addTours";
-    }
-
-    @PostMapping("/add")
-    public String tourPackagesAdd(@ModelAttribute TourPackage tourPackages, @RequestParam("image") MultipartFile multipartFile) throws IOException {
-        tourService.save(tourPackages, multipartFile);
-        return "redirect:/tour";
+    @GetMapping("/index")
+    public String toursPageIndex(ModelMap modelMap) {
+        modelMap.addAttribute("tours", tourPackageService.findAll());
+       return "index";
     }
 
     @GetMapping("/search")
@@ -64,19 +66,19 @@ public class TourPackagesController {
             Region region = regionService.findById(regionId).orElse(null);
 
             if (region != null) {
-                tourPackages = tourService.findByRegion(region);
+                tourPackages = tourPackageService.findByRegion(region);
                 if (tourPackages.isEmpty()) {
                     msg = "At present, we do not have any scheduled tours in this region.";
                 } else {
                     msg = null;
                 }
             } else {
-                tourPackages = tourService.findAll();
+                tourPackages = tourPackageService.findAll();
                 msg = "invalid region";
             }
         } else {
             msg = null;
-            tourPackages = tourService.findAll();
+            tourPackages = tourPackageService.findAll();
         }
 
         modelMap.addAttribute("tourPackages", tourPackages);
@@ -84,6 +86,8 @@ public class TourPackagesController {
         modelMap.addAttribute("msg", msg);
         return "tour";
     }
+
+
 
     @GetMapping("/{id}")
     public String singleTourPage(@PathVariable("id") int id,
@@ -113,12 +117,6 @@ public class TourPackagesController {
         commentService.save(comment);
 
         return "redirect:/tour/" + comment.getTour().getId();
-    }
-
-    @GetMapping("/remove")
-    public String removeTour(@RequestParam("id") int id) {
-        tourService.deleteById(id);
-        return "redirect:/tour";
-    }
 }
 
+}

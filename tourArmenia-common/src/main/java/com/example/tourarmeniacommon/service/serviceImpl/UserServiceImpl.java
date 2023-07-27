@@ -14,16 +14,20 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+
+    //Retrieves a list of all User entities from the database.
     @Override
     public List<User> findAll() {
         return userRepository.findAll();
     }
 
+    //Retrieves a User entity from the database based on the provided email.
     @Override
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
+    //Saves a User entity to the database.
     @Override
     public void save(User user) {
         userRepository.save(user);

@@ -6,6 +6,7 @@ import com.example.tourarmeniacommon.service.ItemService;
 import com.example.tourarmeniacommon.service.RegionService;
 import com.example.tourarmeniaweb.security.CurrentUser;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,11 +14,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -53,19 +54,7 @@ public class ItemController {
         return "item";
 
     }
-    @GetMapping("/add")
-    public String itemsAddPage(ModelMap modelMap) {
-        modelMap.addAttribute("regions", regionService.findAll());
-        List<Type> types = Arrays.asList(Type.values());
-        modelMap.addAttribute("types", types);
-        return "addItem";
-    }
-    @PostMapping("/add")
-    public String hotelsAdd(@ModelAttribute Item item, @RequestParam("image") MultipartFile multipartFile) throws IOException {
-        itemService.addItem(multipartFile, item);
-        return "redirect:/item";
-        // return "redirect:/regions/" + item.getRegion().getId();
-    }
+
 
     @GetMapping("/{id}")
     public String singleHotelPage(@PathVariable("id") int id,
@@ -85,22 +74,15 @@ public class ItemController {
         }
 
     }
-    @GetMapping("/remove")
-    public String removeHotels(@RequestParam("id") int id) {
-        itemService.deleteById(id);
-        return "redirect:/item";
-    }
+
     @GetMapping("/search")
     public String searchByRegion(@RequestParam(value = "regionId", required = false) Integer regionId, ModelMap modelMap) {
         List<Item> items;
         String message;
-
         if (regionId != null) {
             Region region = regionService.findById(regionId).orElse(null);
-
             if (region != null) {
                 items = itemService.findByRegion(region);
-
                 if (items.isEmpty()) {
                     message = "No hotels found in the selected region.";
                 } else {

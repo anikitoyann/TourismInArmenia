@@ -3,17 +3,20 @@ package com.example.tourarmeniaweb.controller;
 import com.example.tourarmeniacommon.entity.*;
 import com.example.tourarmeniacommon.repository.BookingRepository;
 import com.example.tourarmeniacommon.repository.CarRepository;
-import com.example.tourarmeniacommon.repository.ItemRepository;
 import com.example.tourarmeniacommon.repository.TourPackagesRepository;
 import com.example.tourarmeniacommon.service.*;
 import com.example.tourarmeniaweb.security.CurrentUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.*;
@@ -23,7 +26,7 @@ import java.util.*;
 @Controller
 public class BookingController {
 
-    private final TourService tourService;
+    private final TourPackageService tourService;
     private final ItemService itemService;
     private final CarService carService;
     private final BookService bookService;
@@ -37,7 +40,7 @@ public class BookingController {
     public String showBookingForm(ModelMap modelMap) {
         List<Car> cars = carService.findAll();
         List<Item> items = itemService.findAll();
-        List<TourPackage> tours = tourService.findAll();
+        List<TourPackage> tours = tourPackageService.findAll();
         modelMap.addAttribute("tours", tours);
         modelMap.addAttribute("cars", cars);
         modelMap.addAttribute("items", items);

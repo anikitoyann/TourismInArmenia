@@ -13,11 +13,13 @@ import java.util.List;
 public class CurrencyServiceImpl implements CurrencyService {
     private final CurrencyRepository currencyRepository;
     @Override
+    // Retrieves a list of all currencies from the currency repository.
     public List<Currency> findAll() {
         return currencyRepository.findAll();
     }
 
     @Override
+    //Saves a currency object to the currency repository.
     public Currency save(Currency currency) {
         return currencyRepository.save(currency);
     }

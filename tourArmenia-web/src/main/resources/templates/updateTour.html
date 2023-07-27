@@ -2,12 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add Tour</title>
+    <title>Update Tour</title>
 </head>
 <body>
-<a href="/admin">Back</a><br>
-<form action="/admin/addTour" method="post" enctype="multipart/form-data">
-     id: <input type="text" id="id" name="id"/><br>
+<a href="/tours">Back</a><br>
+<form action="/admin/updateTour" method="post" enctype="multipart/form-data">
+    Tour id: <input type="text" id="id" name="id"/><br>
+    </select><br>
    Name: <input type="text" name="name" required><br>
    Car:  <select name="car.id" required>
         <option th:each="car : ${cars}"
@@ -26,7 +27,7 @@
         <option th:each="region : ${regions}"
                 th:text="${region.name}" th:value="${region.id}"></option>
     </select><br>
-    <input type="submit" value="Create"><br>
+    <input type="submit" value="Update"><br>
 </form>
 </body>
 </html>

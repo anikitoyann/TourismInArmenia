@@ -4,6 +4,7 @@ import com.example.tourarmeniacommon.entity.User;
 import com.example.tourarmeniacommon.entity.UserType;
 import com.example.tourarmeniacommon.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

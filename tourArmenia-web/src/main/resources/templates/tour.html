@@ -17,7 +17,6 @@
 <table border="1px">
     <a href="/booking/createCustomTour"> Book Custom Tour</a>
     <div th:if="${currentUser.UserType == 'ADMIN'}">
-    <a href="/tour/add"> Create Tour</a>
     </div>
     <tr>
         <th>ID</th>
@@ -32,7 +31,7 @@
         <th>Start Date</th>
         <th th:if="${currentUser.UserType == 'ADMIN'}"  >Action</th>
     </tr>
-    <tr th:each="tour : ${tours}">
+    <tr th:each="tour : ${tours.content}">
         <td th:text="${tour.id}"></td>
         <td th:text="${tour.name}"></td>
         <td th:text="${tour.region.name}"></td>
@@ -48,9 +47,23 @@
         <td th:text="${tour.startDate}"></td>
         <td th:if="${currentUser.UserType == 'ADMIN'}"><a th:href="@{/admin/removeTour(id=${tour.id})}">Remove</a> </td>
 
+        <td th:if="${currentUser.UserType == 'ADMIN'}"><a th:href="@{/tour/remove(id=${tour.id})}">Remove</a></td>
+<!--        <td> <a th:href="@{'/tour/' + ${tour.id}}">More</a>-->
+<!--        </td>-->
+        <td><a th:href="@{/admin/removeTour(id=${tour.id})}">Remove</a><br>
+            <a th:href="@{/admin/updateTour(id=${tour.id})}">Update</a>
+        </td>
     </tr>
-    <a href="/static">Back</a>
+    <a href="/">Back</a>
 </table>
 
+<div class="pagination">
+    <div th:if="${tours.totalPages > 0}"
+         th:each="pageNumber : ${pageNumbers}">
+        <a th:href="@{/tour(size=${tours.size}, page=${pageNumber})}"
+           th:text="${pageNumber}"
+           th:class="${pageNumber==tours.number + 1} ? active"></a>
+    </div>
+</div>
 </body>
 </html>

@@ -13,7 +13,7 @@ import java.util.List;
 public interface ItemRepository extends JpaRepository<Item, Integer>, QuerydslPredicateExecutor<Item> {
 
     List<Item> findByRegion(Region region);
-    List<Item> findAllByRegion_IdAndType(int regionId, Type type);
+    Page<Item> findAllByRegion_IdAndType(Pageable pageable,int regionId, Type type);
     Page<Item> findAllByType(Type type, Pageable pageable);
 
 }
