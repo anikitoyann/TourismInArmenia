@@ -29,7 +29,9 @@ public class TourPackageServiceImpl implements TourPackageService {
     @Value("${upload.image.path}")
     private String imageUploadPath;
     private int id;
-
+public TourPackage add(TourPackage tourPackage){
+   return tourPackagesRepository.save(tourPackage);
+}
     @Override
     public void save(MultipartFile multipartFile, TourPackage tourPackage) throws IOException {
         if (multipartFile != null && !multipartFile.isEmpty()) {
@@ -52,7 +54,7 @@ public class TourPackageServiceImpl implements TourPackageService {
         this.id = id;
         return tourPackagesRepository.findById(id);
     }
-    public boolean existById(int id){
+    public boolean existsById(int id){
         return tourPackagesRepository.existsById(id);
     }
 
@@ -61,6 +63,9 @@ public class TourPackageServiceImpl implements TourPackageService {
         return tourPackagesRepository.findByRegion(region);
     }
 
+    public  List<TourPackage> findAll(){
+        return tourPackagesRepository.findAll();
+    }
     @Override
     public Page<TourPackage> findAllByPageable(Pageable pageable) {
         return tourPackagesRepository.findAll(pageable);

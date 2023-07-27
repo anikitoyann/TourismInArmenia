@@ -11,19 +11,21 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TourPackageService {
-   public void save(MultipartFile multipartFile, TourPackage tourPackages) throws IOException;
+
+   TourPackage add(TourPackage tourPackage);
+   void save(MultipartFile multipartFile, TourPackage tourPackages) throws IOException;
 
    void deleteById(int id);
-
-    TourPackage add(TourPackage tour);
 
     Optional<TourPackage> findById(int id);
 
     List<TourPackage> findAll();
 
-    void save(TourPackage tourPackages, MultipartFile multipartFile) throws IOException;
-
-    boolean existById(int id);
-
     List<TourPackage> findByRegion(Region region);
+    boolean existsById(int id);
+
+    Page<TourPackage> findAllByPageable(Pageable pageable);
+
+    TourPackage updateTour(TourPackage tourPackage,Optional<TourPackage> byId);
+
 }

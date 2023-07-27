@@ -25,7 +25,6 @@ import java.util.stream.IntStream;
 @RequestMapping("/tour")
 public class TourPackagesController {
     private final TourPackageService tourPackageService;
-    private final TourService tourService;
     private final RegionService regionService;
     private final CarService carService;
     private final ItemService itemService;
@@ -93,7 +92,7 @@ public class TourPackagesController {
     public String singleTourPage(@PathVariable("id") int id,
                                  @AuthenticationPrincipal CurrentUser currentUser,
                                  ModelMap modelMap) {
-        Optional<TourPackage> byId = tourService.findById(id);
+        Optional<TourPackage> byId = tourPackageService.findById(id);
         if (byId.isPresent()) {
             TourPackage tourPackage = byId.get();
             User user = currentUser.getUser();
