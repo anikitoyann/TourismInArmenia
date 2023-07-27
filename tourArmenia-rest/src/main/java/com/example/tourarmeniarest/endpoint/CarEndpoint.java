@@ -6,6 +6,7 @@ import com.example.tourarmeniacommon.entity.Car;
 import com.example.tourarmeniacommon.entity.Region;
 import com.example.tourarmeniacommon.mapper.CarMapper;
 import com.example.tourarmeniacommon.service.CarService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,7 +32,7 @@ public class CarEndpoint {
 
     //Endpoint for creating a new car in the system.
     @PostMapping("/createCar")
-    public ResponseEntity<CarDto> create(@RequestBody CreateCarRequestDto createCarRequestDto) {
+    public ResponseEntity<CarDto> create(@RequestBody @Valid CreateCarRequestDto createCarRequestDto) {
         Car car = carService.create(carMapper.map(createCarRequestDto));
         log.info("New car created with ID {}.", car.getId());
         return ResponseEntity.ok(carMapper.mapToDto(car));

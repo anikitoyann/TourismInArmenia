@@ -3,6 +3,7 @@ package com.example.tourarmeniaweb.controller;
 import com.example.tourarmeniacommon.entity.*;
 import com.example.tourarmeniacommon.service.*;
 import com.example.tourarmeniaweb.security.CurrentUser;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -109,7 +110,7 @@ public class TourPackagesController {
     }
 
     @PostMapping("/comment/add")
-    public String addComment(@ModelAttribute Comment comment, @AuthenticationPrincipal CurrentUser currentUser) {
+    public String addComment(@ModelAttribute @Valid Comment comment, @AuthenticationPrincipal CurrentUser currentUser) {
         User user = currentUser.getUser();
         comment.setUser(user);
         comment.setDate(new Date());
