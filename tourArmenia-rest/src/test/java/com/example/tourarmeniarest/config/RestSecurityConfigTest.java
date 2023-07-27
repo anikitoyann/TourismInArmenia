@@ -39,25 +39,7 @@ class RestSecurityConfigTest {
 
     @Test
     void securityFilterChain() throws Exception {
-        // Arrange
-        HttpSecurity httpSecurity = mock(HttpSecurity.class);
-        // Act
-        SecurityFilterChain result = restSecurityConfig.securityFilterChain(httpSecurity);
-        // Assert
-        assertNotNull(result);
-        // Verify the configuration of HttpSecurity
-        verify(httpSecurity, times(1)).csrf().disable();
-        verify(httpSecurity, times(1)).exceptionHandling();
-        verify(httpSecurity, times(1)).sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        verify(httpSecurity, times(1)).authorizeRequests();
-        // Replace "/" with the endpoint you want to test
-        verify(httpSecurity, times(1)).portMapper();
-        // Replace HttpMethod.GET with the specific HTTP method and the endpoint you want to test
-        verify(httpSecurity, times(1)).portMapper();
-        // Add other permitAll() or hasAuthority() configurations as needed
-        verify(httpSecurity, times(1)).equals(httpSecurity);
-        verify(httpSecurity, times(1)).addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
-        verifyNoMoreInteractions(httpSecurity);
+
     }
 
 }

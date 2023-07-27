@@ -1,9 +1,6 @@
 package com.example.tourarmeniarest.endpoint;
-
 import com.example.tourarmeniacommon.dto.CreateItemRequestDto;
 import com.example.tourarmeniacommon.dto.ItemDto;
-import com.example.tourarmeniacommon.dto.RegionDto;
-import com.example.tourarmeniacommon.dto.RegionRequestDto;
 import com.example.tourarmeniacommon.entity.Item;
 import com.example.tourarmeniacommon.entity.Region;
 import com.example.tourarmeniacommon.mapper.ItemMapper;

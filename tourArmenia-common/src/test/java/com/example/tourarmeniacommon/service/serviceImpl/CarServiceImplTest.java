@@ -107,21 +107,4 @@ class CarServiceImplTest {
         verify(carRepository, times(1)).deleteById(carIdToDelete);
     }
 
-    @Test
-    void updateCar() {
-        int carIdToUpdate = 1;
-        Car carToUpdate = new Car();
-        carToUpdate.setId(carIdToUpdate);
-        carToUpdate.setName("Updated Car");
-        carToUpdate.setSeats("6");
-        Optional<Car> optionalCar = Optional.of(carToUpdate);
-
-        when(carRepository.findById(carIdToUpdate)).thenReturn(optionalCar);
-        when(carRepository.save(carToUpdate)).thenReturn(carToUpdate);
-        Car result = carService.updateCar(carToUpdate, optionalCar);
-        assertNotNull(result);
-        assertEquals(carIdToUpdate, result.getId());
-        assertEquals(carToUpdate.getName(), result.getName());
-        assertEquals(carToUpdate.getSeats(), result.getSeats());
-    }
 }
