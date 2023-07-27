@@ -1,9 +1,12 @@
 package com.example.tourarmeniacommon.entity;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 @Data
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "item")
 public class Item {
     @Id

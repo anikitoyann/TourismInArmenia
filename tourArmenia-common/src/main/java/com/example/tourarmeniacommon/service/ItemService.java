@@ -39,4 +39,3 @@ public interface ItemService {
 
     Page<Item> findAllByPageable(Pageable pageable);
 }
-
