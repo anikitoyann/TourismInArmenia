@@ -3,6 +3,7 @@ package com.example.tourarmeniaweb.controller;
 import com.example.tourarmeniacommon.entity.User;
 import com.example.tourarmeniacommon.entity.UserType;
 import com.example.tourarmeniacommon.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,7 +29,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute User user) {
+    public String register(@ModelAttribute @Valid User user) {
         Optional<User> userFromDB = userService.findByEmail(user.getEmail());
         if (userFromDB.isEmpty()) {
             String password = user.getPassword();
