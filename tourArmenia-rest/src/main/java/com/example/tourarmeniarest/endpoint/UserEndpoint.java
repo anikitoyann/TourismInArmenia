@@ -9,6 +9,7 @@ import com.example.tourarmeniacommon.entity.UserType;
 import com.example.tourarmeniacommon.mapper.UserMapper;
 import com.example.tourarmeniacommon.service.UserService;
 import com.example.tourarmeniarest.util.JwtTokenUtil;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -40,7 +41,7 @@ public class UserEndpoint {
 // The userType is set to UserType.USER to indicate that this is a regular user registration.
 // Returns a ResponseEntity containing the UserDto representation of the newly registered user if successful.
     @PostMapping("/register")
-    public ResponseEntity<UserDto> register(@RequestBody CreateUserRequestDto createUserRequestDto){
+    public ResponseEntity<UserDto> register(@RequestBody @Valid CreateUserRequestDto createUserRequestDto){
         Optional<User> byEmail = userService.findByEmail(createUserRequestDto.getEmail());
         if(byEmail.isPresent()){
             log.warn("Registration failed. User with email: {} already exists.", createUserRequestDto.getEmail());

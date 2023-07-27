@@ -7,7 +7,7 @@
 <body>
 <a href="/admin">Back</a><br>
 <form action="/admin/addTour" method="post" enctype="multipart/form-data">
-     id: <input type="text" id="id" name="id"/><br>
+
    Name: <input type="text" name="name" required><br>
    Car:  <select name="car.id" required>
         <option th:each="car : ${cars}"

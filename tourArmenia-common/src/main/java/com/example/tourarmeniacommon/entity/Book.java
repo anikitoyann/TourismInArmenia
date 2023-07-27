@@ -1,6 +1,7 @@
 package com.example.tourarmeniacommon.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -23,7 +24,7 @@ public class Book {
     private TourPackage tourPackage;
     @ManyToOne
     private Item item;
-
+    @NotNull
     @ManyToOne
     private User user;
 
