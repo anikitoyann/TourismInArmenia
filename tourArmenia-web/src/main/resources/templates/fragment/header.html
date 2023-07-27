@@ -72,10 +72,10 @@
 
           <ul class="menuzord-menu menuzord-right">
             <li class=" active ">
-              <a class="" href="javascript:void(0)">Home</a>
+              <a class="" href="javascript:void(0)" th:text="#{idex.HOME}"></a>
               <ul class="dropdown drop-up">
                 <li class=" active ">
-                  <a href="/static">Home Main</a>
+                  <a href="/" th:text="#{index.main}"></a>
                 </li>
               </ul>
             </li>
@@ -87,17 +87,17 @@
 
                   <div class="col4">
                     <ul class="list-unstyled">
-                      <li>Tour Packages List View</li>
+                      <li th:text="#{index.tourView}"></li>
                       <li class="">
                         <a href="/tour" th:text="#{index.tourList}"></a>
                       </li>
 
                       <li class="">
-                        <a href="packages-list-right-sidebar.html">Packages Sidebar Right</a>
+                        <a href="packages-list-right-sidebar.html" th:text="#{index.tourBooking}"></a>
                       </li>
 
                       <li class="">
-                        <a href="packages-list.html">Packages List</a>
+                        <a href="packages-list.html" th:text="#{index.booking}"></a>
                       </li>
                     </ul>
                   </div>
@@ -111,7 +111,7 @@
 
                   <div class="col3">
                     <ul class="list-unstyled">
-                      <li>Hotels List View</li>
+                      <li th:text="#{index.hotels}"></li>
                       <li class="">
                         <a href="/item" th:text="#{index.hotelsList}"></a>
                       </li>
@@ -126,11 +126,11 @@
                       <li class=" ||
                   ">
 
-                        <a href="javascript:void(0)">Cars</a>
+                        <a href="javascript:void(0)" th:text="#{index.cars}"></a>
 
                         <ul class="dropdown drop-sub-menu-left drop-up">
                           <li class="">
-                            <a href="/cars">Cars List View</a>
+                            <a href="/cars" th:text="#{index.carsList}"></a>
                           </li>
 
                         </ul>
@@ -142,18 +142,18 @@
                     <a href="javascript:void(0)" th:text="#{index.PAGES}"></a>
                     <ul class="dropdown drop-up">
                       <li class="">
-                        <a href="/aboutUs">About Us</a>
+                        <a href="/aboutUs"th:text="#{index.aboutAs}"></a>
                       </li>
 
                       <li class="">
-                        <a href="/contactUs">Contact Us</a>
+                        <a href="/contactUs" th:text="#{index.contactUs}"></a>
                       </li>
 
                       <li class=" ||
                      ||
                     ">
 
-                      <li><a href="/TermsPrivacy">Terms & Privacy! </a></a></li>
+                      <li><a href="/TermsPrivacy" th:text="#{index.terms}"> </a></a></li>
                     </ul>
                   </li>
 
@@ -172,7 +172,7 @@
                    ||
                   ">
 
-                      <a href="https://armenia.travel/about-armenia/history/">Armenian History</a><br>
+                      <a href="https://armenia.travel/about-armenia/history/" th:text="#{index.history}"></a><br>
 
                     </li>
 
@@ -183,18 +183,18 @@
                     <a href="javascript:void(0)" th:text="#{index.ADMIN}"></a>
                     <ul id="admin" class="dropdown drop-up">
                       <li class="">
-                        <a href="/admin">ADMIN</a>
+                        <a href="/admin" th:text="#{index.ADMIN}"></a>
                       </li>
 
 
                       <li class="">
-                        <a href="javascript:void(0)" data-toggle="modal" data-target="#signup">Signup</a>
+                        <a href="javascript:void(0)" data-toggle="modal" data-target="#signup" th:text="#{index.signUp}"></a>
                       </li>
                       <li class="">
-                        <a href="/customLogin" style="color: coral" th:if="${currentUser==null}">Login</a>
+                        <a href="/customLogin" style="color: coral" th:if="${currentUser==null}" th:text="#{index.login}"></a>
                       </li>
                       <li class="">
-                        <a href="/logout">Log Out</a>
+                        <a href="/logout" th:text="#{index.logOut}"></a>
                       </li>
                     </ul>
                   </li>
@@ -224,6 +224,7 @@
 
   </div>
 </div>
+
 <div th:fragment="footerFragment">
   <footer class="footer">
     <div class="footer-bg-color py-9">
