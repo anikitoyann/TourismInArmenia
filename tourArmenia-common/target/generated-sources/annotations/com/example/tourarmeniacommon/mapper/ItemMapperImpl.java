@@ -27,14 +27,14 @@ public class ItemMapperImpl extends ItemMapper {
             return null;
         }
 
-        Item item = new Item();
+        Item.ItemBuilder item = Item.builder();
 
-        item.setRegion( createItemRequestDtoToRegion( dto ) );
-        item.setName( dto.getName() );
-        item.setDescription( dto.getDescription() );
-        item.setType( dto.getType() );
+        item.region( createItemRequestDtoToRegion( dto ) );
+        item.name( dto.getName() );
+        item.description( dto.getDescription() );
+        item.type( dto.getType() );
 
-        return item;
+        return item.build();
     }
 
     @Override

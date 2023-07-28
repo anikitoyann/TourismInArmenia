@@ -28,6 +28,7 @@ import java.util.Optional;
 @RequestMapping("/booking")
 @RequiredArgsConstructor
 @Controller
+@Slf4j
 public class BookingController {
 
     private final TourPackagesRepository tourPackagesRepository;
@@ -38,6 +39,7 @@ public class BookingController {
 
     @GetMapping("/createCustomTour")
     public String showBookingForm(ModelMap modelMap) {
+        log.info("Showing the booking form");
         List<Car> cars = carRepository.findAll();
         List<Item> items = itemService.findAll();
         List<TourPackage> tours = tourPackagesRepository.findAll();
@@ -56,6 +58,7 @@ public class BookingController {
                                 @RequestParam("notes") String notes,
                                 @AuthenticationPrincipal CurrentUser currentUser
     ) {
+        log.info("Creating a custom tour booking");
         Item item = itemService.findById(itemId).get();
         Car car = carRepository.findById(carId).get();
         Book book = new Book();
@@ -72,6 +75,7 @@ public class BookingController {
 public String bookTour(@AuthenticationPrincipal CurrentUser currentUser,
                        @RequestParam("tourId") Integer tourId,
                        RedirectAttributes redirectAttributes) {
+    log.info("Booking a tour by tour ID");
     Optional<TourPackage> tour = tourPackagesRepository.findById(tourId);
     Book book = new Book();
     book.setTourPackage(tour.get());
@@ -87,6 +91,7 @@ public String bookTour(@AuthenticationPrincipal CurrentUser currentUser,
     @GetMapping("/booking")
     public String bookTour(@RequestParam("tourId") Integer tourId,
                            @AuthenticationPrincipal CurrentUser currentUser) {
+        log.info("Redirecting to the tour");
         return "redirect:/tour";
 
 }}

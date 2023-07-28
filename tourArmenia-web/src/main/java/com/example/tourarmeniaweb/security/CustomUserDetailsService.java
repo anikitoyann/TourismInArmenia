@@ -15,6 +15,10 @@ import java.util.Optional;
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
+
+
+    // This method is implemented from the UserDetailsService interface.
+    // It loads user details based on the provided username (email) during the authentication process.
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> byEmail = userRepository.findByEmail(username);

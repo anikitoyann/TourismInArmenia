@@ -23,9 +23,14 @@
         <module name="tourArmenia-common" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="healthcare_managment" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="TourismInArmenia" options="" />
+      <module name="healthcare_managment" options="-parameters" />
       <module name="tourArmenia-common" options="-parameters" />
       <module name="tourArmenia-rest" options="-parameters" />
       <module name="tourArmenia-web" options="-parameters" />
