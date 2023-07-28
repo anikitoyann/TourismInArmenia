@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-07-28T18:55:47+0400",
+    date = "2023-07-28T23:34:40+0400",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 19.0.2 (Amazon.com Inc.)"
 )
 @Component
@@ -93,11 +93,11 @@ public class TourMapperImpl extends TourMapper {
             return null;
         }
 
-        Item item = new Item();
+        Item.ItemBuilder item = Item.builder();
 
-        item.setId( createTourRequestDto.getItemId() );
+        item.id( createTourRequestDto.getItemId() );
 
-        return item;
+        return item.build();
     }
 
     protected Car createTourRequestDtoToCar(CreateTourRequestDto createTourRequestDto) {
@@ -105,11 +105,11 @@ public class TourMapperImpl extends TourMapper {
             return null;
         }
 
-        Car car = new Car();
+        Car.CarBuilder car = Car.builder();
 
-        car.setId( createTourRequestDto.getCarId() );
+        car.id( createTourRequestDto.getCarId() );
 
-        return car;
+        return car.build();
     }
 
     protected Region createTourRequestDtoToRegion(CreateTourRequestDto createTourRequestDto) {

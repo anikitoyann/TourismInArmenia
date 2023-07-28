@@ -1,14 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.example.tourarmeniacommon.service.serviceImpl.CarServiceImplTest
 -------------------------------------------------------------------------------
-Tests run: 7, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.797 s <<< FAILURE! - in com.example.tourarmeniacommon.service.serviceImpl.CarServiceImplTest
-updateCar  Time elapsed: 0.743 s  <<< ERROR!
-org.mockito.exceptions.misusing.UnnecessaryStubbingException: 
-
-Unnecessary stubbings detected.
-Clean & maintainable test code requires zero unnecessary code.
-Following stubbings are unnecessary (click to navigate to relevant line of code):
-  1. -> at com.example.tourarmeniacommon.service.serviceImpl.CarServiceImplTest.updateCar(CarServiceImplTest.java:119)
-  2. -> at com.example.tourarmeniacommon.service.serviceImpl.CarServiceImplTest.updateCar(CarServiceImplTest.java:120)
-Please remove unnecessary stubbings or use 'lenient' strictness. More info: javadoc for UnnecessaryStubbingException class.
-
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.94 s - in com.example.tourarmeniacommon.service.serviceImpl.CarServiceImplTest

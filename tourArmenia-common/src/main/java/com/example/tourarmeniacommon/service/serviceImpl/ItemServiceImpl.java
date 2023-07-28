@@ -2,6 +2,7 @@ package com.example.tourarmeniacommon.service.serviceImpl;
 import com.example.tourarmeniacommon.dto.ItemDto;
 import com.example.tourarmeniacommon.dto.ItemSearchDto;
 import com.example.tourarmeniacommon.entity.Item;
+import com.example.tourarmeniacommon.entity.QItem;
 import com.example.tourarmeniacommon.entity.Region;
 import com.example.tourarmeniacommon.entity.Type;
 import com.example.tourarmeniacommon.mapper.ItemMapper;

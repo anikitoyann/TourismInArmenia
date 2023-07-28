@@ -26,6 +26,7 @@ com\example\tourarmeniacommon\dto\CreateUserRequestDto.class
 com\example\tourarmeniacommon\service\ItemService.class
 com\example\tourarmeniacommon\service\CarService.class
 com\example\tourarmeniacommon\dto\CreateItemRequestDto.class
+com\example\tourarmeniacommon\entity\Item$ItemBuilder.class
 com\example\tourarmeniacommon\entity\Region.class
 com\example\tourarmeniacommon\mapper\RegionMapperImpl.class
 com\example\tourarmeniacommon\service\TourPackageService.class
@@ -55,6 +56,7 @@ com\example\tourarmeniacommon\entity\User.class
 com\example\tourarmeniacommon\entity\QRegion.class
 com\example\tourarmeniacommon\dto\RestErrorDto.class
 com\example\tourarmeniacommon\repository\TourPackagesRepository.class
+com\example\tourarmeniacommon\entity\Car$CarBuilder.class
 com\example\tourarmeniacommon\service\serviceImpl\CurrencyServiceImpl.class
 com\example\tourarmeniacommon\service\serviceImpl\UserServiceImpl.class
 com\example\tourarmeniacommon\repository\BookingRepository.class

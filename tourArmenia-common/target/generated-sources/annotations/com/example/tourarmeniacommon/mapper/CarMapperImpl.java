@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-07-28T18:55:47+0400",
+    date = "2023-07-28T23:34:40+0400",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 19.0.2 (Amazon.com Inc.)"
 )
 @Component
@@ -22,12 +22,12 @@ public class CarMapperImpl implements CarMapper {
             return null;
         }
 
-        Car car = new Car();
+        Car.CarBuilder car = Car.builder();
 
-        car.setName( createCarRequestDto.getName() );
-        car.setSeats( createCarRequestDto.getSeats() );
+        car.name( createCarRequestDto.getName() );
+        car.seats( createCarRequestDto.getSeats() );
 
-        return car;
+        return car.build();
     }
 
     @Override
