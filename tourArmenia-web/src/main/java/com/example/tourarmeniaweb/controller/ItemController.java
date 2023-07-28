@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/item")
@@ -31,6 +31,7 @@ public class ItemController {
     private final ItemService itemService;
     private final RegionService regionService;
 
+    // Handler for HTTP GET requests with optional query parameters "page" and "size"
     @GetMapping
     public String hotelReservationPage(
             @RequestParam("page") Optional<Integer> page,
@@ -49,6 +50,7 @@ public class ItemController {
             modelMap.addAttribute("pageNumbers", pageNumbers);
         }
         modelMap.addAttribute("items", result);
+        log.info("Handling hotelReservationPage request");
         return "item";
 
     }
@@ -60,11 +62,12 @@ public class ItemController {
         if (byId.isPresent()) {
             Item item = byId.get();
             modelMap.addAttribute("item", item);
+            log.info("Handling singleHotelPage request for item with ID: {}", id);
             return "singlehotel";
         } else {
+            log.warn("Requested item with ID: {} not found. Redirecting to /item", id);
             return "redirect:/item";
         }
-
     }
 
     @GetMapping("/search")
@@ -73,15 +76,19 @@ public class ItemController {
         String message;
         if (regionId != null) {
             Region region = regionService.findById(regionId).orElse(null);
+            log.info("Fetching hotels for regionId: {}", regionId);
             if (region != null) {
                 items = itemService.findByRegion(region);
+                log.info("Region found: {}", region.getName());
                 if (items.isEmpty()) {
                     message = "No hotels found in the selected region.";
                 } else {
+                    log.warn("Invalid regionId: {}", regionId);
                     message = "Hotels in the selected region:";
                 }
             } else {
                 items = itemService.findAll();
+                log.info("Hotels found in the selected region: {}", items.size());
                 message = "Invalid region selected. Showing all hotels instead.";
             }
         } else {

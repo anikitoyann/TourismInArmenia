@@ -11,6 +11,7 @@ import com.example.tourarmeniacommon.service.TourPackageService;
 import com.example.tourarmeniaweb.security.CurrentUser;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +26,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/tour")
@@ -99,6 +100,7 @@ public class TourPackagesController {
      public String singleTourPage(@PathVariable("id") int id,
                                   @AuthenticationPrincipal CurrentUser currentUser,
                                  ModelMap modelMap){
+        log.info("Received request for singleTourPage with id: {} for user: {}", id, currentUser.getUser());
         Optional<TourPackage> byId = tourPackagesRepository.findById(id);
         if (byId.isPresent()) {
             TourPackage tourPackage = byId.get();
@@ -110,6 +112,7 @@ public class TourPackagesController {
 
             return "singleTour";
         } else {
+            log.warn("Tour with id: {} not found. Redirecting to /tour.", id);
             return "redirect:/tour";
         }
 
@@ -120,6 +123,7 @@ public class TourPackagesController {
         comment.setUser(user);
         comment.setDate(new Date());
         commentRepository.save(comment);
+        log.info("Added comment with id: {} for user: {} on tour with id: {}", comment.getId(), currentUser.getUser(), comment.getTour().getId());
         return "redirect:/tour/" + comment.getTour().getId();
 }
 
