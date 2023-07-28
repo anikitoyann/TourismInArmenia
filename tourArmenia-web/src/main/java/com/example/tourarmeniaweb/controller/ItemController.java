@@ -1,7 +1,6 @@
 package com.example.tourarmeniaweb.controller;
 
 import com.example.tourarmeniacommon.entity.*;
-import com.example.tourarmeniacommon.service.HotelCommentService;
 import com.example.tourarmeniacommon.service.ItemService;
 import com.example.tourarmeniacommon.service.RegionService;
 import com.example.tourarmeniaweb.security.CurrentUser;
@@ -31,7 +30,6 @@ public class ItemController {
 
     private final ItemService itemService;
     private final RegionService regionService;
-    private final HotelCommentService hotelCommentService;
 
     @GetMapping
     public String hotelReservationPage(
@@ -64,9 +62,7 @@ public class ItemController {
         if (byId.isPresent()) {
             Item item = byId.get();
             User user = currentUser.getUser();
-            List<HotelComment> comments = hotelCommentService.findAllByItemId(id);
             modelMap.addAttribute("item", item);
-            modelMap.addAttribute("comments",comments);
             modelMap.addAttribute("user",user);
             return "singlehotel";
         } else {
