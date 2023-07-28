@@ -14,6 +14,7 @@ import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.PathBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 
@@ -54,7 +55,14 @@ public class ItemServiceImpl implements ItemService {
     // Retrieves an Item object from the item repository based on the provided item ID.
     @Override
     public Optional<Item> findById(int id) {
-        return itemRepository.findById(id);
+        log.debug("Searching for Item with id: {}", id);
+        Optional<Item> byId = itemRepository.findById(id);
+        if (byId.isEmpty()) {
+            log.error("Item with id {} does not exist.", id);
+            throw new EntityNotFoundException("Item with " + id + " id does not exists.");
+        }
+        log.debug("Found Item with id {}: {}", id, byId.get());
+        return Optional.of(byId.get());
     }
 
     // Retrieves a paginated list of Item objects from the item repository that match the specified Type.
