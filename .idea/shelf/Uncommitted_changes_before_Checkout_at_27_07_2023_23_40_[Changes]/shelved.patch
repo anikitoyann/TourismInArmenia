@@ -1,0 +1,35 @@
+Index: tourArmenia-common/src/main/java/com/example/tourarmeniacommon/service/ItemService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.tourarmeniacommon.service;\r\n\r\n\r\nimport com.example.tourarmeniacommon.dto.ItemDto;\r\nimport com.example.tourarmeniacommon.dto.ItemSearchDto;\r\nimport com.example.tourarmeniacommon.entity.Item;\r\nimport com.example.tourarmeniacommon.entity.Region;\r\nimport com.example.tourarmeniacommon.entity.Type;\r\nimport org.springframework.data.domain.Page;\r\nimport org.springframework.data.domain.Pageable;\r\nimport org.springframework.web.multipart.MultipartFile;\r\n\r\nimport java.io.IOException;\r\nimport java.util.List;\r\nimport java.util.Optional;\r\n\r\npublic interface ItemService {\r\n    public void addItem(MultipartFile multipartFile, Item item) throws IOException;\r\n\r\n    public Optional<Item> findById(int id);\r\n\r\n    Page<Item> findAllByType(Type type, Pageable pageable);\r\n\r\n    void deleteById(int id);\r\n\r\n    List<Item> findAll();\r\n\r\n    List<Item> findByRegion(Region region);\r\n\r\n    Page<Item> findAllByRegionAndType(Pageable pageable ,int id, Type type);\r\n\r\n    public Item save(Item item);\r\n\r\n    boolean existsById(int id);\r\n\r\n    List<ItemDto> search(int page, int size, ItemSearchDto itemSearchDto);\r\n\r\n    Item updateItem(Item item, Optional<Item> byId);\r\n\r\n    Page<Item> findAllByPageable(Pageable pageable);\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/tourArmenia-common/src/main/java/com/example/tourarmeniacommon/service/ItemService.java b/tourArmenia-common/src/main/java/com/example/tourarmeniacommon/service/ItemService.java
+--- a/tourArmenia-common/src/main/java/com/example/tourarmeniacommon/service/ItemService.java	(revision b0eedd75a97e9b739ce09f49f28652435427da29)
++++ b/tourArmenia-common/src/main/java/com/example/tourarmeniacommon/service/ItemService.java	(date 1690486524667)
+@@ -38,5 +38,4 @@
+     Item updateItem(Item item, Optional<Item> byId);
+ 
+     Page<Item> findAllByPageable(Pageable pageable);
+-}
+-
++}
+\ No newline at end of file
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n    <modelVersion>4.0.0</modelVersion>\r\n    <parent>\r\n        <groupId>org.springframework.boot</groupId>\r\n        <artifactId>spring-boot-starter-parent</artifactId>\r\n        <version>3.0.6</version>\r\n        <relativePath/> <!-- lookup parent from repository -->\r\n    </parent>\r\n    <groupId>com.example</groupId>\r\n    <artifactId>TourismInArmenia</artifactId>\r\n    <version>0.0.1-SNAPSHOT</version>\r\n    <name>TourismInArmenia</name>\r\n    <description>TourismInArmenia</description>\r\n    <properties>\r\n        <java.version>17</java.version>\r\n    </properties>\r\n\r\n    <packaging>pom</packaging>\r\n    <modules>\r\n        <module>tourArmenia-common</module>\r\n        <module>tourArmenia-web</module>\r\n        <module>tourArmenia-rest</module>\r\n    </modules>\r\n\r\n    <dependencies>\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-security</artifactId>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-web</artifactId>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-data-jpa</artifactId>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-devtools</artifactId>\r\n            <scope>runtime</scope>\r\n            <optional>true</optional>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>com.mysql</groupId>\r\n            <artifactId>mysql-connector-j</artifactId>\r\n            <scope>runtime</scope>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.projectlombok</groupId>\r\n            <artifactId>lombok</artifactId>\r\n            <optional>true</optional>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-test</artifactId>\r\n            <scope>test</scope>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.jbpm.contrib</groupId>\r\n            <artifactId>google-translate-workitem</artifactId>\r\n            <version>7.73.0.Final</version>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.jbpm.contrib</groupId>\r\n            <artifactId>google-translate-workitem</artifactId>\r\n            <version>7.73.0.Final</version>\r\n        </dependency>\r\n    </dependencies>\r\n\r\n    <build>\r\n        <plugins>\r\n            <plugin>\r\n                <groupId>org.springframework.boot</groupId>\r\n                <artifactId>spring-boot-maven-plugin</artifactId>\r\n                <configuration>\r\n                    <excludes>\r\n                        <exclude>\r\n                            <groupId>org.projectlombok</groupId>\r\n                            <artifactId>lombok</artifactId>\r\n                        </exclude>\r\n                    </excludes>\r\n                </configuration>\r\n            </plugin>\r\n        </plugins>\r\n    </build>\r\n</project>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pom.xml b/pom.xml
+--- a/pom.xml	(revision b0eedd75a97e9b739ce09f49f28652435427da29)
++++ b/pom.xml	(date 1690486353763)
+@@ -86,4 +86,4 @@
+             </plugin>
+         </plugins>
+     </build>
+-</project>
++</project>
+\ No newline at end of file
