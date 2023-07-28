@@ -3,6 +3,7 @@ package com.example.tourarmeniacommon.service.serviceImpl;
 import com.example.tourarmeniacommon.entity.TourPackage;
 import com.example.tourarmeniacommon.repository.TourPackagesRepository;
 import com.example.tourarmeniacommon.service.TourPackageService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,9 +47,17 @@ public class TourPackageServiceImpl implements TourPackageService {
         return tourPackagesRepository.save(tour);
     }
 
+    // Retrieves a TourPackage with the given ID from the repository.
     @Override
     public Optional<TourPackage> findById(int id) {
-        return tourPackagesRepository.findById(id);
+        log.debug("Searching for TourPackage with id: {}", id);
+        Optional<TourPackage> byId = tourPackagesRepository.findById(id);
+        if (byId.isEmpty()) {
+            log.error("TourPackage with id {} does not exist.", id);
+            throw new EntityNotFoundException("Tour with " + id + " id does not exists.");
+        }
+        log.debug("Found TourPackage with id {}: {}", id, byId.get());
+        return Optional.of(byId.get());
     }
 
     @Override
@@ -56,9 +65,17 @@ public class TourPackageServiceImpl implements TourPackageService {
         return tourPackagesRepository.findAll();
     }
 
+    //Checks if a TourPackage with the given ID exists in the repository.
     @Override
     public boolean existsById(int id) {
-        return tourPackagesRepository.existsById(id);
+        log.debug("Checking if TourPackage with id {} exists.", id);
+        boolean exists = tourPackagesRepository.existsById(id);
+        if (!exists) {
+            log.error("TourPackage with id {} does not exist.", id);
+            throw new EntityNotFoundException("TourPackage with id " + id + " does not exist.");
+        }
+        log.debug("TourPackage with id {} exists.", id);
+        return true;
     }
 
     @Override
