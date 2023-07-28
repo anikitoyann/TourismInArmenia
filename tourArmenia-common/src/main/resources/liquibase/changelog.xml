@@ -129,5 +129,28 @@ create table if not exists car
 <!--                </sql>-->
 <!--        </changeSet>-->
 
-      
+        <changeSet id="createTable" author="lstepanyan">
+                <createTable tableName="tour_comment">
+                        <column name="id" type="INT">
+                                <constraints primaryKey="true" nullable="false"/>
+                        </column>
+                        <column name="commentText" type="VARCHAR(255)"/>
+                        <column name="date" type="DATE"/>
+                        <column name="user_id" type="INT">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="tour_id" type="INT">
+                                <constraints nullable="false"/>
+                        </column>
+                </createTable>
+        </changeSet>
+
+        <changeSet id="add_comment_foreign_keys" author="lstepanyan">
+                <addForeignKeyConstraint baseTableName="tour_comment" baseColumnNames="user_id"
+                                         referencedTableName="user" referencedColumnNames="id"
+                                         constraintName="fk_tour_comment_user"/>
+                <addForeignKeyConstraint baseTableName="tour_comment" baseColumnNames="tour_id"
+                                         referencedTableName="tour_package" referencedColumnNames="id"
+                                         constraintName="fk_tour_comment_tour_package"/>
+        </changeSet>
 </databaseChangeLog>

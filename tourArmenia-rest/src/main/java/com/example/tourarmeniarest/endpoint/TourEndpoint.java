@@ -6,6 +6,7 @@ import com.example.tourarmeniacommon.entity.*;
 import com.example.tourarmeniacommon.mapper.TourMapper;
 import com.example.tourarmeniacommon.service.*;
 import com.example.tourarmeniacommon.util.RoundUtil;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,7 +35,7 @@ public class TourEndpoint {
 
     //Endpoint for creating a new tour in the system.
     @PostMapping("/createTour")
-    public ResponseEntity<TourDto> create(@RequestBody CreateTourRequestDto createTourRequestDto) {
+    public ResponseEntity<TourDto> create(@RequestBody @Valid CreateTourRequestDto createTourRequestDto) {
         Optional<Region> regionId = regionService.findById(createTourRequestDto.getRegionId());
         Optional<Item> itemId = itemService.findById(createTourRequestDto.getItemId());
         Optional<Car> carId = carService.findById(createTourRequestDto.getCarId());

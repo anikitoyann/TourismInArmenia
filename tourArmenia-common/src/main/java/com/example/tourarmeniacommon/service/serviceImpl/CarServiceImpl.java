@@ -3,6 +3,7 @@ package com.example.tourarmeniacommon.service.serviceImpl;
 import com.example.tourarmeniacommon.entity.Car;
 import com.example.tourarmeniacommon.repository.CarRepository;
 import com.example.tourarmeniacommon.service.CarService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,7 +46,11 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Optional<Car> findById(int carId) {
-       return carRepository.findById(carId);
+        Optional<Car> byId = carRepository.findById(carId);
+        if (byId.isEmpty()) {
+            throw new EntityNotFoundException("Car with " + carId + " id does not exists.");
+        }
+        return Optional.of(byId.get());
     }
 
     @Override

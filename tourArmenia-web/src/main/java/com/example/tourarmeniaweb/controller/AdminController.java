@@ -5,6 +5,7 @@ import com.example.tourarmeniacommon.service.CarService;
 import com.example.tourarmeniacommon.service.ItemService;
 import com.example.tourarmeniacommon.service.RegionService;
 import com.example.tourarmeniacommon.service.TourPackageService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -37,7 +38,7 @@ public class AdminController {
          }
 
          @PostMapping("/addRegion")
-         public String addRegionPage(@ModelAttribute Region region) {
+         public String addRegionPage(@ModelAttribute @Valid Region region) {
         regionService.save(region);
         return "redirect:/admin";
          }
@@ -51,7 +52,7 @@ public class AdminController {
     }
 
     @PostMapping("/addItem")
-    public String hotelsAdd(@ModelAttribute Item item, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+    public String hotelsAdd(@ModelAttribute @Valid Item item, @RequestParam("image") MultipartFile multipartFile) throws IOException {
         itemService.addItem(multipartFile, item);
         return "redirect:/admin";
     }
@@ -68,7 +69,7 @@ public class AdminController {
     }
 
     @PostMapping("/addTour")
-    public String tourAdd(@ModelAttribute TourPackage tourPackages, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+    public String tourAdd(@ModelAttribute @Valid TourPackage tourPackages, @RequestParam("image") MultipartFile multipartFile) throws IOException {
         tourPackageService.save(multipartFile, tourPackages);
         return "redirect:/admin";
     }
@@ -80,7 +81,7 @@ public class AdminController {
     }
 
     @PostMapping("/addCar")
-    public String carAdd(@ModelAttribute Car car, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+    public String carAdd(@ModelAttribute @Valid Car car, @RequestParam("image") MultipartFile multipartFile) throws IOException {
         carService.save(multipartFile, car);
         return "redirect:/admin";
     }
@@ -110,7 +111,7 @@ public class AdminController {
 
     @PostMapping("/updateCar")
     public String updateCar(@RequestParam("id") int id,
-                            @ModelAttribute Car car,
+                            @ModelAttribute @Valid Car car,
                             @RequestParam("image") MultipartFile multipartFile) throws IOException {
         Optional<Car> byId = carService.findById(id);
         if (!byId.isEmpty()) {
@@ -133,7 +134,7 @@ public class AdminController {
 
     @PostMapping("/updateTour")
     public String updateTour(@RequestParam("id") int id,
-                            @ModelAttribute TourPackage tourPackage,
+                            @ModelAttribute @Valid TourPackage tourPackage,
                             @RequestParam("image") MultipartFile multipartFile) throws IOException {
         Optional<TourPackage> byId = tourPackageService.findById(id);
         if (!byId.isEmpty()) {
@@ -153,7 +154,7 @@ public class AdminController {
 
     @PostMapping("/updateItem")
     public String updateItem(@RequestParam("id") int id,
-                             @ModelAttribute Item item,
+                             @ModelAttribute @Valid Item item,
                              @RequestParam("image") MultipartFile multipartFile) throws IOException {
         Optional<Item> byId = itemService.findById(id);
         if (!byId.isEmpty()) {
