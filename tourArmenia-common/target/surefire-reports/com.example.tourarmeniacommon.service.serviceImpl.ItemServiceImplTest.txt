@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: com.example.tourarmeniacommon.service.serviceImpl.ItemServiceImplTest
+-------------------------------------------------------------------------------
+Tests run: 12, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.288 s <<< FAILURE! - in com.example.tourarmeniacommon.service.serviceImpl.ItemServiceImplTest
+search  Time elapsed: 0.08 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "jakarta.persistence.EntityManager.getDelegate()" because "em" is null
+	at com.example.tourarmeniacommon.service.serviceImpl.ItemServiceImplTest.search(ItemServiceImplTest.java:134)
+

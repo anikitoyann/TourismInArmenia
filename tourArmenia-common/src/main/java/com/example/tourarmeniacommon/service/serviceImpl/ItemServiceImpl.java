@@ -1,9 +1,7 @@
 package com.example.tourarmeniacommon.service.serviceImpl;
-
 import com.example.tourarmeniacommon.dto.ItemDto;
 import com.example.tourarmeniacommon.dto.ItemSearchDto;
 import com.example.tourarmeniacommon.entity.Item;
-import com.example.tourarmeniacommon.entity.QItem;
 import com.example.tourarmeniacommon.entity.Region;
 import com.example.tourarmeniacommon.entity.Type;
 import com.example.tourarmeniacommon.mapper.ItemMapper;
@@ -85,7 +83,7 @@ public class ItemServiceImpl implements ItemService {
     //Checks if an Item with the specified ID exists in the item repository.
     @Override
     public boolean existsById(int id) {
-      return itemRepository.existsById(id);
+        return itemRepository.existsById(id);
     }
 
     //Performs a search for items based on the provided search criteria and pagination parameters.
