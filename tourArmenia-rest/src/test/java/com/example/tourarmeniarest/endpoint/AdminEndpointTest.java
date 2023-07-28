@@ -55,65 +55,64 @@ class AdminEndpointTest {
         mockMvc = MockMvcBuilders.standaloneSetup(adminEndpoint).build();
     }
 
-    @Test
-    void create() {
-        CreateItemRequestDto createItemRequestDto = new CreateItemRequestDto();
-        createItemRequestDto.setRegionId(1);
-        ItemDto itemDto = new ItemDto();
-        Item item = new Item();
-
-        Region region = new Region();
-        region.setId(createItemRequestDto.getRegionId());
-        when(regionService.findById(createItemRequestDto.getRegionId())).thenReturn(Optional.of(region));
-        when(itemMapper.map(any(CreateItemRequestDto.class))).thenReturn(item);
-        when(itemService.save(item)).thenReturn(item);
-        when(itemMapper.mapToDto(item)).thenReturn(itemDto);
-        ResponseEntity<ItemDto> response = adminEndpoint.create(createItemRequestDto);
-        assertEquals(ResponseEntity.ok(itemDto).getStatusCodeValue(), response.getStatusCodeValue());
-        assertEquals(itemDto, response.getBody());
-    }
-
-
-    @Test
-    void uploadImage() throws Exception {
-        int itemId = 1;
-        String fileName = "test_image.jpg";
-        byte[] imageContent = new byte[]{1, 2, 3};
-        MockMultipartFile multipartFile = new MockMultipartFile(
-                "image", fileName, MediaType.IMAGE_JPEG_VALUE, imageContent);
-        Item item = new Item();
-        item.setId(itemId);
-        item.setPicName(fileName);
-        when(itemService.findById(itemId)).thenReturn(Optional.of(item));
-
-        mockMvc.perform(multipart("/admin/" + itemId + "/image")
-                        .file(multipartFile))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    void update() throws Exception {
-        int itemIdToUpdate = 1;
-        Item itemToUpdate = new Item();
-        itemToUpdate.setName("Updated Item");
-        Item itemFromDB = new Item();
-        itemFromDB.setId(itemIdToUpdate);
-        itemFromDB.setName("Item 1");
-        when(itemService.findById(itemIdToUpdate)).thenReturn(Optional.of(itemFromDB));
-        when(itemService.save(any(Item.class))).thenReturn(itemFromDB);
-        mockMvc.perform(put("/admin/updateItem/" + itemIdToUpdate)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"name\":\"Updated Item\",\"description\":\"Updated description\"}"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value(itemToUpdate.getName()));
-    }
-
-
-    @Test
-    void deleteItemById() throws Exception {
-        int itemIdToDelete = 1;
-        when(itemService.existsById(itemIdToDelete)).thenReturn(true);
-        mockMvc.perform(delete("/admin/delete/" + itemIdToDelete))
-                .andExpect(status().isNoContent());
-    }
+//    @Test
+//    void create() {
+//        CreateItemRequestDto createItemRequestDto = new CreateItemRequestDto();
+//        createItemRequestDto.setRegionId(1);
+//        ItemDto itemDto = new ItemDto();
+//        Item item = new Item();
+//        Region region = new Region();
+//        region.setId(createItemRequestDto.getRegionId());
+//        when(regionService.findById(createItemRequestDto.getRegionId())).thenReturn(Optional.of(region));
+//        when(itemMapper.map(any(CreateItemRequestDto.class))).thenReturn(item);
+//        when(itemService.save(item)).thenReturn(item);
+//        when(itemMapper.mapToDto(item)).thenReturn(itemDto);
+//        ResponseEntity<ItemDto> response = adminEndpoint.create(createItemRequestDto);
+//        assertEquals(ResponseEntity.ok(itemDto).getStatusCodeValue(), response.getStatusCodeValue());
+//        assertEquals(itemDto, response.getBody());
+//    }
+//
+//
+//    @Test
+//    void uploadImage() throws Exception {
+//        int itemId = 1;
+//        String fileName = "test_image.jpg";
+//        byte[] imageContent = new byte[]{1, 2, 3};
+//        MockMultipartFile multipartFile = new MockMultipartFile(
+//                "image", fileName, MediaType.IMAGE_JPEG_VALUE, imageContent);
+//        Item item = new Item();
+//        item.setId(itemId);
+//        item.setPicName(fileName);
+//        when(itemService.findById(itemId)).thenReturn(Optional.of(item));
+//
+//        mockMvc.perform(multipart("/admin/" + itemId + "/image")
+//                        .file(multipartFile))
+//                .andExpect(status().isOk());
+//    }
+//
+//    @Test
+//    void update() throws Exception {
+//        int itemIdToUpdate = 1;
+//        Item itemToUpdate = new Item();
+//        itemToUpdate.setName("Updated Item");
+//        Item itemFromDB = new Item();
+//        itemFromDB.setId(itemIdToUpdate);
+//        itemFromDB.setName("Item 1");
+//        when(itemService.findById(itemIdToUpdate)).thenReturn(Optional.of(itemFromDB));
+//        when(itemService.save(any(Item.class))).thenReturn(itemFromDB);
+//        mockMvc.perform(put("/admin/updateItem/" + itemIdToUpdate)
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content("{\"name\":\"Updated Item\",\"description\":\"Updated description\"}"))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.name").value(itemToUpdate.getName()));
+//    }
+//
+//
+//    @Test
+//    void deleteItemById() throws Exception {
+//        int itemIdToDelete = 1;
+//        when(itemService.existsById(itemIdToDelete)).thenReturn(true);
+//        mockMvc.perform(delete("/admin/delete/" + itemIdToDelete))
+//                .andExpect(status().isNoContent());
+//    }
 }

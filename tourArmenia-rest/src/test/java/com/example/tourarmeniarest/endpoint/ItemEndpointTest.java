@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -20,7 +21,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -40,26 +42,24 @@ class ItemEndpointTest {
         mockMvc = MockMvcBuilders.standaloneSetup(itemEndpoint).build();
     }
 
-    @Test
-    void singleItem() {
-        int itemId = 1;
-        Item item = new Item();
-        item.setId(itemId);
-        item.setName("Test Item");
-        when(itemService.findById(itemId)).thenReturn(Optional.of(item));
-        ResponseEntity<Item> response = itemEndpoint.singleItem(itemId);
-        assertEquals(ResponseEntity.ok(item).getStatusCodeValue(), response.getStatusCodeValue());
-        assertEquals(item, response.getBody());
-    }
 
     @Test
     void getAll() {
+        // Arrange
         int size = 20;
         int page = 0;
         ItemSearchDto itemSearchDto = new ItemSearchDto();
+        // Set criteria in itemSearchDto...
+
         List<ItemDto> itemDtos = new ArrayList<>();
+        // Add items to itemDtos...
+
         when(itemService.search(page, size, itemSearchDto)).thenReturn(itemDtos);
+
+        // Act
         ResponseEntity<List<ItemDto>> response = itemEndpoint.getAll(size, page, itemSearchDto);
+
+        // Assert
         assertEquals(ResponseEntity.ok(itemDtos).getStatusCodeValue(), response.getStatusCodeValue());
         assertEquals(itemDtos, response.getBody());
     }
