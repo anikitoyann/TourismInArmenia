@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Tour</title>
+</head>
+<body>
+<a href="/admin">Back</a><br>
+<form action="/admin/addTour" method="post" enctype="multipart/form-data">
+
+   Name: <input type="text" name="name" required><br>
+   Car:  <select name="car.id" required>
+        <option th:each="car : ${cars}"
+                th:text="${car.name}" th:value="${car.id}"></option>
+    </select><br>
+    Item: <select name="item.id" required>
+        <option th:each="item : ${items}"
+                th:text="${item.name}" th:value="${item.id}"></option>
+    </select><br>
+   Price: <input type="number" name="price" required><br>
+   Group size: <input type="number" name="groupSize" required><br>
+  Duration  <textarea name="duration" required></textarea><br>
+  Image:  <input type="file" name="image" required><br>
+  Start date:  <input type="datetime-local" name="startDate" required><br>
+  Region:  <select name="region.id" required>
+        <option th:each="region : ${regions}"
+                th:text="${region.name}" th:value="${region.id}"></option>
+    </select><br>
+    <input type="submit" value="Create"><br>
+</form>
+</body>
+</html>

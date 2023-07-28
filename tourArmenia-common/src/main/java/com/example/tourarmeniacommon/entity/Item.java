@@ -1,11 +1,15 @@
 package com.example.tourarmeniacommon.entity;
 import jakarta.persistence.*;
+import lombok.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "item")
 public class Item {
     @Id

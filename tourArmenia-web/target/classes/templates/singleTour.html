@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tour</title>
+</head>
+<body>
+<a href="/tour">Back</a> <br>
+<h2 th:text="${tour.name}"></h2>
+<img th:if="${tour.picName != null}" th:src="@{/getImage(imageName=${tour.getPicName()})}" width="400"/><br>
+Region: <span th:text="${tour.region.name}"></span><br>
+Car: <span th:text="${tour.car.name}"></span><br>
+Venues: <span th:text="${tour.item.name}"></span><br>
+Start date: <span th:text="${tour.startDate}"></span><br>
+Duration: <span th:text="${tour.duration}"></span><br>
+Group size: <span th:text="${tour.groupSize}"></span><br>
+Price: <span th:text="${tour.price}"></span><br>
+<span>Just a friendly reminder that the price mentioned is per person, encompassing children aged 7 and above.</span>
+<br>
+<form th:action="@{/booking}" method="post">
+    <input type="hidden" name="tourId" th:value="${tour.id}" />
+    <button type="submit">Book this tour </button> </form>
+<!--<a id="bookNowBtn" th:href="@{/booking?tourId=${tourId}}">Book this tour</a>-->
+
+<br>
+<h2>Add Comment</h2>
+<br>
+<form method="POST" action="/tour/comment/add">
+    <input type="hidden" name="tour.id" th:value="${tour.id}">
+    <div>
+        Comment:
+        <textarea name="commentText"></textarea>
+    </div>
+    <div>
+        <input type="submit">Add Comment</input>
+    </div>
+</form>
+<ul>
+    <li th:each="comment : ${comments}">
+        <span>Username: <span th:text="${comment.user.name}"></span></span><br>
+        <span>Comment: <span th:text="${comment.commentText}"></span></span>
+    </li>
+</ul>
+
+</body>
+</html>

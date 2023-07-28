@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: com.example.tourarmeniacommon.service.serviceImpl.ItemServiceImplTest
+-------------------------------------------------------------------------------
+Tests run: 11, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.188 s <<< FAILURE! - in com.example.tourarmeniacommon.service.serviceImpl.ItemServiceImplTest
+findById_WhenItemDoesNotExist  Time elapsed: 0.021 s  <<< ERROR!
+jakarta.persistence.EntityNotFoundException: Item with 1 id does not exists.
+	at com.example.tourarmeniacommon.service.serviceImpl.ItemServiceImplTest.findById_WhenItemDoesNotExist(ItemServiceImplTest.java:64)
+

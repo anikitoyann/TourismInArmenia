@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>single Regions</title>
+
+</head>
+<body>
+<a href="/regions">Back</a><br>
+<a th:href="${'/regions/'+region.id+'?type=HOTEL'}"><button>SEE hotels</button></a><br>
+<a th:href="${'/regions/'+region.id+'?type=SIGHTSEEING'}"><button>SEE Sightseeing</button></a>
+
+<h1 th:text="${region.name}"></h1>
+<div th:each="item : ${items.content}">
+    <span th:text="${item.type}"></span>
+    <h1><a th:href="@{'/item/' + ${item.id}}"> <span th:text="${item.name}"></span></a></h1>
+    <img th:if="${item.getPicName() != null}" th:src="@{/getImage(imageName=${item.getPicName()})}" width="400"/>
+    <a th:href="@{/admin/updateItem(id=${item.id})}" class="btn btn-xs btn-outline-secondary text-uppercase">Delete</a>
+
+</div>
+
+<div class="pagination">
+    <div th:if="${items.totalPages > 1}">
+        <ul class="pagination">
+            <li th:if="${items.number > 0}">
+                <a th:href="@{/regions/{id}(id=${region.id}, page=0, size=${items.size})}">First</a>
+            </li>
+            <li th:if="${items.number > 0}">
+                <a th:href="@{/regions/{id}(id=${region.id}, page=${items.number - 1}, size=${items.size})}">Previous</a>
+            </li>
+            <li th:if="${items.number + 1 < items.totalPages}">
+                <a th:href="@{/regions/{id}(id=${region.id}, page=${items.number + 1}, size=${items.size})}">Next</a>
+            </li>
+            <li th:if="${items.number + 1 < items.totalPages}">
+                <a th:href="@{/regions/{id}(id=${region.id}, page=${items.totalPages - 1}, size=${items.size})}">Last</a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
