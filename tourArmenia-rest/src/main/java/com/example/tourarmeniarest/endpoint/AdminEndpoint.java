@@ -10,6 +10,8 @@ import com.example.tourarmeniacommon.mapper.ItemMapper;
 import com.example.tourarmeniacommon.mapper.RegionMapper;
 import com.example.tourarmeniacommon.service.ItemService;
 import com.example.tourarmeniacommon.service.RegionService;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,7 +38,7 @@ public class AdminEndpoint {
 
     //Endpoint for creating a new item in the system.
     @PostMapping("/createItem")
-    public ResponseEntity<ItemDto> create(@RequestBody CreateItemRequestDto createItemRequestDto) {
+    public ResponseEntity<ItemDto> create(@RequestBody @Valid CreateItemRequestDto createItemRequestDto) {
         Optional<Region> byId = regionService.findById(createItemRequestDto.getRegionId());
         if (byId.isEmpty()) {
             log.warn("Region with ID {} not found. Failed to create item.", createItemRequestDto.getRegionId());
@@ -52,7 +54,7 @@ public class AdminEndpoint {
     //Endpoint for creating a new region in the system.
     @PostMapping("/createRegion")
 
-    public ResponseEntity<RegionDto> create(@RequestBody RegionRequestDto regionRequestDto) {
+    public ResponseEntity<RegionDto> create(@RequestBody @Valid RegionRequestDto regionRequestDto) {
         Region region = regionService.save(regionMapper.map(regionRequestDto));
         log.info("New region created with ID {}.", region.getId());
         return ResponseEntity.ok(regionMapper.mapToDto(region));
@@ -92,7 +94,8 @@ public class AdminEndpoint {
         Optional<Item> byId = itemService.findById(id);
         if (byId.isEmpty()) {
             log.warn("Item with id: {} not found. Update request failed.", id);
-            return ResponseEntity.notFound().build();
+            //throw new EntityNotFoundException("Item with "+ id + "does not exists");
+             return ResponseEntity.notFound().build();
         }
         Item itemFromDB = byId.get();
         if (item.getName() != null && !item.getName().isEmpty()) {

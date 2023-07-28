@@ -6,6 +6,7 @@ import com.example.tourarmeniacommon.entity.Type;
 import com.example.tourarmeniacommon.mapper.RegionMapper;
 import com.example.tourarmeniacommon.service.ItemService;
 import com.example.tourarmeniacommon.service.RegionService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
@@ -43,7 +44,7 @@ public class RegionEndpoint {
     @GetMapping("/{id}")
     public ResponseEntity<?> singleRegionPage(@PageableDefault Pageable pageable,
                                               @PathVariable("id") int id,
-                                              @RequestBody(required = false) String type) {
+                                              @RequestBody(required = false) String type) throws EntityNotFoundException {
         Optional<Region> byId = regionService.findById(id);
         if (byId.isPresent()) {
             Region region = byId.get();
@@ -53,6 +54,7 @@ public class RegionEndpoint {
             return ResponseEntity.ok(itemService.findAllByRegionAndType(pageable,region.getId(), Type.valueOf(type)));
         }
         log.error("Invalid region ID provided: {}", id);
-        return ResponseEntity.badRequest().build();
+        //return ResponseEntity.badRequest().build();
+        throw new EntityNotFoundException("Region with " + id + "does not exists");
     }
 }
