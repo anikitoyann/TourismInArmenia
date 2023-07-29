@@ -1,0 +1,14 @@
+Index: src/main/java/com/example/tourisminarmenia/TourismInArmeniaApplication.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.tourisminarmenia;\r\n\r\nimport org.springframework.boot.SpringApplication;\r\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\r\nimport org.springframework.context.annotation.Bean;\r\nimport org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;\r\n\r\n@SpringBootApplication\r\npublic class TourismInArmeniaApplication {\r\n\r\n    public static void main(String[] args) {\r\n        SpringApplication.run(TourismInArmeniaApplication.class, args);\r\n    }\r\n\r\n    @Bean\r\n    public BCryptPasswordEncoder passwordEncoder(){\r\n        return  new BCryptPasswordEncoder();\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/src/main/java/com/example/tourisminarmenia/TourismInArmeniaApplication.java b/src/main/java/com/example/tourisminarmenia/TourismInArmeniaApplication.java
+--- a/src/main/java/com/example/tourisminarmenia/TourismInArmeniaApplication.java	
++++ b/src/main/java/com/example/tourisminarmenia/TourismInArmeniaApplication.java	
+@@ -1,5 +1,4 @@
+ package com.example.tourisminarmenia;
+-
+ import org.springframework.boot.SpringApplication;
+ import org.springframework.boot.autoconfigure.SpringBootApplication;
+ import org.springframework.context.annotation.Bean;
