@@ -1,0 +1,19 @@
+Index: .idea/encodings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"Encoding\" defaultCharsetForPropertiesFiles=\"UTF-8\">\r\n    <file url=\"file://$PROJECT_DIR$/tourArmenia-common/src/main/java\" charset=\"UTF-8\" />\r\n    <file url=\"file://$PROJECT_DIR$/tourArmenia-common/src/main/resources\" charset=\"UTF-8\" />\r\n    <file url=\"file://$PROJECT_DIR$/tourArmenia-rest/src/main/java\" charset=\"UTF-8\" />\r\n    <file url=\"file://$PROJECT_DIR$/tourArmenia-rest/src/main/resources\" charset=\"UTF-8\" />\r\n    <file url=\"file://$PROJECT_DIR$/tourArmenia-web/src/main/java\" charset=\"UTF-8\" />\r\n    <file url=\"file://$PROJECT_DIR$/tourArmenia-web/src/main/resources\" charset=\"UTF-8\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/encodings.xml b/.idea/encodings.xml
+--- a/.idea/encodings.xml	(revision eff155906cd241ecb079a4072277a654a7063774)
++++ b/.idea/encodings.xml	(date 1690498289070)
+@@ -1,6 +1,8 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
++    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
++    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+     <file url="file://$PROJECT_DIR$/tourArmenia-common/src/main/java" charset="UTF-8" />
+     <file url="file://$PROJECT_DIR$/tourArmenia-common/src/main/resources" charset="UTF-8" />
+     <file url="file://$PROJECT_DIR$/tourArmenia-rest/src/main/java" charset="UTF-8" />

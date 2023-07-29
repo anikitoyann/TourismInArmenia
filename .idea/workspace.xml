@@ -1,0 +1,589 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c8c574d0-2d3c-4972-896a-4801fecab75b" name="Changes" comment="unit &amp; integration tests &amp; logging comments">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c22a040e-444b-491b-af54-c0969a6f9168.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c22a040e-444b-491b-af54-c0969a6f9168.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QBook.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QBook.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QCar.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QCar.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QComment.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QComment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QCurrency.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QCurrency.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QItem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QRegion.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QRegion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QTourPackage.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QTourPackage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-web/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-web/target/classes/templates/ContactUs.html" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/target/classes/templates/ContactUs.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-web/target/classes/templates/cars.html" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/target/classes/templates/cars.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-web/target/classes/templates/singleRegion.html" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/target/classes/templates/singleRegion.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-web/target/classes/templates/singleTour.html" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/target/classes/templates/singleTour.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Enum" />
+        <option value="Class" />
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="ItemPage" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Testing" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/pom.xml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tourArmenia-common/src/main/java/com/example/tourarmeniacommon/service/serviceImpl/ItemServiceImpl.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tourArmenia-web/pom.xml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Temp/tmp_1_CurrencyService.class" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Temp/tmp_2_CurrencyService.class" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Temp/tmp__CurrencyService.class" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="2Q9V3ngpegS9WGy2Ok0aoKZ47nk" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers&quot;: &quot;true&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/TourismInArmenia/tourArmenia-common/src/main/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;642cfbea4d52b9b80a303454dfee69e1&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.example.tourisminarmenia.entity" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\TourismInArmenia\tourArmenia-common\src\main\resources" />
+      <recent name="C:\Users\User\IdeaProjects\TourismInArmenia\src\main\resources" />
+      <recent name="C:\Users\User\IdeaProjects\TourismInArmenia\src\main\resources\templates" />
+      <recent name="C:\Users\User\IdeaProjects\TourismInArmenia\src\main\resources\static\assets\img" />
+      <recent name="C:\Users\User\IdeaProjects\TourismInArmenia\src\main\resources\static\assets\img\home\gallery" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\IdeaProjects\TourismInArmenia\src\main\resources\static\images" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.example.tourarmeniacommon.service.serviceImpl" />
+      <recent name="com.example.tourarmeniarest.endpoint" />
+      <recent name="com.example.tourarmeniarest.config" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.tourisminarmenia.controller" />
+      <recent name="com.example.tourisminarmenia.service" />
+      <recent name="com.example.tourisminarmenia.respository" />
+      <recent name="com.example.tourisminarmenia.entity" />
+      <recent name="com.example.tourisminarmenia.config" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.TourArmeniaWebApplication">
+    <configuration name="CarEndpointTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tourArmenia-rest" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.tourarmeniarest.endpoint.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.tourarmeniarest.endpoint" />
+      <option name="MAIN_CLASS_NAME" value="com.example.tourarmeniarest.endpoint.CarEndpointTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ItemServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tourArmenia-common" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.tourarmeniacommon.service.serviceImpl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.tourarmeniacommon.service.serviceImpl" />
+      <option name="MAIN_CLASS_NAME" value="com.example.tourarmeniacommon.service.serviceImpl.ItemServiceImplTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ItemServiceImplTest.save" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tourArmenia-common" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.tourarmeniacommon.service.serviceImpl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.tourarmeniacommon.service.serviceImpl" />
+      <option name="MAIN_CLASS_NAME" value="com.example.tourarmeniacommon.service.serviceImpl.ItemServiceImplTest" />
+      <option name="METHOD_NAME" value="save" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TourEndpointTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tourArmenia-rest" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.tourarmeniarest.endpoint.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.tourarmeniarest.endpoint" />
+      <option name="MAIN_CLASS_NAME" value="com.example.tourarmeniarest.endpoint.TourEndpointTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TourEndpointTest.getAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tourArmenia-rest" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.tourarmeniarest.endpoint.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.tourarmeniarest.endpoint" />
+      <option name="MAIN_CLASS_NAME" value="com.example.tourarmeniarest.endpoint.TourEndpointTest" />
+      <option name="METHOD_NAME" value="getAll" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TourArmeniaRestApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="tourArmenia-rest" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.tourarmeniarest.TourArmeniaRestApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TourArmeniaWebApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="tourArmenia-web" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.tourarmeniaweb.TourArmeniaWebApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TourismInArmeniaApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="TourismInArmenia" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.tourisminarmenia.TourismInArmeniaApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TourismInArmeniaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="TourismInArmenia" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.tourisminarmenia.TourismInArmeniaApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.TourEndpointTest.getAll" />
+        <item itemvalue="JUnit.TourEndpointTest" />
+        <item itemvalue="JUnit.ItemServiceImplTest.save" />
+        <item itemvalue="JUnit.ItemServiceImplTest" />
+        <item itemvalue="JUnit.CarEndpointTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c8c574d0-2d3c-4972-896a-4801fecab75b" name="Changes" comment="" />
+      <created>1684765590274</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1684765590274</updated>
+      <workItem from="1684765591226" duration="3049000" />
+      <workItem from="1684998756217" duration="939000" />
+      <workItem from="1684999766284" duration="608000" />
+      <workItem from="1685000999391" duration="25000" />
+      <workItem from="1685004247506" duration="2510000" />
+      <workItem from="1685006882152" duration="6326000" />
+      <workItem from="1685014157362" duration="2119000" />
+      <workItem from="1685016306574" duration="1461000" />
+      <workItem from="1685081350162" duration="447000" />
+      <workItem from="1685186196300" duration="212000" />
+      <workItem from="1685187666968" duration="112000" />
+      <workItem from="1685196235354" duration="4632000" />
+      <workItem from="1685200953121" duration="6000" />
+      <workItem from="1685251346834" duration="17000" />
+      <workItem from="1685251764398" duration="240000" />
+      <workItem from="1685266969833" duration="17267000" />
+      <workItem from="1685287476395" duration="346000" />
+      <workItem from="1685289405887" duration="7000" />
+      <workItem from="1685290141061" duration="677000" />
+      <workItem from="1685290847331" duration="423000" />
+      <workItem from="1685344339308" duration="8000" />
+      <workItem from="1685376177068" duration="622000" />
+      <workItem from="1685376831843" duration="849000" />
+      <workItem from="1685727689385" duration="266000" />
+      <workItem from="1685980874420" duration="3180000" />
+      <workItem from="1686214131043" duration="778000" />
+      <workItem from="1686225872453" duration="1786000" />
+      <workItem from="1686229485085" duration="6807000" />
+      <workItem from="1686237318416" duration="2700000" />
+      <workItem from="1686292622651" duration="939000" />
+      <workItem from="1686293584030" duration="376000" />
+      <workItem from="1686294023137" duration="467000" />
+      <workItem from="1686294868325" duration="52000" />
+      <workItem from="1686388578976" duration="8037000" />
+      <workItem from="1686397837011" duration="277000" />
+      <workItem from="1686398220383" duration="362000" />
+      <workItem from="1686398597032" duration="132000" />
+      <workItem from="1686398743627" duration="42000" />
+      <workItem from="1686399224073" duration="524000" />
+      <workItem from="1686399839901" duration="88000" />
+      <workItem from="1686404977212" duration="1622000" />
+      <workItem from="1686406615768" duration="1079000" />
+      <workItem from="1686407730221" duration="799000" />
+      <workItem from="1686408570636" duration="75000" />
+      <workItem from="1686410079886" duration="6961000" />
+      <workItem from="1686418660780" duration="277000" />
+      <workItem from="1686461440879" duration="365000" />
+      <workItem from="1686462230378" duration="2023000" />
+      <workItem from="1686494183508" duration="1862000" />
+      <workItem from="1686543886961" duration="3949000" />
+      <workItem from="1686548209247" duration="451000" />
+      <workItem from="1686548771562" duration="423000" />
+      <workItem from="1686552502787" duration="1122000" />
+      <workItem from="1686553646738" duration="350000" />
+      <workItem from="1686568799603" duration="35000" />
+      <workItem from="1686586024427" duration="1814000" />
+      <workItem from="1686627930146" duration="69000" />
+      <workItem from="1686628373020" duration="59000" />
+      <workItem from="1686635136586" duration="45000" />
+      <workItem from="1686805973705" duration="6805000" />
+      <workItem from="1686908804699" duration="3352000" />
+      <workItem from="1686925507334" duration="212000" />
+      <workItem from="1686927033712" duration="2147000" />
+      <workItem from="1686981645935" duration="543000" />
+      <workItem from="1686986810801" duration="677000" />
+      <workItem from="1687014330007" duration="14915000" />
+      <workItem from="1687031274353" duration="1287000" />
+      <workItem from="1687032634923" duration="719000" />
+      <workItem from="1687073307611" duration="21000" />
+      <workItem from="1687095877940" duration="601000" />
+      <workItem from="1687104125328" duration="197000" />
+      <workItem from="1687104357416" duration="1347000" />
+      <workItem from="1687105836487" duration="4167000" />
+      <workItem from="1687111023342" duration="11496000" />
+      <workItem from="1687122554549" duration="5000" />
+      <workItem from="1687156835928" duration="1231000" />
+      <workItem from="1687158680544" duration="915000" />
+      <workItem from="1687160090552" duration="781000" />
+      <workItem from="1687160889693" duration="119000" />
+      <workItem from="1687161028795" duration="73000" />
+      <workItem from="1687185700872" duration="123000" />
+      <workItem from="1687282422883" duration="6352000" />
+      <workItem from="1687288801796" duration="44000" />
+      <workItem from="1687406378725" duration="52000" />
+      <workItem from="1687437050517" duration="194000" />
+      <workItem from="1687437299743" duration="18000" />
+      <workItem from="1687453538422" duration="15000" />
+      <workItem from="1687761781857" duration="627000" />
+      <workItem from="1687866890317" duration="28000" />
+      <workItem from="1687867076707" duration="121000" />
+      <workItem from="1688459233939" duration="107000" />
+      <workItem from="1688459438629" duration="24000" />
+      <workItem from="1688463284245" duration="65000" />
+      <workItem from="1688564048607" duration="75000" />
+      <workItem from="1688564135561" duration="152000" />
+      <workItem from="1688564298380" duration="58000" />
+      <workItem from="1688564369386" duration="334000" />
+      <workItem from="1688564746894" duration="35000" />
+      <workItem from="1688564855639" duration="372000" />
+      <workItem from="1688565233554" duration="4820000" />
+      <workItem from="1688570169218" duration="111000" />
+      <workItem from="1688630968832" duration="578000" />
+      <workItem from="1688632223500" duration="49000" />
+      <workItem from="1688804646390" duration="47000" />
+      <workItem from="1688825520807" duration="22000" />
+      <workItem from="1688979079378" duration="63000" />
+      <workItem from="1689071770127" duration="2836000" />
+      <workItem from="1689166770380" duration="17000" />
+      <workItem from="1689166801337" duration="40000" />
+      <workItem from="1689320207310" duration="417000" />
+      <workItem from="1689320640336" duration="346000" />
+      <workItem from="1689321609226" duration="859000" />
+      <workItem from="1689331219998" duration="548000" />
+      <workItem from="1689333785403" duration="37000" />
+      <workItem from="1689336107601" duration="18000" />
+      <workItem from="1689850341636" duration="651000" />
+      <workItem from="1689933010906" duration="50000" />
+      <workItem from="1689933418651" duration="38000" />
+      <workItem from="1689942208729" duration="644000" />
+      <workItem from="1689943071008" duration="72000" />
+      <workItem from="1690032875302" duration="34000" />
+      <workItem from="1690361693882" duration="4455000" />
+      <workItem from="1690366168471" duration="11125000" />
+      <workItem from="1690381643171" duration="195000" />
+      <workItem from="1690382172854" duration="913000" />
+      <workItem from="1690394056200" duration="253000" />
+      <workItem from="1690394331058" duration="498000" />
+      <workItem from="1690476776895" duration="822000" />
+      <workItem from="1690485488527" duration="1095000" />
+      <workItem from="1690486785021" duration="12046000" />
+      <workItem from="1690498860043" duration="173000" />
+      <workItem from="1690499683946" duration="615000" />
+      <workItem from="1690544710621" duration="6709000" />
+      <workItem from="1690551455504" duration="946000" />
+      <workItem from="1690552434594" duration="3430000" />
+      <workItem from="1690571064467" duration="2140000" />
+      <workItem from="1690573353471" duration="1529000" />
+      <workItem from="1690574918475" duration="144000" />
+      <workItem from="1690575106324" duration="48000" />
+      <workItem from="1690575997424" duration="20000" />
+      <workItem from="1690576221714" duration="43000" />
+      <workItem from="1690576428135" duration="119000" />
+      <workItem from="1690577033917" duration="311000" />
+    </task>
+    <task id="LOCAL-00001" summary="Tour">
+      <created>1686398768807</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1686398768807</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Tour">
+      <created>1686407325040</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1686407325040</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Tour">
+      <created>1686418611543</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1686418611543</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Tour">
+      <created>1686553668088</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1686553668088</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Update HotelController--&gt; ItemController">
+      <created>1686553793986</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1686553793986</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Update HotelController--&gt; ItemController">
+      <created>1686912249784</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1686912249784</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Tamplates for Page and New AboutUs Page">
+      <created>1687032739350</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1687032739350</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Tamplates for Page and New AboutUs Page">
+      <created>1687122426835</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1687122426835</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Tamplates for Hotels Page">
+      <created>1687122467854</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1687122467854</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Tamplates for Hotels Page">
+      <created>1687288825812</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1687288825812</updated>
+    </task>
+    <task id="LOCAL-00011" summary="RestTourEndPoint">
+      <created>1688569929481</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1688569929481</updated>
+    </task>
+    <task id="LOCAL-00012" summary="RestTourEndPoint">
+      <created>1690362228113</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1690362228113</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Logging Mvc, Comment Mvc">
+      <created>1690394533260</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1690394533260</updated>
+    </task>
+    <task id="LOCAL-00014" summary="unit &amp; integration tests">
+      <created>1690498334778</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1690498334778</updated>
+    </task>
+    <task id="LOCAL-00015" summary="unit &amp; integration tests">
+      <created>1690548668095</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1690548668095</updated>
+    </task>
+    <task id="LOCAL-00016" summary="unit &amp; integration tests &amp; logging comments">
+      <created>1690551203874</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1690551203874</updated>
+    </task>
+    <task id="LOCAL-00017" summary="unit &amp; integration tests &amp; logging comments">
+      <created>1690556221546</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1690556221546</updated>
+    </task>
+    <task id="LOCAL-00018" summary="unit &amp; integration tests &amp; logging comments">
+      <created>1690573046521</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1690573046521</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Tour" />
+    <MESSAGE value="Update HotelController--&gt; ItemController" />
+    <MESSAGE value="Tamplates for Page and New AboutUs Page" />
+    <MESSAGE value="Tamplates for Hotels Page" />
+    <MESSAGE value="RestTourEndPoint" />
+    <MESSAGE value="Logging Mvc, Comment Mvc" />
+    <MESSAGE value="unit &amp; integration tests" />
+    <MESSAGE value="unit &amp; integration tests &amp; logging comments" />
+    <option name="LAST_COMMIT_MESSAGE" value="unit &amp; integration tests &amp; logging comments" />
+  </component>
+</project>

@@ -1,0 +1,929 @@
+Index: tourArmenia-common/src/main/java/com/example/tourarmeniacommon/service/ItemService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.tourarmeniacommon.service;\r\n\r\n\r\nimport com.example.tourarmeniacommon.dto.ItemDto;\r\nimport com.example.tourarmeniacommon.dto.ItemSearchDto;\r\nimport com.example.tourarmeniacommon.entity.Item;\r\nimport com.example.tourarmeniacommon.entity.Region;\r\nimport com.example.tourarmeniacommon.entity.Type;\r\nimport org.springframework.data.domain.Page;\r\nimport org.springframework.data.domain.Pageable;\r\nimport org.springframework.web.multipart.MultipartFile;\r\n\r\nimport java.io.IOException;\r\nimport java.util.List;\r\nimport java.util.Optional;\r\n\r\npublic interface ItemService {\r\n    public void addItem(MultipartFile multipartFile, Item item) throws IOException;\r\n\r\n    public Optional<Item> findById(int id);\r\n\r\n    Page<Item> findAllByType(Type type, Pageable pageable);\r\n\r\n    void deleteById(int id);\r\n\r\n    List<Item> findAll();\r\n\r\n    List<Item> findByRegion(Region region);\r\n\r\n    Page<Item> findAllByRegionAndType(Pageable pageable ,int id, Type type);\r\n\r\n    public Item save(Item item);\r\n\r\n    boolean existsById(int id);\r\n\r\n    List<ItemDto> search(int page, int size, ItemSearchDto itemSearchDto);\r\n\r\n    Item updateItem(Item item, Optional<Item> byId);\r\n\r\n    Page<Item> findAllByPageable(Pageable pageable);\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/tourArmenia-common/src/main/java/com/example/tourarmeniacommon/service/ItemService.java b/tourArmenia-common/src/main/java/com/example/tourarmeniacommon/service/ItemService.java
+--- a/tourArmenia-common/src/main/java/com/example/tourarmeniacommon/service/ItemService.java	(revision ef328d499dd7ca6b8f21f676a415642cd594428c)
++++ b/tourArmenia-common/src/main/java/com/example/tourarmeniacommon/service/ItemService.java	(date 1690497601358)
+@@ -38,5 +38,4 @@
+     Item updateItem(Item item, Optional<Item> byId);
+ 
+     Page<Item> findAllByPageable(Pageable pageable);
+-}
+-
++}
+\ No newline at end of file
+Index: tourArmenia-common/src/test/java/com/example/tourarmeniacommon/service/serviceImpl/ItemServiceImplTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/tourArmenia-common/src/test/java/com/example/tourarmeniacommon/service/serviceImpl/ItemServiceImplTest.java b/tourArmenia-common/src/test/java/com/example/tourarmeniacommon/service/serviceImpl/ItemServiceImplTest.java
+new file mode 100644
+--- /dev/null	(date 1690497601397)
++++ b/tourArmenia-common/src/test/java/com/example/tourarmeniacommon/service/serviceImpl/ItemServiceImplTest.java	(date 1690497601397)
+@@ -0,0 +1,167 @@
++package com.example.tourarmeniacommon.service.serviceImpl;
++import com.example.tourarmeniacommon.dto.ItemDto;
++import com.example.tourarmeniacommon.dto.ItemSearchDto;
++import com.example.tourarmeniacommon.entity.Item;
++import com.example.tourarmeniacommon.entity.Type;
++import com.example.tourarmeniacommon.mapper.ItemMapper;
++import com.example.tourarmeniacommon.repository.CurrencyRepository;
++import com.example.tourarmeniacommon.repository.ItemRepository;
++import com.example.tourarmeniacommon.service.ItemService;
++import org.junit.jupiter.api.BeforeEach;
++import org.junit.jupiter.api.Test;
++import org.junit.jupiter.api.extension.ExtendWith;
++import org.mockito.Mockito;
++import org.mockito.junit.jupiter.MockitoExtension;
++import org.springframework.boot.test.mock.mockito.MockBean;
++import org.springframework.data.domain.Page;
++import org.springframework.data.domain.PageImpl;
++import org.springframework.data.domain.PageRequest;
++import org.springframework.data.domain.Pageable;
++import org.springframework.web.multipart.MultipartFile;
++
++import java.io.IOException;
++import java.util.ArrayList;
++import java.util.List;
++import java.util.Optional;
++
++import static org.junit.jupiter.api.Assertions.*;
++import static org.mockito.Mockito.*;
++
++//@SpringBootTest
++@ExtendWith(MockitoExtension.class)
++class ItemServiceImplTest {
++    private ItemService itemService;
++
++    ItemRepository itemRepository = Mockito.mock(ItemRepository.class);
++
++    @MockBean
++    ItemMapper itemMapper;
++
++    @MockBean
++    CurrencyRepository currencyRepository;
++
++    @BeforeEach
++    public void beforeAll() {
++        itemService = new ItemServiceImpl(itemRepository, itemMapper);
++    }
++
++    @Test
++    void addItem_WithoutFile() throws IOException {
++        MultipartFile multipartFile = mock(MultipartFile.class);
++        Item item = new Item();
++        item.setName("Test Item");
++        item.setDescription("Test description");
++        when(multipartFile.isEmpty()).thenReturn(true);
++        itemService.addItem(multipartFile, item);
++        assertNull(item.getPicName());
++        verify(itemRepository, times(1)).save(item);
++    }
++
++    @Test
++    void findById_WhenItemDoesNotExist() {
++        int itemId = 1;
++        when(itemRepository.findById(itemId)).thenReturn(Optional.empty());
++        Optional<Item> result = itemService.findById(itemId);
++        assertFalse(result.isPresent());
++    }
++    @Test
++    void findById_WhenItemExists() {
++        int itemId = 1;
++        Item item = new Item();
++        item.setId(itemId);
++        when(itemRepository.findById(itemId)).thenReturn(Optional.of(item));
++        Optional<Item> result = itemService.findById(itemId);
++        assertTrue(result.isPresent());
++        assertEquals(itemId, result.get().getId());
++    }
++
++    @Test
++    void findAllByType() {
++        Type type=Type.HOTEL;
++        List<Item> items = new ArrayList<>();
++        Pageable pageable = Pageable.unpaged();
++        when(itemRepository.findAllByType(type, pageable)).thenReturn(new PageImpl<>(items));
++        Page<Item> result = itemService.findAllByType(type, pageable);
++        assertEquals(items.size(), result.getContent().size());
++    }
++
++
++    @Test
++    void findAllByRegionAndType() {
++        Pageable pageable = Pageable.unpaged();
++        int regionId = 1;
++       Type type=Type.HOTEL;
++        List<Item> items = new ArrayList<>();
++        // Add some items to the list
++        when(itemRepository.findAllByRegion_IdAndType(pageable, regionId, type)).thenReturn(new PageImpl<>(items));
++        Page<Item> result = itemService.findAllByRegionAndType(pageable, regionId, type);
++        assertEquals(items.size(), result.getContent().size());
++    }
++
++
++    @Test
++    void save() {
++        Item item = Item.builder()
++                .description("asdf")
++                .name("asfdsad")
++                .build();
++        itemService.save(item);
++        verify(itemRepository, times(1)).save(item);
++    }
++    @Test
++    void existsById_WhenItemExists() {
++        int itemId = 1;
++        when(itemRepository.existsById(itemId)).thenReturn(true);
++        boolean exists = itemService.existsById(itemId);
++        assertTrue(exists);
++    }
++
++    @Test
++    void existsById_WhenItemDoesNotExist() {
++        int itemId = 1;
++        when(itemRepository.existsById(itemId)).thenReturn(false);
++        boolean exists = itemService.existsById(itemId);
++        assertFalse(exists);
++    }
++
++    @Test
++    void search() {
++        int page = 0;
++        int size = 10;
++        ItemSearchDto itemSearchDto = new ItemSearchDto();
++        // Set properties of the itemSearchDto as needed
++        List<Item> items = new ArrayList<>();
++        when(itemService.search(page, size, itemSearchDto)).thenReturn(new ArrayList<>());
++        when(itemMapper.mapListToDtos(items)).thenReturn(new ArrayList<>());
++        List<ItemDto> result = itemService.search(page, size, itemSearchDto);
++        assertNotNull(result);
++        assertEquals(0, result.size());
++    }
++
++    @Test
++    void findAllByPageable() {
++        // Arrange
++        Pageable pageable = PageRequest.of(0, 10);
++        List<Item> items = new ArrayList<>();
++        when(itemRepository.findAll(pageable)).thenReturn(new PageImpl<>(items));
++        Page<Item> result = itemService.findAllByPageable(pageable);
++        assertNotNull(result);
++        assertEquals(items.size(), result.getContent().size());
++    }
++
++    @Test
++    void deleteById() {
++        int itemId = 1;
++        itemService.deleteById(itemId);
++        verify(itemRepository, times(1)).deleteById(itemId);
++    }
++
++    @Test
++    void findAll() {
++        List<Item> items = new ArrayList<>();
++        when(itemRepository.findAll()).thenReturn(items);
++        List<Item> result = itemService.findAll();
++        assertNotNull(result);
++        assertEquals(items.size(), result.size());
++    }
++}
+\ No newline at end of file
+Index: tourArmenia-rest/src/test/java/com/example/tourarmeniarest/endpoint/AdminEndpointTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/tourArmenia-rest/src/test/java/com/example/tourarmeniarest/endpoint/AdminEndpointTest.java b/tourArmenia-rest/src/test/java/com/example/tourarmeniarest/endpoint/AdminEndpointTest.java
+new file mode 100644
+--- /dev/null	(date 1690497601383)
++++ b/tourArmenia-rest/src/test/java/com/example/tourarmeniarest/endpoint/AdminEndpointTest.java	(date 1690497601383)
+@@ -0,0 +1,122 @@
++package com.example.tourarmeniarest.endpoint;
++
++import com.example.tourarmeniacommon.dto.CreateItemRequestDto;
++import com.example.tourarmeniacommon.dto.ItemDto;
++import com.example.tourarmeniacommon.dto.RegionDto;
++import com.example.tourarmeniacommon.dto.RegionRequestDto;
++import com.example.tourarmeniacommon.entity.Item;
++import com.example.tourarmeniacommon.entity.Region;
++import com.example.tourarmeniacommon.mapper.ItemMapper;
++import com.example.tourarmeniacommon.mapper.RegionMapper;
++import com.example.tourarmeniacommon.service.ItemService;
++import com.example.tourarmeniacommon.service.RegionService;
++import org.junit.jupiter.api.BeforeEach;
++import org.junit.jupiter.api.Test;
++import org.mockito.InjectMocks;
++import org.mockito.Mock;
++import org.mockito.MockitoAnnotations;
++import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
++import org.springframework.boot.test.context.SpringBootTest;
++import org.springframework.http.MediaType;
++import org.springframework.http.ResponseEntity;
++import org.springframework.mock.web.MockMultipartFile;
++import org.springframework.test.web.servlet.MockMvc;
++import org.springframework.test.web.servlet.setup.MockMvcBuilders;
++
++import java.util.Optional;
++
++import static org.junit.jupiter.api.Assertions.assertEquals;
++import static org.mockito.ArgumentMatchers.any;
++import static org.mockito.Mockito.*;
++import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
++import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
++
++@SpringBootTest
++@AutoConfigureMockMvc
++class AdminEndpointTest {
++
++    private MockMvc mockMvc;
++
++    @Mock
++    private ItemService itemService;
++
++    @Mock
++    private RegionService regionService;
++
++    @Mock
++    private ItemMapper itemMapper;
++
++    @Mock
++    private RegionMapper regionMapper;
++
++    @InjectMocks
++    private AdminEndpoint adminEndpoint;
++
++    @BeforeEach
++    void setUp() {
++        MockitoAnnotations.openMocks(this);
++        mockMvc = MockMvcBuilders.standaloneSetup(adminEndpoint).build();
++    }
++
++    @Test
++    void create() {
++        CreateItemRequestDto createItemRequestDto = new CreateItemRequestDto();
++        createItemRequestDto.setRegionId(1);
++        ItemDto itemDto = new ItemDto();
++        Item item = new Item();
++
++        Region region = new Region();
++        region.setId(createItemRequestDto.getRegionId());
++        when(regionService.findById(createItemRequestDto.getRegionId())).thenReturn(Optional.of(region));
++        when(itemMapper.map(any(CreateItemRequestDto.class))).thenReturn(item);
++        when(itemService.save(item)).thenReturn(item);
++        when(itemMapper.mapToDto(item)).thenReturn(itemDto);
++        ResponseEntity<ItemDto> response = adminEndpoint.create(createItemRequestDto);
++        assertEquals(ResponseEntity.ok(itemDto).getStatusCodeValue(), response.getStatusCodeValue());
++        assertEquals(itemDto, response.getBody());
++    }
++
++
++    @Test
++    void uploadImage() throws Exception {
++        int itemId = 1;
++        String fileName = "test_image.jpg";
++        byte[] imageContent = new byte[]{1, 2, 3};
++        MockMultipartFile multipartFile = new MockMultipartFile(
++                "image", fileName, MediaType.IMAGE_JPEG_VALUE, imageContent);
++        Item item = new Item();
++        item.setId(itemId);
++        item.setPicName(fileName);
++        when(itemService.findById(itemId)).thenReturn(Optional.of(item));
++
++        mockMvc.perform(multipart("/admin/" + itemId + "/image")
++                        .file(multipartFile))
++                .andExpect(status().isOk());
++    }
++
++    @Test
++    void update() throws Exception {
++        int itemIdToUpdate = 1;
++        Item itemToUpdate = new Item();
++        itemToUpdate.setName("Updated Item");
++        Item itemFromDB = new Item();
++        itemFromDB.setId(itemIdToUpdate);
++        itemFromDB.setName("Item 1");
++        when(itemService.findById(itemIdToUpdate)).thenReturn(Optional.of(itemFromDB));
++        when(itemService.save(any(Item.class))).thenReturn(itemFromDB);
++        mockMvc.perform(put("/admin/updateItem/" + itemIdToUpdate)
++                        .contentType(MediaType.APPLICATION_JSON)
++                        .content("{\"name\":\"Updated Item\",\"description\":\"Updated description\"}"))
++                .andExpect(status().isOk())
++                .andExpect(jsonPath("$.name").value(itemToUpdate.getName()));
++    }
++
++
++    @Test
++    void deleteItemById() throws Exception {
++        int itemIdToDelete = 1;
++        when(itemService.existsById(itemIdToDelete)).thenReturn(true);
++        mockMvc.perform(delete("/admin/delete/" + itemIdToDelete))
++                .andExpect(status().isNoContent());
++    }
++}
+Index: tourArmenia-rest/src/main/java/com/example/tourarmeniarest/endpoint/CarEndpoint.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.tourarmeniarest.endpoint;\r\n\r\nimport com.example.tourarmeniacommon.dto.CarDto;\r\nimport com.example.tourarmeniacommon.dto.CreateCarRequestDto;\r\nimport com.example.tourarmeniacommon.entity.Car;\r\nimport com.example.tourarmeniacommon.entity.Region;\r\nimport com.example.tourarmeniacommon.mapper.CarMapper;\r\nimport com.example.tourarmeniacommon.service.CarService;\r\nimport jakarta.validation.Valid;\r\nimport lombok.RequiredArgsConstructor;\r\nimport lombok.extern.slf4j.Slf4j;\r\nimport org.springframework.beans.factory.annotation.Value;\r\nimport org.springframework.http.ResponseEntity;\r\nimport org.springframework.stereotype.Controller;\r\nimport org.springframework.web.bind.annotation.*;\r\nimport org.springframework.web.multipart.MultipartFile;\r\n\r\nimport java.io.File;\r\nimport java.util.List;\r\nimport java.util.Optional;\r\n\r\n@RequiredArgsConstructor\r\n@RestController\r\n@RequestMapping(\"/cars\")\r\n@Slf4j\r\npublic class CarEndpoint {\r\n\r\n    private final CarService carService;\r\n    private final CarMapper carMapper;\r\n    @Value(\"${upload.image.path}\")\r\n    private String uploadPath;\r\n\r\n    //Endpoint for creating a new car in the system.\r\n    @PostMapping(\"/createCar\")\r\n    public ResponseEntity<CarDto> create(@RequestBody @Valid CreateCarRequestDto createCarRequestDto) {\r\n        Car car = carService.create(carMapper.map(createCarRequestDto));\r\n        log.info(\"New car created with ID {}.\", car.getId());\r\n        return ResponseEntity.ok(carMapper.mapToDto(car));\r\n    }\r\n\r\n    // Endpoint for uploading an image for a specific car.\r\n    @PostMapping(\"/{id}/image\")\r\n    public ResponseEntity<CarDto> uploadImage(@PathVariable(\"id\") int carId,\r\n                                               @RequestParam(\"image\") MultipartFile multipartFile) {\r\n        Optional<Car> carOptional = carService.findById(carId);\r\n        if (!multipartFile.isEmpty() && carOptional.isPresent()) {\r\n            String originalFilename = multipartFile.getOriginalFilename();\r\n            String picName = System.currentTimeMillis() + \"_\" + originalFilename;\r\n            File file = new File(uploadPath + picName);\r\n            Car car = carOptional.get();\r\n            car.setPicName(picName);\r\n            carService.create(car);\r\n            CarDto carDto = carMapper.mapToDto(car);\r\n            log.info(\"Image uploaded successfully for car with id: {}\", carId);\r\n            return ResponseEntity.ok(carDto);\r\n        }\r\n        log.error(\"Failed to save the uploaded image for car with id: {}\", carId);\r\n        return ResponseEntity.badRequest().build();\r\n    }\r\n\r\n   // Endpoint for retrieving a list of all cars in the system.\r\n    @GetMapping\r\n    public ResponseEntity<List<CarDto>> getAllCars() {\r\n        List<Car> all = carService.findAll();\r\n        if (all.size() == 0) {\r\n            log.warn(\"No cars found. Returning 404 - Not Found.\");\r\n            return ResponseEntity.notFound().build();\r\n        }\r\n        List<CarDto> carDto = carMapper.mapListToDtos(all);\r\n        log.info(\"Returning the list of all cars with {} cars.\", all.size());\r\n        return ResponseEntity.ok(carDto);\r\n    }\r\n\r\n    //Endpoint for deleting a car by its ID from the system.\r\n    @DeleteMapping(\"/delete/{id}\")\r\n    public ResponseEntity<?> deleteById(@PathVariable(\"id\") int id) {\r\n        if (carService.existsById(id)) {\r\n            carService.deleteById(id);\r\n            log.info(\"Car with id: {} deleted successfully.\", id);\r\n            return ResponseEntity.noContent().build();\r\n        }\r\n        log.warn(\"Car with id: {} not found. Delete request failed.\", id);\r\n        return ResponseEntity.notFound().build();\r\n    }\r\n\r\n    //Endpoint for updating an existing car in the system.\r\n    @PutMapping(\"/update/{id}\")\r\n    public ResponseEntity<Car> update(@PathVariable(\"id\") int id, @RequestBody Car car) {\r\n        Optional<Car> byId = carService.findById(id);\r\n        if (byId.isEmpty()) {\r\n            log.warn(\"Car with id: {} not found. Update request failed.\", id);\r\n            return ResponseEntity.notFound().build();\r\n        }\r\n        Car carDb = byId.get();\r\n        if (car.getName() != null && !car.getName().isEmpty()) {\r\n            carDb.setName(car.getName());\r\n        }\r\n        if (car.getSeats() != null && !car.getSeats().isEmpty()) {\r\n            carDb.setSeats(car.getSeats());\r\n        }\r\n        carDb.setPicName(car.getPicName());\r\n        log.info(\"Car with id: {} updated successfully.\", id);\r\n        return ResponseEntity.ok(carService.create(carDb));\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/tourArmenia-rest/src/main/java/com/example/tourarmeniarest/endpoint/CarEndpoint.java b/tourArmenia-rest/src/main/java/com/example/tourarmeniarest/endpoint/CarEndpoint.java
+--- a/tourArmenia-rest/src/main/java/com/example/tourarmeniarest/endpoint/CarEndpoint.java	(revision ef328d499dd7ca6b8f21f676a415642cd594428c)
++++ b/tourArmenia-rest/src/main/java/com/example/tourarmeniarest/endpoint/CarEndpoint.java	(date 1690497601373)
+@@ -3,7 +3,6 @@
+ import com.example.tourarmeniacommon.dto.CarDto;
+ import com.example.tourarmeniacommon.dto.CreateCarRequestDto;
+ import com.example.tourarmeniacommon.entity.Car;
+-import com.example.tourarmeniacommon.entity.Region;
+ import com.example.tourarmeniacommon.mapper.CarMapper;
+ import com.example.tourarmeniacommon.service.CarService;
+ import jakarta.validation.Valid;
+@@ -11,7 +10,6 @@
+ import lombok.extern.slf4j.Slf4j;
+ import org.springframework.beans.factory.annotation.Value;
+ import org.springframework.http.ResponseEntity;
+-import org.springframework.stereotype.Controller;
+ import org.springframework.web.bind.annotation.*;
+ import org.springframework.web.multipart.MultipartFile;
+ 
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n    <modelVersion>4.0.0</modelVersion>\r\n    <parent>\r\n        <groupId>org.springframework.boot</groupId>\r\n        <artifactId>spring-boot-starter-parent</artifactId>\r\n        <version>3.0.6</version>\r\n        <relativePath/> <!-- lookup parent from repository -->\r\n    </parent>\r\n    <groupId>com.example</groupId>\r\n    <artifactId>TourismInArmenia</artifactId>\r\n    <version>0.0.1-SNAPSHOT</version>\r\n    <name>TourismInArmenia</name>\r\n    <description>TourismInArmenia</description>\r\n    <properties>\r\n        <java.version>17</java.version>\r\n    </properties>\r\n\r\n    <packaging>pom</packaging>\r\n    <modules>\r\n        <module>tourArmenia-common</module>\r\n        <module>tourArmenia-web</module>\r\n        <module>tourArmenia-rest</module>\r\n    </modules>\r\n\r\n    <dependencies>\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-security</artifactId>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-web</artifactId>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-data-jpa</artifactId>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-devtools</artifactId>\r\n            <scope>runtime</scope>\r\n            <optional>true</optional>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>com.mysql</groupId>\r\n            <artifactId>mysql-connector-j</artifactId>\r\n            <scope>runtime</scope>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.projectlombok</groupId>\r\n            <artifactId>lombok</artifactId>\r\n            <optional>true</optional>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-test</artifactId>\r\n            <scope>test</scope>\r\n        </dependency>\r\n    </dependencies>\r\n\r\n    <build>\r\n        <plugins>\r\n            <plugin>\r\n                <groupId>org.springframework.boot</groupId>\r\n                <artifactId>spring-boot-maven-plugin</artifactId>\r\n                <configuration>\r\n                    <excludes>\r\n                        <exclude>\r\n                            <groupId>org.projectlombok</groupId>\r\n                            <artifactId>lombok</artifactId>\r\n                        </exclude>\r\n                    </excludes>\r\n                </configuration>\r\n            </plugin>\r\n        </plugins>\r\n    </build>\r\n</project>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pom.xml b/pom.xml
+--- a/pom.xml	(revision ef328d499dd7ca6b8f21f676a415642cd594428c)
++++ b/pom.xml	(date 1690497601388)
+@@ -76,4 +76,4 @@
+             </plugin>
+         </plugins>
+     </build>
+-</project>
++</project>
+\ No newline at end of file
+Index: tourArmenia-common/src/test/java/com/example/tourarmeniacommon/service/serviceImpl/CarServiceImplTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/tourArmenia-common/src/test/java/com/example/tourarmeniacommon/service/serviceImpl/CarServiceImplTest.java b/tourArmenia-common/src/test/java/com/example/tourarmeniacommon/service/serviceImpl/CarServiceImplTest.java
+new file mode 100644
+--- /dev/null	(date 1690497601426)
++++ b/tourArmenia-common/src/test/java/com/example/tourarmeniacommon/service/serviceImpl/CarServiceImplTest.java	(date 1690497601426)
+@@ -0,0 +1,127 @@
++package com.example.tourarmeniacommon.service.serviceImpl;
++
++import com.example.tourarmeniacommon.entity.Car;
++import com.example.tourarmeniacommon.repository.CarRepository;
++import org.junit.jupiter.api.BeforeEach;
++import org.junit.jupiter.api.Test;
++import org.junit.jupiter.api.extension.ExtendWith;
++import org.mockito.ArgumentCaptor;
++import org.mockito.junit.jupiter.MockitoExtension;
++import org.mockito.stubbing.OngoingStubbing;
++
++import java.io.IOException;
++import java.util.ArrayList;
++import java.util.List;
++import java.util.Optional;
++
++import static org.junit.jupiter.api.Assertions.*;
++import static org.mockito.Mockito.*;
++
++@ExtendWith(MockitoExtension.class)
++class CarServiceImplTest {
++
++    private CarServiceImpl carService;
++    private CarRepository carRepository;
++
++    @BeforeEach
++    void setUp() {
++        carRepository = mock(CarRepository.class);
++        carService = new CarServiceImpl(carRepository);
++    }
++
++    @Test
++    void findAll() {
++        List<Car> cars = new ArrayList<>();
++        Car car1 = new Car();
++        car1.setId(1);
++        car1.setName("Car 1");
++        car1.setSeats("4");
++        Car car2 = new Car();
++        car2.setId(2);
++        car2.setName("Car 2");
++        car2.setSeats("7");
++        cars.add(car1);
++        cars.add(car2);
++        when(carRepository.findAll()).thenReturn(cars);
++        List<Car> result = carService.findAll();
++        assertEquals(cars.size(), result.size());
++        assertEquals(car1.getName(), result.get(0).getName());
++        assertEquals(car2.getName(), result.get(1).getName());
++        assertEquals(car1.getSeats(), result.get(0).getSeats());
++        assertEquals(car2.getSeats(), result.get(1).getSeats());
++    }
++
++    @Test
++    void save() throws IOException {
++        Car carToSave = new Car();
++        carToSave.setName("New Car");
++        carToSave.setSeats("5");
++        when(carRepository.save(carToSave)).thenReturn(carToSave);
++        carService.save(null, carToSave);
++        ArgumentCaptor<Car> carCaptor = ArgumentCaptor.forClass(Car.class);
++        verify(carRepository, times(1)).save(carCaptor.capture());
++        Car savedCar = carCaptor.getValue();
++        assertEquals(carToSave.getName(), savedCar.getName());
++        assertEquals(carToSave.getSeats(), savedCar.getSeats());
++    }
++
++    @Test
++    void findById() {
++        int carIdToFind = 1;
++        Car car = new Car();
++        car.setId(carIdToFind);
++        car.setName("Car 1");
++        car.setSeats("4");
++        when(carRepository.findById(carIdToFind)).thenReturn(Optional.of(car));
++        Optional<Car> result = carService.findById(carIdToFind);
++        assertTrue(result.isPresent());
++        assertEquals(carIdToFind, result.get().getId());
++        assertEquals(car.getName(), result.get().getName());
++        assertEquals(car.getSeats(), result.get().getSeats());
++    }
++
++    @Test
++    void create() {
++        Car carToCreate = new Car();
++        carToCreate.setName("New Car");
++        carToCreate.setSeats("5");
++        when(carRepository.save(carToCreate)).thenReturn(carToCreate);
++        Car result = carService.create(carToCreate);
++        assertNotNull(result);
++        assertEquals(carToCreate.getName(), result.getName());
++        assertEquals(carToCreate.getSeats(), result.getSeats());
++    }
++
++    @Test
++    void existsById() {
++        int carIdToCheck = 1;
++        when(carRepository.existsById(carIdToCheck)).thenReturn(true);
++        boolean result = carService.existsById(carIdToCheck);
++        assertTrue(result);
++    }
++
++    @Test
++    void deleteById() {
++        int carIdToDelete = 1;
++        carService.deleteById(carIdToDelete);
++        verify(carRepository, times(1)).deleteById(carIdToDelete);
++    }
++
++    @Test
++    void updateCar() {
++        int carIdToUpdate = 1;
++        Car carToUpdate = new Car();
++        carToUpdate.setId(carIdToUpdate);
++        carToUpdate.setName("Updated Car");
++        carToUpdate.setSeats("6");
++        Optional<Car> optionalCar = Optional.of(carToUpdate);
++
++        when(carRepository.findById(carIdToUpdate)).thenReturn(optionalCar);
++        when(carRepository.save(carToUpdate)).thenReturn(carToUpdate);
++        Car result = carService.updateCar(carToUpdate, optionalCar);
++        assertNotNull(result);
++        assertEquals(carIdToUpdate, result.getId());
++        assertEquals(carToUpdate.getName(), result.getName());
++        assertEquals(carToUpdate.getSeats(), result.getSeats());
++    }
++}
+\ No newline at end of file
+Index: tourArmenia-rest/src/test/java/com/example/tourarmeniarest/endpoint/ItemEndpointTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/tourArmenia-rest/src/test/java/com/example/tourarmeniarest/endpoint/ItemEndpointTest.java b/tourArmenia-rest/src/test/java/com/example/tourarmeniarest/endpoint/ItemEndpointTest.java
+new file mode 100644
+--- /dev/null	(date 1690497601432)
++++ b/tourArmenia-rest/src/test/java/com/example/tourarmeniarest/endpoint/ItemEndpointTest.java	(date 1690497601432)
+@@ -0,0 +1,19 @@
++package com.example.tourarmeniarest.endpoint;
++
++import org.junit.jupiter.api.Test;
++import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
++import org.springframework.boot.test.context.SpringBootTest;
++
++import static org.junit.jupiter.api.Assertions.*;
++@SpringBootTest
++@AutoConfigureMockMvc
++class ItemEndpointTest {
++
++    @Test
++    void singleItem() {
++    }
++
++    @Test
++    void getAll() {
++    }
++}
+\ No newline at end of file
+Index: tourArmenia-common/pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n    <modelVersion>4.0.0</modelVersion>\r\n    <parent>\r\n        <groupId>com.example</groupId>\r\n        <artifactId>TourismInArmenia</artifactId>\r\n        <version>0.0.1-SNAPSHOT</version>\r\n    </parent>\r\n\r\n    <artifactId>tourArmenia-common</artifactId>\r\n    <version>0.0.1-SNAPSHOT</version>\r\n    <name>tourArmenia-common</name>\r\n    <description>tourArmenia-common</description>\r\n    <properties>\r\n        <java.version>17</java.version>\r\n        <spring-boot.repackage.skip>true</spring-boot.repackage.skip>\r\n    </properties>\r\n    <dependencies>\r\n        <dependency>\r\n            <groupId>org.mapstruct</groupId>\r\n            <artifactId>mapstruct</artifactId>\r\n            <version>1.5.3.Final</version>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>commons-io</groupId>\r\n            <artifactId>commons-io</artifactId>\r\n            <version>2.11.0</version>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>com.querydsl</groupId>\r\n            <artifactId>querydsl-apt</artifactId>\r\n            <version>5.0.0</version>\r\n            <classifier>jakarta</classifier>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>com.querydsl</groupId>\r\n            <artifactId>querydsl-jpa</artifactId>\r\n            <version>5.0.0</version>\r\n            <classifier>jakarta</classifier>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.mapstruct</groupId>\r\n            <artifactId>mapstruct-processor</artifactId>\r\n            <version>1.5.3.Final</version>\r\n            <scope>provided</scope>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-validation</artifactId>\r\n        </dependency>\r\n    </dependencies>\r\n\r\n    <build>\r\n        <plugins>\r\n            <plugin>\r\n                <groupId>org.springframework.boot</groupId>\r\n                <artifactId>spring-boot-maven-plugin</artifactId>\r\n            </plugin>\r\n            <plugin>\r\n                <groupId>org.apache.maven.plugins</groupId>\r\n                <artifactId>maven-compiler-plugin</artifactId>\r\n                <version>3.5.1</version>\r\n                <configuration>\r\n                    <source>17</source>\r\n                    <target>17</target>\r\n                    <annotationProcessorPaths>\r\n                        <path>\r\n                            <groupId>org.mapstruct</groupId>\r\n                            <artifactId>mapstruct-processor</artifactId>\r\n                            <version>1.5.3.Final</version>\r\n                        </path>\r\n                        <path>\r\n                            <groupId>org.projectlombok</groupId>\r\n                            <artifactId>lombok</artifactId>\r\n                            <version>${lombok.version}</version>\r\n                        </path>\r\n                        <dependency>\r\n                            <groupId>org.projectlombok</groupId>\r\n                            <artifactId>lombok-mapstruct-binding</artifactId>\r\n                            <version>0.2.0</version>\r\n                        </dependency>\r\n                    </annotationProcessorPaths>\r\n                </configuration>\r\n            </plugin>\r\n            <plugin>\r\n                <groupId>com.mysema.maven</groupId>\r\n                <artifactId>apt-maven-plugin</artifactId>\r\n                <version>1.1.3</version>\r\n                <executions>\r\n                    <execution>\r\n                        <phase>generate-sources</phase>\r\n                        <goals>\r\n                            <goal>process</goal>\r\n                        </goals>\r\n                        <configuration>\r\n                            <outputDirectory>target/generated-sources/java</outputDirectory>\r\n                            <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>\r\n                        </configuration>\r\n                    </execution>\r\n                </executions>\r\n            </plugin>\r\n        </plugins>\r\n    </build>\r\n\r\n</project>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/tourArmenia-common/pom.xml b/tourArmenia-common/pom.xml
+--- a/tourArmenia-common/pom.xml	(revision ef328d499dd7ca6b8f21f676a415642cd594428c)
++++ b/tourArmenia-common/pom.xml	(date 1690497601403)
+@@ -39,6 +39,7 @@
+             <version>5.0.0</version>
+             <classifier>jakarta</classifier>
+         </dependency>
++
+         <dependency>
+             <groupId>org.mapstruct</groupId>
+             <artifactId>mapstruct-processor</artifactId>
+@@ -49,8 +50,13 @@
+             <groupId>org.springframework.boot</groupId>
+             <artifactId>spring-boot-starter-validation</artifactId>
+         </dependency>
++        <dependency>
++            <groupId>org.mockito</groupId>
++            <artifactId>mockito-junit-jupiter</artifactId>
++            <version>5.3.1</version>
++            <scope>test</scope>
++        </dependency>
+     </dependencies>
+-
+     <build>
+         <plugins>
+             <plugin>
+Index: tourArmenia-rest/src/test/java/com/example/tourarmeniarest/endpoint/CarEndpointTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/tourArmenia-rest/src/test/java/com/example/tourarmeniarest/endpoint/CarEndpointTest.java b/tourArmenia-rest/src/test/java/com/example/tourarmeniarest/endpoint/CarEndpointTest.java
+new file mode 100644
+--- /dev/null	(date 1690497601410)
++++ b/tourArmenia-rest/src/test/java/com/example/tourarmeniarest/endpoint/CarEndpointTest.java	(date 1690497601410)
+@@ -0,0 +1,145 @@
++package com.example.tourarmeniarest.endpoint;
++
++import com.example.tourarmeniacommon.dto.CarDto;
++import com.example.tourarmeniacommon.dto.CreateCarRequestDto;
++import com.example.tourarmeniacommon.entity.Car;
++import com.example.tourarmeniacommon.mapper.CarMapper;
++import com.example.tourarmeniacommon.service.CarService;
++import org.junit.jupiter.api.BeforeEach;
++import org.junit.jupiter.api.Test;
++import org.mockito.InjectMocks;
++import org.mockito.Mock;
++import org.mockito.MockitoAnnotations;
++import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
++import org.springframework.boot.test.context.SpringBootTest;
++import org.springframework.http.MediaType;
++import org.springframework.http.ResponseEntity;
++import org.springframework.mock.web.MockMultipartFile;
++import org.springframework.test.web.servlet.MockMvc;
++import org.springframework.test.web.servlet.setup.MockMvcBuilders;
++
++import java.util.Arrays;
++import java.util.List;
++import java.util.Optional;
++
++import static org.junit.jupiter.api.Assertions.assertEquals;
++import static org.mockito.ArgumentMatchers.*;
++import static org.mockito.Mockito.*;
++import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
++import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
++
++@SpringBootTest
++@AutoConfigureMockMvc
++class CarEndpointTest {
++
++    private MockMvc mockMvc;
++
++    @Mock
++    private CarService carService;
++
++    @Mock
++    private CarMapper carMapper;
++
++    @InjectMocks
++    private CarEndpoint carEndpoint;
++
++    @BeforeEach
++    void setUp() {
++        MockitoAnnotations.openMocks(this);
++        mockMvc = MockMvcBuilders.standaloneSetup(carEndpoint).build();
++    }
++
++    @Test
++    void create() {
++        // Arrange
++        CreateCarRequestDto createCarRequestDto = new CreateCarRequestDto();
++        createCarRequestDto.setName("Car 1");
++        createCarRequestDto.setSeats("4");
++        CarDto carDto = new CarDto();
++        carDto.setName(createCarRequestDto.getName());
++        carDto.setSeats(createCarRequestDto.getSeats());
++        Car car = new Car();
++        car.setName(createCarRequestDto.getName());
++        car.setSeats(createCarRequestDto.getSeats());
++        when(carMapper.map(any(CreateCarRequestDto.class))).thenReturn(car);
++        when(carService.create(any(Car.class))).thenReturn(car);
++        when(carMapper.mapToDto(any(Car.class))).thenReturn(carDto);
++        ResponseEntity<CarDto> response = carEndpoint.create(createCarRequestDto);
++        assertEquals(ResponseEntity.ok(carDto).getStatusCodeValue(), response.getStatusCodeValue());
++        assertEquals(carDto, response.getBody());
++    }
++
++    @Test
++    void uploadImage() throws Exception {
++        int carId = 1;
++        String fileName = "test_image.jpg";
++        byte[] imageContent = new byte[]{1, 2, 3};
++        MockMultipartFile multipartFile = new MockMultipartFile(
++                "image", fileName, MediaType.IMAGE_JPEG_VALUE, imageContent);
++        Car car = new Car();
++        car.setId(carId);
++        car.setPicName(fileName);
++        when(carService.findById(carId)).thenReturn(Optional.of(car));
++        mockMvc.perform(multipart("/cars/" + carId + "/image")
++                        .file(multipartFile))
++                .andExpect(status().isOk());
++    }
++
++    @Test
++    void getAllCars() throws Exception {
++        CarDto carDto1 = new CarDto();
++        carDto1.setName("Car 1");
++        carDto1.setSeats("4");
++
++        CarDto carDto2 = new CarDto();
++        carDto2.setName("Car 2");
++        carDto2.setSeats("7");
++        List<CarDto> carDtoList = Arrays.asList(carDto1, carDto2);
++        Car car1 = new Car();
++        car1.setName("Car 1");
++        car1.setSeats("4");
++
++        Car car2 = new Car();
++        car2.setName("Car 2");
++        car2.setSeats("7");
++        List<Car> carList = Arrays.asList(car1, car2);
++        when(carService.findAll()).thenReturn(carList);
++        when(carMapper.mapListToDtos(carList)).thenReturn(carDtoList);
++        mockMvc.perform(get("/cars"))
++                .andExpect(status().isOk())
++                .andExpect(jsonPath("$[0].name").value(carDto1.getName()))
++                .andExpect(jsonPath("$[0].seats").value(carDto1.getSeats()))
++                .andExpect(jsonPath("$[1].name").value(carDto2.getName()))
++                .andExpect(jsonPath("$[1].seats").value(carDto2.getSeats()));
++    }
++
++    @Test
++    void deleteById() throws Exception {
++        int carIdToDelete = 1;
++        when(carService.existsById(carIdToDelete)).thenReturn(true);
++        mockMvc.perform(delete("/cars/delete/" + carIdToDelete))
++                .andExpect(status().isNoContent());
++    }
++
++    @Test
++    void update() throws Exception {
++        int carIdToUpdate = 1;
++        Car carToUpdate = new Car();
++        carToUpdate.setName("Updated Car");
++        carToUpdate.setSeats("6");
++
++        Car carDb = new Car();
++        carDb.setId(carIdToUpdate);
++        carDb.setName("Car 1");
++        carDb.setSeats("4");
++
++        when(carService.findById(carIdToUpdate)).thenReturn(Optional.of(carDb));
++        when(carService.create(any(Car.class))).thenReturn(carDb);
++        mockMvc.perform(put("/cars/update/" + carIdToUpdate)
++                        .contentType(MediaType.APPLICATION_JSON)
++                        .content("{\"name\":\"Updated Car\",\"seats\":\"6\"}"))
++                .andExpect(status().isOk())
++                .andExpect(jsonPath("$.name").value(carToUpdate.getName()))
++                .andExpect(jsonPath("$.seats").value(carToUpdate.getSeats()));
++    }
++}
+Index: tourArmenia-common/src/test/java/com/example/tourarmeniacommon/service/serviceImpl/RegionServiceImplTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/tourArmenia-common/src/test/java/com/example/tourarmeniacommon/service/serviceImpl/RegionServiceImplTest.java b/tourArmenia-common/src/test/java/com/example/tourarmeniacommon/service/serviceImpl/RegionServiceImplTest.java
+new file mode 100644
+--- /dev/null	(date 1690497601418)
++++ b/tourArmenia-common/src/test/java/com/example/tourarmeniacommon/service/serviceImpl/RegionServiceImplTest.java	(date 1690497601418)
+@@ -0,0 +1,92 @@
++package com.example.tourarmeniacommon.service.serviceImpl;
++
++import com.example.tourarmeniacommon.entity.Region;
++import com.example.tourarmeniacommon.repository.RegionRepository;
++import org.junit.jupiter.api.BeforeEach;
++import org.junit.jupiter.api.Test;
++import org.junit.jupiter.api.extension.ExtendWith;
++import org.mockito.junit.jupiter.MockitoExtension;
++
++import java.util.ArrayList;
++import java.util.List;
++import java.util.Optional;
++
++import static org.junit.jupiter.api.Assertions.*;
++import static org.mockito.Mockito.*;
++
++@ExtendWith(MockitoExtension.class)
++class RegionServiceImplTest {
++
++    private RegionServiceImpl regionService;
++    private RegionRepository regionRepository;
++
++    @BeforeEach
++    void setUp() {
++        regionRepository = mock(RegionRepository.class);
++        regionService = new RegionServiceImpl(regionRepository);
++    }
++
++    @Test
++    void findAll() {
++        List<Region> regions = new ArrayList<>();
++        Region region1 = new Region();
++        region1.setId(1);
++        region1.setName("Region 1");
++        region1.setRegionalCenter("Center 1");
++        Region region2 = new Region();
++        region2.setId(2);
++        region2.setName("Region 2");
++        region2.setRegionalCenter("Center 2");
++        regions.add(region1);
++        regions.add(region2);
++
++        when(regionRepository.findAll()).thenReturn(regions);
++        List<Region> result = regionService.findAll();
++        assertEquals(regions.size(), result.size());
++        assertEquals(region1.getName(), result.get(0).getName());
++        assertEquals(region2.getName(), result.get(1).getName());
++        assertEquals(region1.getRegionalCenter(), result.get(0).getRegionalCenter());
++        assertEquals(region2.getRegionalCenter(), result.get(1).getRegionalCenter());
++    }
++
++    @Test
++    void deleteById() {
++        int regionIdToDelete = 1;
++        regionService.deleteById(regionIdToDelete);
++        verify(regionRepository, times(1)).deleteById(regionIdToDelete);
++    }
++
++    @Test
++    void findById() {
++        int regionIdToFind = 1;
++        Region region = new Region();
++        region.setId(regionIdToFind);
++        region.setName("Region 1");
++        region.setRegionalCenter("Center 1");
++        when(regionRepository.findById(regionIdToFind)).thenReturn(Optional.of(region));
++        Optional<Region> result = regionService.findById(regionIdToFind);
++        assertTrue(result.isPresent());
++        assertEquals(regionIdToFind, result.get().getId());
++        assertEquals(region.getName(), result.get().getName());
++        assertEquals(region.getRegionalCenter(), result.get().getRegionalCenter());
++    }
++
++    @Test
++    void save() {
++        Region regionToSave = new Region();
++        regionToSave.setName("New Region");
++        regionToSave.setRegionalCenter("New Center");
++
++        Region savedRegion = new Region();
++        savedRegion.setId(1);
++        savedRegion.setName("New Region");
++        savedRegion.setRegionalCenter("New Center");
++
++        when(regionRepository.save(regionToSave)).thenReturn(savedRegion);
++        Region result = regionService.save(regionToSave);
++        assertNotNull(result);
++        assertEquals(savedRegion.getId(), result.getId());
++        assertEquals(savedRegion.getName(), result.getName());
++        assertEquals(savedRegion.getRegionalCenter(), result.getRegionalCenter());
++    }
++}
+\ No newline at end of file
+Index: tourArmenia-common/src/main/java/com/example/tourarmeniacommon/entity/Item.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.tourarmeniacommon.entity;\r\nimport jakarta.persistence.*;\r\nimport jakarta.validation.constraints.NotEmpty;\r\nimport jakarta.validation.constraints.NotNull;\r\nimport lombok.Data;\r\n\r\n@Data\r\n@Entity\r\n@Table(name = \"item\")\r\npublic class Item {\r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n    private int id;\r\n    @NotEmpty(message = \"Name can not be null or empty\")\r\n    private String name;\r\n    private String description;\r\n    private String picName;\r\n    @ManyToOne\r\n    @NotNull(message = \"Region is not null\")\r\n    private Region region;\r\n    @Enumerated(value = EnumType.STRING)\r\n    private Type type;\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/tourArmenia-common/src/main/java/com/example/tourarmeniacommon/entity/Item.java b/tourArmenia-common/src/main/java/com/example/tourarmeniacommon/entity/Item.java
+--- a/tourArmenia-common/src/main/java/com/example/tourarmeniacommon/entity/Item.java	(revision ef328d499dd7ca6b8f21f676a415642cd594428c)
++++ b/tourArmenia-common/src/main/java/com/example/tourarmeniacommon/entity/Item.java	(date 1690497601364)
+@@ -2,10 +2,13 @@
+ import jakarta.persistence.*;
+ import jakarta.validation.constraints.NotEmpty;
+ import jakarta.validation.constraints.NotNull;
+-import lombok.Data;
++import lombok.*;
+ 
+ @Data
+ @Entity
++@Builder
++@NoArgsConstructor
++@AllArgsConstructor
+ @Table(name = "item")
+ public class Item {
+     @Id
+Index: tourArmenia-rest/src/test/java/com/example/tourarmeniarest/config/RestSecurityConfigTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/tourArmenia-rest/src/test/java/com/example/tourarmeniarest/config/RestSecurityConfigTest.java b/tourArmenia-rest/src/test/java/com/example/tourarmeniarest/config/RestSecurityConfigTest.java
+new file mode 100644
+--- /dev/null	(date 1690497601369)
++++ b/tourArmenia-rest/src/test/java/com/example/tourarmeniarest/config/RestSecurityConfigTest.java	(date 1690497601369)
+@@ -0,0 +1,63 @@
++package com.example.tourarmeniarest.config;
++
++import com.example.tourarmeniarest.filter.JWTAuthenticationTokenFilter;
++import com.example.tourarmeniarest.security.JwtAuthenticationEntryPoint;
++import org.junit.jupiter.api.BeforeEach;
++import org.junit.jupiter.api.Test;
++import org.springframework.boot.test.mock.mockito.MockBean;
++import org.springframework.security.config.annotation.web.builders.HttpSecurity;
++import org.springframework.security.config.http.SessionCreationPolicy;
++import org.springframework.security.core.userdetails.UserDetailsService;
++import org.springframework.security.crypto.password.PasswordEncoder;
++import org.springframework.security.web.SecurityFilterChain;
++import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
++
++import static org.junit.jupiter.api.Assertions.assertNotNull;
++import static org.mockito.Mockito.*;
++
++class RestSecurityConfigTest {
++
++
++    private RestSecurityConfig restSecurityConfig;
++
++    @MockBean
++    private PasswordEncoder passwordEncoder;
++
++    @MockBean
++    private UserDetailsService userDetailsService;
++
++    @MockBean
++    private JwtAuthenticationEntryPoint authenticationEntryPoint;
++
++    @MockBean
++    private JWTAuthenticationTokenFilter jwtAuthenticationTokenFilter;
++
++    @BeforeEach
++    void setUp() {
++        restSecurityConfig = new RestSecurityConfig(passwordEncoder, userDetailsService, authenticationEntryPoint, jwtAuthenticationTokenFilter);
++    }
++
++    @Test
++    void securityFilterChain() throws Exception {
++        // Arrange
++        HttpSecurity httpSecurity = mock(HttpSecurity.class);
++        // Act
++        SecurityFilterChain result = restSecurityConfig.securityFilterChain(httpSecurity);
++        // Assert
++        assertNotNull(result);
++        // Verify the configuration of HttpSecurity
++        verify(httpSecurity, times(1)).csrf().disable();
++        verify(httpSecurity, times(1)).exceptionHandling();
++        verify(httpSecurity, times(1)).sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
++        verify(httpSecurity, times(1)).authorizeRequests();
++        // Replace "/" with the endpoint you want to test
++        verify(httpSecurity, times(1)).portMapper();
++        // Replace HttpMethod.GET with the specific HTTP method and the endpoint you want to test
++        verify(httpSecurity, times(1)).portMapper();
++        // Add other permitAll() or hasAuthority() configurations as needed
++        verify(httpSecurity, times(1)).equals(httpSecurity);
++        verify(httpSecurity, times(1)).addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
++        verifyNoMoreInteractions(httpSecurity);
++    }
++
++}
+\ No newline at end of file
