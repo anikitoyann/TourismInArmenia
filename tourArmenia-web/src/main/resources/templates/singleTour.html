@@ -1,49 +1,41 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Hotels</title>
-    <th:block>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <title>Hotel Fullwidth Grid View - Star Travel</title>
+    <title>Tours</title>
 
-        <!-- Plugins css Style -->
-        <link href="/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-        <link href="/assets/plugins/animate/animate.css" rel="stylesheet">
-        <link href="/assets/plugins/menuzord/css/menuzord.css" rel="stylesheet">
-        <link href="/assets/plugins/menuzord/css/menuzord-animations.css" rel="stylesheet">
+    <!-- Meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+    <!-- Plugins CSS Styles -->
+    <link href="/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/assets/plugins/animate/animate.css" rel="stylesheet">
+    <link href="/assets/plugins/menuzord/css/menuzord.css" rel="stylesheet">
+    <link href="/assets/plugins/menuzord/css/menuzord-animations.css" rel="stylesheet">
+    <link href="/assets/plugins/fancybox/jquery.fancybox.min.css" rel="stylesheet">
+    <link href="/assets/plugins/selectric/selectric.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700' rel='stylesheet'>
 
-        <link href='/assets/plugins/fancybox/jquery.fancybox.min.css' rel='stylesheet'>
+    <!-- Custom CSS -->
+    <link href="/assets/css/star.css" id="option_style" rel="stylesheet">
 
-        <link href='/assets/plugins/selectric/selectric.css' rel='stylesheet'>
-        <link href='../../css?family=Montserrat:400,500,600,700' rel='stylesheet'>
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="/assets/img/favicon.png">
 
-        <!-- CUSTOM CSS -->
-        <link href="/assets/css/star.css" id="option_style" rel="stylesheet">
-
-
-        <!-- FAVICON -->
-        <link rel="shortcut icon" type="image/png" href="/assets/img/favicon.png">
-
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-    </th:block>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
-<div th:include="fragment/header::headerFragment">
-</div>
+<!-- Header Section -->
+<div th:include="fragment/header::headerFragment"></div>
 
-
-<!-- ====================================
-———	PAGE TITLE
-===================================== -->
+<!-- Page Title Section -->
 <section class="page-title">
     <div class="page-title-img bg-img bg-overlay-darken" style="background-image: url(/assets/img/pages/page-title-bg12.jpg);">
         <div class="container">
@@ -51,9 +43,9 @@
                 <div class="col-lg-6">
                     <div class="page-title-content">
                         <div class="">
-                            <h2 class="text-uppercase text-white font-weight-bold" ></h2>
+                            <h2 class="text-uppercase text-white font-weight-bold">Title Goes Here</h2>
                         </div>
-                        <p class="text-white mb-0"></p>
+                        <p class="text-white mb-0">Description Goes Here</p>
                     </div>
                 </div>
             </div>
@@ -61,224 +53,343 @@
     </div>
 </section>
 
+<!-- Tour Details Section -->
 <section class="bg-smoke py-10">
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="mb-md-6">
-                    <div class="row align-items-center">
-
+                <!-- Tour Details -->
+                <a href="/tour">Back</a> <br>
+                <h2 th:text="${tour.name}"></h2>
+                <img th:if="${tour.picName != null}" th:src="@{/getImage(imageName=${tour.getPicName()})}" width="400"/><br>
+                Region: <span th:text="${tour.region.name}"></span><br>
+                Car: <span th:text="${tour.car.name}"></span><br>
+                Venues: <span th:text="${tour.item.name}"></span><br>
+                Start date: <span th:text="${tour.startDate}"></span><br>
+                Duration: <span th:text="${tour.duration}"></span><br>
+                Group size: <span th:text="${tour.groupSize}"></span><br>
+                Price: <span th:text="${tour.price}"></span><br>
+                <span>Just a friendly reminder that the price mentioned is per person, encompassing children aged 7 and above.</span>
+                <br>
+                <form th:action="@{/booking}" method="post">
+                    <input type="hidden" name="tourId" th:value="${tour.id}" />
+                    <button type="submit">Book this tour</button>
+                </form>
+                <!-- Add Comment Section -->
+                <br>
+                <h2>Add Comment</h2>
+                <br>
+                <form method="POST" action="/tour/comment/add">
+                    <input type="hidden" name="tour.id" th:value="${tour.id}">
+                    <div>
+                        Comment:
+                        <textarea name="commentText"></textarea>
                     </div>
-                </div>
-            </div>
-
-            <a href="/tour">Back</a> <br>
-            <h2 th:text="${tour.name}"></h2>
-            <img th:if="${tour.picName != null}" th:src="@{/getImage(imageName=${tour.getPicName()})}" width="400"/><br>
-            Region: <span th:text="${tour.region.name}"></span><br>
-            Car: <span th:text="${tour.car.name}"></span><br>
-            Venues: <span th:text="${tour.item.name}"></span><br>
-            Start date: <span th:text="${tour.startDate}"></span><br>
-            Duration: <span th:text="${tour.duration}"></span><br>
-            Group size: <span th:text="${tour.groupSize}"></span><br>
-            Price: <span th:text="${tour.price}"></span><br>
-            <span>Just a friendly reminder that the price mentioned is per person, encompassing children aged 7 and above.</span>
-            <br>
-            <form th:action="@{/booking}" method="post">
-                <input type="hidden" name="tourId" th:value="${tour.id}" />
-                <button type="submit">Book this tour </button> </form>
-            <a id="bookNowBtn" th:href="@{/booking?tourId=${tourId}}">Book this tour</a>
-
-            <br>
-            <h2>Add Comment</h2>
-            <br>
-            <form method="POST" action="/tour/comment/add">
-                <input type="hidden" name="tour.id" th:value="${tour.id}">
-                <div>
-                    Comment:
-                    <textarea name="commentText"></textarea>
-                </div>
-                <div>
-                    <input type="submit">Add Comment</input>
-                </div>
-            </form>
-            <ul>
-                <li th:each="comment : ${comments}">
-                    <span>Username: <span th:text="${comment.user.name}"></span></span><br>
-                    <span>Comment: <span th:text="${comment.commentText}"></span></span>
-                </li>
-            </ul>
-
-
+                    <div>
+                        <input type="submit" value="Add Comment" />
+                    </div>
+                </form>
+                <!-- List of Comments -->
+                <ul>
+                    <li th:each="comment : ${comments}">
+                        <span>Username: <span th:text="${comment.user.name}"></span></span><br>
+                        <span>Comment: <span th:text="${comment.commentText}"></span></span>
+                    </li>
+                </ul>
             </div>
         </div>
-    </div>
-    </div>
-
-
-    <!-- ====================================
-
-  ===================================== -->
-
-
-    </div><!-- element wrapper ends -->
-
-    <!-- ====================================
-    ——— FOOTER SECTION
-    ===================================== -->
-    <th:block th:include="fragment/header::footerFragment">
-    </th:block>
-
-    <!-- ====================================
-    ——— MODAL SECTION
-    ===================================== -->
-    <!-- Signup Modal -->
-    <div class="modal fade" id="signup" tabindex="-1" role="dialog" aria-label="signupModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header rounded">
-                    <h3 class="modal-title text-uppercase font-weight-bold">Create your account</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form class="" action="index.html" method="post">
-                        <div class="form-group">
-                            <input type="text" class="form-control bg-smoke" required="" placeholder="Full Name">
-                        </div>
-
-                        <div class="form-group">
-                            <input type="email" class="form-control bg-smoke" required="" placeholder="Email">
-                        </div>
-
-                        <div class="form-group">
-                            <input type="password" class="form-control bg-smoke" required="" placeholder="Password">
-                        </div>
-
-                        <div class="form-group form-check mb-0">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck4">
-                            <label class="form-check-label text-gray-color mb-3" for="exampleCheck4">
-                                I agree to the terms of use and privacy.
-                            </label>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary btn-block text-uppercase">Login</button>
-
-                        <div class="text-uppercase text-center py-3">Or</div>
-
-                        <button type="submit" class="btn btn-facebook btn-block text-uppercase">Login with facebook</button>
-                    </form>
-                </div>
-
-                <div class="modal-footer justify-content-center">
-                    <p class="mb-1">Don’t have an Account? <a href="javascript:void(0)">Sign up</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Login Modal -->
-    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-label="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header rounded">
-                    <h3 class="modal-title text-uppercase font-weight-bold">Log in to your account</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form class="" action="index.html" method="post">
-                        <div class="form-group">
-                            <input type="email" class="form-control bg-smoke" required="" placeholder="Email">
-                        </div>
-
-                        <div class="form-group">
-                            <input type="password" class="form-control bg-smoke" required="" placeholder="Password">
-                        </div>
-
-                        <div class="form-group form-check mb-0">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck5">
-                            <label class="form-check-label text-gray-color mb-3" for="exampleCheck5">
-                                Remember me
-                            </label>
-                            <a class="pull-right" href="javascript:void(0)">Fogot Password?</a>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block text-uppercase">Login</button>
-                        <div class="text-uppercase text-center py-3">Or</div>
-                        <button type="submit" class="btn btn-facebook btn-block text-uppercase">Login with facebook</button>
-                    </form>
-                </div>
-
-                <div class="modal-footer justify-content-center">
-                    <p class="mb-1">Don’t have an Account? <a href="javascript:void(0)">Sign up</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- INQUIRY IN MODAL -->
-    <div class="modal fade" id="inquiry" tabindex="-1" role="dialog" aria-label="inquiryModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header rounded">
-                    <h3 class="modal-title text-uppercase font-weight-bold">Inquiry about tour</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body pb-3">
-                    <form class="" action="index.html" method="post">
-                        <div class="form-group">
-                            <input type="text" class="form-control bg-smoke" required="" placeholder="Your Name">
-                        </div>
-
-                        <div class="form-group">
-                            <input type="email" class="form-control bg-smoke" required="" placeholder="Your Email">
-                        </div>
-
-                        <div class="form-group">
-                            <input type="number" class="form-control bg-smoke" required="" placeholder="Phone Number">
-                        </div>
-
-                        <div class="form-group">
-                            <textarea class="form-control bg-smoke" rows="6" placeholder="Message"></textarea>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary text-uppercase">Submit</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Javascript -->
-    <script src="/assets/plugins/jquery/jquery-3.4.1.min.js"></script>
-    <script src="/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/assets/plugins/menuzord/js/menuzord.js"></script>
-
-
-
-    <script src='/assets/plugins/fancybox/jquery.fancybox.min.js'></script>
-
-    <script src='/assets/plugins/selectric/jquery.selectric.min.js'></script>
-
-
-
-    <script src="/assets/plugins/lazyestload/lazyestload.js"></script>
-
-
-    <script src="/assets/plugins/smoothscroll/SmoothScroll.js"></script>
-
-    <script src="/assets/js/star.js"></script>
-    <link href="/assets/options/optionswitch.css" rel="stylesheet">
-    <script src="/assets/options/optionswitcher.js"></script>
     </div>
 </section>
-</body>
 
+<!-- Footer Section -->
+<th:block th:include="fragment/header::footerFragment"></th:block>
+
+<!-- Modal Section -->
+<!-- Signup Modal -->
+<!-- Login Modal -->
+<!-- Inquiry Modal -->
+
+<!-- JavaScript -->
+<script src="/assets/plugins/jquery/jquery-3.4.1.min.js"></script>
+<script src="/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Tours</title>-->
+<!--    <th:block>-->
+<!--        <meta charset="utf-8">-->
+<!--        <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+<!--        <title>Hotel Fullwidth Grid View - Star Travel</title>-->
+
+<!--        &lt;!&ndash; Plugins css Style &ndash;&gt;-->
+<!--        <link href="/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">-->
+<!--        <link href="/assets/plugins/animate/animate.css" rel="stylesheet">-->
+<!--        <link href="/assets/plugins/menuzord/css/menuzord.css" rel="stylesheet">-->
+<!--        <link href="/assets/plugins/menuzord/css/menuzord-animations.css" rel="stylesheet">-->
+
+
+<!--        <link href='/assets/plugins/fancybox/jquery.fancybox.min.css' rel='stylesheet'>-->
+
+<!--        <link href='/assets/plugins/selectric/selectric.css' rel='stylesheet'>-->
+<!--        <link href='../../css?family=Montserrat:400,500,600,700' rel='stylesheet'>-->
+
+<!--        &lt;!&ndash; CUSTOM CSS &ndash;&gt;-->
+<!--        <link href="/assets/css/star.css" id="option_style" rel="stylesheet">-->
+
+
+<!--        &lt;!&ndash; FAVICON &ndash;&gt;-->
+<!--        <link rel="shortcut icon" type="image/png" href="/assets/img/favicon.png">-->
+
+<!--        &lt;!&ndash; HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries &ndash;&gt;-->
+<!--        &lt;!&ndash; WARNING: Respond.js doesn't work if you view the page via file:// &ndash;&gt;-->
+<!--        &lt;!&ndash;[if lt IE 9]>-->
+<!--        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>-->
+<!--        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>-->
+<!--        <![endif]&ndash;&gt;-->
+<!--    </th:block>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div th:include="fragment/header::headerFragment">-->
+<!--</div>-->
+
+
+<!--&lt;!&ndash; ====================================-->
+<!--———	PAGE TITLE-->
+<!--===================================== &ndash;&gt;-->
+<!--<section class="page-title">-->
+<!--    <div class="page-title-img bg-img bg-overlay-darken" style="background-image: url(/assets/img/pages/page-title-bg12.jpg);">-->
+<!--        <div class="container">-->
+<!--            <div class="row align-items-center justify-content-center" style="height: 200px;">-->
+<!--                <div class="col-lg-6">-->
+<!--                    <div class="page-title-content">-->
+<!--                        <div class="">-->
+<!--                            <h2 class="text-uppercase text-white font-weight-bold" ></h2>-->
+<!--                        </div>-->
+<!--                        <p class="text-white mb-0"></p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+
+<!--<section class="bg-smoke py-10">-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-12">-->
+<!--                <div class="mb-md-6">-->
+<!--                    <div class="row align-items-center">-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <a href="/tour">Back</a> <br>-->
+<!--            <h2 th:text="${tour.name}"></h2>-->
+<!--            <img th:if="${tour.picName != null}" th:src="@{/getImage(imageName=${tour.getPicName()})}" width="400"/><br>-->
+<!--            Region: <span th:text="${tour.region.name}"></span><br>-->
+<!--            Car: <span th:text="${tour.car.name}"></span><br>-->
+<!--            Venues: <span th:text="${tour.item.name}"></span><br>-->
+<!--            Start date: <span th:text="${tour.startDate}"></span><br>-->
+<!--            Duration: <span th:text="${tour.duration}"></span><br>-->
+<!--            Group size: <span th:text="${tour.groupSize}"></span><br>-->
+<!--            Price: <span th:text="${tour.price}"></span><br>-->
+<!--            <span>Just a friendly reminder that the price mentioned is per person, encompassing children aged 7 and above.</span>-->
+<!--            <br>-->
+<!--            <form th:action="@{/booking}" method="post">-->
+<!--                <input type="hidden" name="tourId" th:value="${tour.id}" />-->
+<!--                <button type="submit">Book this tour </button> </form>-->
+<!--            <a id="bookNowBtn" th:href="@{/booking?tourId=${tourId}}">Book this tour</a>-->
+
+<!--            <br>-->
+<!--            <h2>Add Comment</h2>-->
+<!--            <br>-->
+<!--            <form method="POST" action="/tour/comment/add">-->
+<!--                <input type="hidden" name="tour.id" th:value="${tour.id}">-->
+<!--                <div>-->
+<!--                    Comment:-->
+<!--                    <textarea name="commentText"></textarea>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <input type="submit">Add Comment</input>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--            <ul>-->
+<!--                <li th:each="comment : ${comments}">-->
+<!--                    <span>Username: <span th:text="${comment.user.name}"></span></span><br>-->
+<!--                    <span>Comment: <span th:text="${comment.commentText}"></span></span>-->
+<!--                </li>-->
+<!--            </ul>-->
+
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    </div>-->
+
+
+<!--    &lt;!&ndash; ====================================-->
+
+<!--  ===================================== &ndash;&gt;-->
+
+
+<!--    </div>&lt;!&ndash; element wrapper ends &ndash;&gt;-->
+
+<!--    &lt;!&ndash; ====================================-->
+<!--    ——— FOOTER SECTION-->
+<!--    ===================================== &ndash;&gt;-->
+<!--    <th:block th:include="fragment/header::footerFragment">-->
+<!--    </th:block>-->
+
+<!--    &lt;!&ndash; ====================================-->
+<!--    ——— MODAL SECTION-->
+<!--    ===================================== &ndash;&gt;-->
+<!--    &lt;!&ndash; Signup Modal &ndash;&gt;-->
+<!--    <div class="modal fade" id="signup" tabindex="-1" role="dialog" aria-label="signupModalLabel" aria-hidden="true">-->
+<!--        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header rounded">-->
+<!--                    <h3 class="modal-title text-uppercase font-weight-bold">Create your account</h3>-->
+<!--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                        <span aria-hidden="true">&times;</span>-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--                <div class="modal-body">-->
+<!--                    <form class="" action="index.html" method="post">-->
+<!--                        <div class="form-group">-->
+<!--                            <input type="text" class="form-control bg-smoke" required="" placeholder="Full Name">-->
+<!--                        </div>-->
+
+<!--                        <div class="form-group">-->
+<!--                            <input type="email" class="form-control bg-smoke" required="" placeholder="Email">-->
+<!--                        </div>-->
+
+<!--                        <div class="form-group">-->
+<!--                            <input type="password" class="form-control bg-smoke" required="" placeholder="Password">-->
+<!--                        </div>-->
+
+<!--                        <div class="form-group form-check mb-0">-->
+<!--                            <input type="checkbox" class="form-check-input" id="exampleCheck4">-->
+<!--                            <label class="form-check-label text-gray-color mb-3" for="exampleCheck4">-->
+<!--                                I agree to the terms of use and privacy.-->
+<!--                            </label>-->
+<!--                        </div>-->
+
+<!--                        <button type="submit" class="btn btn-primary btn-block text-uppercase">Login</button>-->
+
+<!--                        <div class="text-uppercase text-center py-3">Or</div>-->
+
+<!--                        <button type="submit" class="btn btn-facebook btn-block text-uppercase">Login with facebook</button>-->
+<!--                    </form>-->
+<!--                </div>-->
+
+<!--                <div class="modal-footer justify-content-center">-->
+<!--                    <p class="mb-1">Don’t have an Account? <a href="javascript:void(0)">Sign up</a></p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Login Modal &ndash;&gt;-->
+<!--    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-label="loginModalLabel" aria-hidden="true">-->
+<!--        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header rounded">-->
+<!--                    <h3 class="modal-title text-uppercase font-weight-bold">Log in to your account</h3>-->
+<!--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                        <span aria-hidden="true">&times;</span>-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--                <div class="modal-body">-->
+<!--                    <form class="" action="index.html" method="post">-->
+<!--                        <div class="form-group">-->
+<!--                            <input type="email" class="form-control bg-smoke" required="" placeholder="Email">-->
+<!--                        </div>-->
+
+<!--                        <div class="form-group">-->
+<!--                            <input type="password" class="form-control bg-smoke" required="" placeholder="Password">-->
+<!--                        </div>-->
+
+<!--                        <div class="form-group form-check mb-0">-->
+<!--                            <input type="checkbox" class="form-check-input" id="exampleCheck5">-->
+<!--                            <label class="form-check-label text-gray-color mb-3" for="exampleCheck5">-->
+<!--                                Remember me-->
+<!--                            </label>-->
+<!--                            <a class="pull-right" href="javascript:void(0)">Fogot Password?</a>-->
+<!--                        </div>-->
+<!--                        <button type="submit" class="btn btn-primary btn-block text-uppercase">Login</button>-->
+<!--                        <div class="text-uppercase text-center py-3">Or</div>-->
+<!--                        <button type="submit" class="btn btn-facebook btn-block text-uppercase">Login with facebook</button>-->
+<!--                    </form>-->
+<!--                </div>-->
+
+<!--                <div class="modal-footer justify-content-center">-->
+<!--                    <p class="mb-1">Don’t have an Account? <a href="javascript:void(0)">Sign up</a></p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; INQUIRY IN MODAL &ndash;&gt;-->
+<!--    <div class="modal fade" id="inquiry" tabindex="-1" role="dialog" aria-label="inquiryModalLabel" aria-hidden="true">-->
+<!--        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header rounded">-->
+<!--                    <h3 class="modal-title text-uppercase font-weight-bold">Inquiry about tour</h3>-->
+<!--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                        <span aria-hidden="true">&times;</span>-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--                <div class="modal-body pb-3">-->
+<!--                    <form class="" action="index.html" method="post">-->
+<!--                        <div class="form-group">-->
+<!--                            <input type="text" class="form-control bg-smoke" required="" placeholder="Your Name">-->
+<!--                        </div>-->
+
+<!--                        <div class="form-group">-->
+<!--                            <input type="email" class="form-control bg-smoke" required="" placeholder="Your Email">-->
+<!--                        </div>-->
+
+<!--                        <div class="form-group">-->
+<!--                            <input type="number" class="form-control bg-smoke" required="" placeholder="Phone Number">-->
+<!--                        </div>-->
+
+<!--                        <div class="form-group">-->
+<!--                            <textarea class="form-control bg-smoke" rows="6" placeholder="Message"></textarea>-->
+<!--                        </div>-->
+
+<!--                        <button type="submit" class="btn btn-primary text-uppercase">Submit</button>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Javascript &ndash;&gt;-->
+<!--    <script src="/assets/plugins/jquery/jquery-3.4.1.min.js"></script>-->
+<!--    <script src="/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+<!--    <script src="/assets/plugins/menuzord/js/menuzord.js"></script>-->
+
+
+
+<!--    <script src='/assets/plugins/fancybox/jquery.fancybox.min.js'></script>-->
+
+<!--    <script src='/assets/plugins/selectric/jquery.selectric.min.js'></script>-->
+
+
+
+<!--    <script src="/assets/plugins/lazyestload/lazyestload.js"></script>-->
+
+
+<!--    <script src="/assets/plugins/smoothscroll/SmoothScroll.js"></script>-->
+
+<!--    <script src="/assets/js/star.js"></script>-->
+<!--    <link href="/assets/options/optionswitch.css" rel="stylesheet">-->
+<!--    <script src="/assets/options/optionswitcher.js"></script>-->
+<!--    </div>-->
+<!--</section>-->
+<!--</body>-->
 </html>
 <!--<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">

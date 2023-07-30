@@ -2,6 +2,7 @@ package com.example.tourarmeniacommon.service.serviceImpl;
 
 import com.example.tourarmeniacommon.service.MailService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -10,12 +11,16 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class MailServiceImpl implements MailService {
 
+    private final MailSender mailSender;
+
+
     @Async
     public void sendMail(String to, String subject, String text) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setTo(to);
         simpleMailMessage.setSubject(subject);
         simpleMailMessage.setText(text);
+        mailSender.send(simpleMailMessage);
 
     }
 }

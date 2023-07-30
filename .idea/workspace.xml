@@ -4,22 +4,109 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c8c574d0-2d3c-4972-896a-4801fecab75b" name="Changes" comment="unit &amp; integration tests &amp; logging comments">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c22a040e-444b-491b-af54-c0969a6f9168.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c22a040e-444b-491b-af54-c0969a6f9168.xml" afterDir="false" />
+    <list default="true" id="99d3478f-117c-4b9e-a0ea-70311bf8dbf9" name="Changes" comment="deleted hotelcomment">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_07_2023_23_40__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27_07_2023_23_40__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_28_07_2023_18_45__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_28_07_2023_18_45__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_28_07_2023_2_37__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_28_07_2023_2_37__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_28_07_2023_2_40__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_28_07_2023_2_40__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_28_07_2023_2_41__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_28_07_2023_2_41__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_28_07_2023_2_54__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_28_07_2023_2_54__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_05_07_2023_17_51__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_05_07_2023_17_51__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_07_2023_18_46__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_07_2023_18_46__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_07_2023_2_34__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_07_2023_2_34__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QBook.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QBook.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QCar.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QCar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QComment.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QComment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QCurrency.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QCurrency.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QRegion.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QRegion.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QTourPackage.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QTourPackage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/QUser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tourArmenia-web/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tourArmenia-web/target/classes/templates/ContactUs.html" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/target/classes/templates/ContactUs.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tourArmenia-web/target/classes/templates/cars.html" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/target/classes/templates/cars.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tourArmenia-web/target/classes/templates/singleRegion.html" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/target/classes/templates/singleRegion.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tourArmenia-web/target/classes/templates/singleTour.html" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/target/classes/templates/singleTour.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/src/main/java/com/example/tourarmeniacommon/entity/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/src/main/java/com/example/tourarmeniacommon/entity/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/src/main/java/com/example/tourarmeniacommon/repository/BookingRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/src/main/java/com/example/tourarmeniacommon/repository/BookingRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/src/main/java/com/example/tourarmeniacommon/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/src/main/java/com/example/tourarmeniacommon/service/BookService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/src/main/java/com/example/tourarmeniacommon/service/serviceImpl/BookServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/src/main/java/com/example/tourarmeniacommon/service/serviceImpl/BookServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/src/main/java/com/example/tourarmeniacommon/service/serviceImpl/MailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/src/main/java/com/example/tourarmeniacommon/service/serviceImpl/MailServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/src/main/resources/liquibase/changelog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/src/main/resources/liquibase/changelog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/CarDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/CarDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/CreateCarRequestDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/CreateCarRequestDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/CreateItemRequestDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/CreateItemRequestDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/CreateTourRequestDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/CreateTourRequestDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/CreateUserRequestDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/CreateUserRequestDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/ItemDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/ItemDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/ItemSearchDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/ItemSearchDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/RegionDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/RegionDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/RegionRequestDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/RegionRequestDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/RestErrorDto$RestErrorDtoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/RestErrorDto$RestErrorDtoBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/RestErrorDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/RestErrorDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/TourDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/TourDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/UserAuthRequestDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/UserAuthRequestDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/UserAuthResponseDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/UserAuthResponseDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/UserDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/dto/UserDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/Book.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/Book.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/Car.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/Car.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/Comment.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/Comment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/Currency$CurrencyBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/Currency$CurrencyBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/Currency.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/Currency.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/Item.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/Region.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/Region.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/TourPackage.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/TourPackage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/Type.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/Type.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/UserType.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/entity/UserType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/exception/EntityNotFoundException.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/exception/EntityNotFoundException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/exception/RestExceptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/exception/RestExceptionHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/mapper/CarMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/mapper/CarMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/mapper/CarMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/mapper/CarMapperImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/mapper/ItemMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/mapper/ItemMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/mapper/ItemMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/mapper/ItemMapperImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/mapper/RegionMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/mapper/RegionMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/mapper/RegionMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/mapper/RegionMapperImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/mapper/TourMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/mapper/TourMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/mapper/TourMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/mapper/TourMapperImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/mapper/UserMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/mapper/UserMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/mapper/UserMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/mapper/UserMapperImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/repository/BookingRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/repository/BookingRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/repository/CommentRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/repository/CommentRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/repository/ItemRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/repository/ItemRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/repository/TourPackagesRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/repository/TourPackagesRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/repository/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/service/CarService.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/service/CarService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/service/CurrencyService.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/service/CurrencyService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/service/ItemService.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/service/ItemService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/service/RegionService.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/service/RegionService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/service/TourPackageService.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/service/TourPackageService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/service/serviceImpl/CarServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/service/serviceImpl/CarServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/service/serviceImpl/CurrencyServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/service/serviceImpl/CurrencyServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/service/serviceImpl/ItemServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/service/serviceImpl/ItemServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/service/serviceImpl/RegionServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/service/serviceImpl/RegionServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/service/serviceImpl/TourPackageServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/service/serviceImpl/TourPackageServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/service/serviceImpl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/service/serviceImpl/UserServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/util/RoundUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/com/example/tourarmeniacommon/util/RoundUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/classes/liquibase/changelog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/classes/liquibase/changelog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/generated-sources/annotations/com/example/tourarmeniacommon/mapper/CarMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/generated-sources/annotations/com/example/tourarmeniacommon/mapper/CarMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/generated-sources/annotations/com/example/tourarmeniacommon/mapper/ItemMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/generated-sources/annotations/com/example/tourarmeniacommon/mapper/ItemMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/generated-sources/annotations/com/example/tourarmeniacommon/mapper/RegionMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/generated-sources/annotations/com/example/tourarmeniacommon/mapper/RegionMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/generated-sources/annotations/com/example/tourarmeniacommon/mapper/TourMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/generated-sources/annotations/com/example/tourarmeniacommon/mapper/TourMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-common/target/generated-sources/annotations/com/example/tourarmeniacommon/mapper/UserMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-common/target/generated-sources/annotations/com/example/tourarmeniacommon/mapper/UserMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-web/src/main/java/com/example/tourarmeniaweb/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/src/main/java/com/example/tourarmeniaweb/controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-web/src/main/java/com/example/tourarmeniaweb/controller/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/src/main/java/com/example/tourarmeniaweb/controller/BookingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-web/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-web/src/main/resources/templates/admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/src/main/resources/templates/admin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-web/src/main/resources/templates/booking.html" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/src/main/resources/templates/booking.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-web/src/main/resources/templates/bookings.html" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/src/main/resources/templates/bookings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-web/src/main/resources/templates/fragment/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/src/main/resources/templates/fragment/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-web/src/main/resources/templates/singleTour.html" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/src/main/resources/templates/singleTour.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-web/src/main/resources/templates/tour.html" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/src/main/resources/templates/tour.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-web/target/classes/com/example/tourarmeniaweb/TourArmeniaWebApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/target/classes/com/example/tourarmeniaweb/TourArmeniaWebApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-web/target/classes/com/example/tourarmeniaweb/config/SpringSecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/target/classes/com/example/tourarmeniaweb/config/SpringSecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-web/target/classes/com/example/tourarmeniaweb/controller/BookingController.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/target/classes/com/example/tourarmeniaweb/controller/BookingController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-web/target/classes/com/example/tourarmeniaweb/controller/ItemController.class" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/target/classes/com/example/tourarmeniaweb/controller/ItemController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-web/target/classes/templates/booking.html" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/target/classes/templates/booking.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-web/target/classes/templates/customLoginPage.html" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/target/classes/templates/customLoginPage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-web/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/target/classes/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-web/target/classes/templates/item.html" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/target/classes/templates/item.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tourArmenia-web/target/classes/templates/tour.html" beforeDir="false" afterPath="$PROJECT_DIR$/tourArmenia-web/target/classes/templates/tour.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,38 +170,40 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers&quot;: &quot;true&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/TourismInArmenia/tourArmenia-common/src/main/resources&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;642cfbea4d52b9b80a303454dfee69e1&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/TourismInArmenia/tourArmenia-common/src/main/resources",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "spring.configuration.checksum": "4bf6b7ad13bb42369520acd630c29ea3",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.example.tourisminarmenia.entity" />
@@ -271,7 +360,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="c8c574d0-2d3c-4972-896a-4801fecab75b" name="Changes" comment="" />
+      <changelist id="99d3478f-117c-4b9e-a0ea-70311bf8dbf9" name="Changes" comment="deleted hotelcomment" />
       <created>1684765590274</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -419,6 +508,7 @@
       <workItem from="1690576221714" duration="43000" />
       <workItem from="1690576428135" duration="119000" />
       <workItem from="1690577033917" duration="311000" />
+      <workItem from="1690652520906" duration="22182000" />
     </task>
     <task id="LOCAL-00001" summary="Tour">
       <created>1686398768807</created>
@@ -585,5 +675,26 @@
     <MESSAGE value="unit &amp; integration tests" />
     <MESSAGE value="unit &amp; integration tests &amp; logging comments" />
     <option name="LAST_COMMIT_MESSAGE" value="unit &amp; integration tests &amp; logging comments" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/tourArmenia-web/src/main/java/com/example/tourarmeniaweb/controller/BookingController.java</url>
+          <line>79</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/tourArmenia-common/src/main/java/com/example/tourarmeniacommon/service/serviceImpl/MailServiceImpl.java</url>
+          <line>18</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/tourArmenia-web/src/main/java/com/example/tourarmeniaweb/controller/BookingController.java</url>
+          <line>55</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

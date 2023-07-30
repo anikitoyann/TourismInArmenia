@@ -1,9 +1,7 @@
 package com.example.tourarmeniaweb.controller;
+
 import com.example.tourarmeniacommon.entity.*;
-import com.example.tourarmeniacommon.service.CarService;
-import com.example.tourarmeniacommon.service.ItemService;
-import com.example.tourarmeniacommon.service.RegionService;
-import com.example.tourarmeniacommon.service.TourPackageService;
+import com.example.tourarmeniacommon.service.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,23 +24,26 @@ public class AdminController {
     private final ItemService itemService;
     private final CarService carService;
     private final TourPackageService tourPackageService;
+    private final BookService bookService;
+    private final UserService userService;
 
     @GetMapping
-    public String adminPage(){
+    public String adminPage() {
         log.info("Admin page accessed.");
-     return "admin";
-     }
-   @GetMapping("/addRegion")
-         public String regionPage(){
-        return "addRegion";
-         }
+        return "admin";
+    }
 
-         @PostMapping("/addRegion")
-         public String addRegionPage(@ModelAttribute @Valid Region region) {
+    @GetMapping("/addRegion")
+    public String regionPage() {
+        return "addRegion";
+    }
+
+    @PostMapping("/addRegion")
+    public String addRegionPage(@ModelAttribute @Valid Region region) {
         regionService.save(region);
-             log.info("Region added: {}", region);
+        log.info("Region added: {}", region);
         return "redirect:/admin";
-         }
+    }
 
     @GetMapping("/addItem")
     public String itemAddPage(ModelMap modelMap) {
@@ -127,7 +128,7 @@ public class AdminController {
         if (!byId.isEmpty()) {
             Car carDb = carService.updateCar(car, byId);
             carService.save(multipartFile, carDb);
-          log.info("Car updated :{}",carDb);
+            log.info("Car updated :{}", carDb);
             return "redirect:/cars";
         }
         log.warn("Car update failed: Car with ID {} not found.", id);
@@ -145,8 +146,8 @@ public class AdminController {
 
     @PostMapping("/updateTour")
     public String updateTour(@RequestParam("id") int id,
-                            @ModelAttribute @Valid TourPackage tourPackage,
-                            @RequestParam("image") MultipartFile multipartFile) throws IOException {
+                             @ModelAttribute @Valid TourPackage tourPackage,
+                             @RequestParam("image") MultipartFile multipartFile) throws IOException {
         Optional<TourPackage> byId = tourPackageService.findById(id);
         if (byId.isPresent()) {
             TourPackage tourDB = tourPackageService.updateTour(tourPackage, byId);
@@ -157,6 +158,7 @@ public class AdminController {
         log.warn("TourPackage update failed: TourPackage with ID {} not found.", id);
         return "redirect:/tour";
     }
+
     @GetMapping("/updateItem")
     public String updateItemPage(ModelMap modelMap) {
         modelMap.addAttribute("regions", regionService.findAll());
@@ -177,4 +179,16 @@ public class AdminController {
             return "redirect:/item";
         }
         return "redirect:/item";
-        }}
+    }
+
+
+    @GetMapping("/bookings")
+    public String showBookingsPageForAdmin(ModelMap modelMap) {
+        List<Book> bookings = bookService.findAll();
+        List<User> users = userService.findAll();
+        modelMap.addAttribute("bookings", bookings);
+        modelMap.addAttribute("users",users);
+        return "bookings";
+    }
+
+}

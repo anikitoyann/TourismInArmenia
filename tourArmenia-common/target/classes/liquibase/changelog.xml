@@ -153,4 +153,36 @@ create table if not exists car
                                          referencedTableName="tour_package" referencedColumnNames="id"
                                          constraintName="fk_tour_comment_tour_package"/>
         </changeSet>
+
+        <changeSet id="addEnabledColumnToBookTable" author="anahit">
+                <addColumn tableName="book">
+                        <column name="enabled" type="BOOLEAN" defaultValue="false"/>
+                </addColumn>
+        </changeSet>
+
+        <changeSet id="addTokenColumnToBookTable" author="anahit">
+                <addColumn tableName="book">
+                        <column name="token" type="VARCHAR(255)"/>
+                </addColumn>
+        </changeSet>
+
+
+
+        <changeSet id="renameColumnInTourCommentTable" author="anahit">
+                <renameColumn tableName="tour_comment" oldColumnName="commentText" newColumnName="comment_text" columnDataType="VARCHAR(255)"/>
+        </changeSet>
+
+        <changeSet id="modifyTourCommentTable" author="anahit">
+                <!--  Drop the existing "id" column -->
+                <dropColumn tableName="tour_comment" columnName="id" />
+
+                <!-- Add a new "id" column with auto-increment -->
+                <addColumn tableName="tour_comment">
+                        <column name="id" type="INT" autoIncrement="true">
+                                <constraints primaryKey="true" nullable="false" unique="true" />
+                        </column>
+                </addColumn>
+        </changeSet>
+
+
 </databaseChangeLog>

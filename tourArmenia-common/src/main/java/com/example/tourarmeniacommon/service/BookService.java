@@ -11,5 +11,7 @@ public interface BookService {
 
     List<Book> findAll();
 
-    Optional<Book> findByUser(User user);
+    List<Book> findByUser(User user);
+
+    Optional<Book>  findByToken(String token);
 }

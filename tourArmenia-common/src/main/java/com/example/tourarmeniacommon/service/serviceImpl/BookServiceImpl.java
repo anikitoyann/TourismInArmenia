@@ -27,7 +27,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Optional<Book> findByUser(User user) {
+    public List<Book> findByUser(User user) {
         return bookingRepository.findByUser(user);
+    }
+
+    public Optional<Book>  findByToken(String token){
+        return bookingRepository.findByToken(token);
     }
 }
