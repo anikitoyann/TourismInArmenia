@@ -1,5 +1,6 @@
 package com.example.tourarmeniacommon.service;
 
+import com.example.tourarmeniacommon.entity.Region;
 import com.example.tourarmeniacommon.entity.TourPackage;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,16 +11,17 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TourPackageService {
-   public void save(MultipartFile multipartFile, TourPackage tourPackages) throws IOException;
+
+   TourPackage add(TourPackage tourPackage);
+   void save(MultipartFile multipartFile, TourPackage tourPackages) throws IOException;
 
    void deleteById(int id);
-
-    TourPackage add(TourPackage tour);
 
     Optional<TourPackage> findById(int id);
 
     List<TourPackage> findAll();
 
+    List<TourPackage> findByRegion(Region region);
     boolean existsById(int id);
 
     Page<TourPackage> findAllByPageable(Pageable pageable);

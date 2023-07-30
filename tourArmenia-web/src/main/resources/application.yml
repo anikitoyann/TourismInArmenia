@@ -1,6 +1,18 @@
 server:
   port: 8080
 spring:
+  mail:
+    host: smtp.gmail.com
+    username: mailsenderforjava@gmail.com
+    password: iltifceckjkwsohf
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
   datasource:
     url: jdbc:mysql://localhost:3306/tourisminarmenia
     username: root

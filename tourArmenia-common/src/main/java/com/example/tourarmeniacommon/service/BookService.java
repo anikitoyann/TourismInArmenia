@@ -6,11 +6,12 @@ import com.example.tourarmeniacommon.entity.User;
 import java.util.List;
 import java.util.Optional;
 
-public interface UserService {
-    List<User> findAll();
+public interface BookService {
+    void save(Book book);
 
-    Optional<User> findByEmail(String email);
+    List<Book> findAll();
 
-    void save(User user);
+    List<Book> findByUser(User user);
 
+    Optional<Book>  findByToken(String token);
 }

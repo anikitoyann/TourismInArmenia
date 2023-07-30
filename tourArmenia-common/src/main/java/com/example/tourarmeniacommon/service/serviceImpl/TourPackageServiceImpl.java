@@ -1,5 +1,6 @@
 package com.example.tourarmeniacommon.service.serviceImpl;
 
+import com.example.tourarmeniacommon.entity.Region;
 import com.example.tourarmeniacommon.entity.TourPackage;
 import com.example.tourarmeniacommon.repository.TourPackagesRepository;
 import com.example.tourarmeniacommon.service.TourPackageService;
@@ -76,6 +77,11 @@ public class TourPackageServiceImpl implements TourPackageService {
         }
         log.debug("TourPackage with id {} exists.", id);
         return true;
+    }
+
+    @Override
+    public List<TourPackage> findByRegion(Region region) {
+        return tourPackagesRepository.findByRegion(region);
     }
 
     @Override

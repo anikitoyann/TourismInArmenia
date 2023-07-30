@@ -19,7 +19,7 @@ public class Comment {
     private TourPackage tour;
     private Date date;
     @ManyToOne
-    @NotNull(message = "User isn't null")
+//    @NotNull(message = "User isn't null")
     private User user;
 
 
